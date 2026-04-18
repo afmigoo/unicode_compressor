@@ -1,5 +1,5 @@
 import { b85encode, b85decode, base91Encode, base91Decode, buildEncoders, ALPHABET } from "./js/encoders.js";
-import { randomBytes } from "crypto";
+import { randomBytes, randomInt } from "crypto";
 
 for (let n = 0; n < 30; n++) {
   const u = new Uint8Array(randomBytes(n));
@@ -25,9 +25,21 @@ const cases = [
   "a",
   "hello 123",
   "лтфлстзлфытьсзфь",
-  "заказала аккумы\nно они не скоро",
+  "съешь ещё этих мягких французских булок, да выпей чаю",
+  "brown fox jumps over the lazy dog",
   "Test: !@# with mixed АБВ and xyz.",
 ];
+
+/** Same as prototype/test_encoders.py: choices(ALPHABET, k=n) for n in range(1000) */
+const alphabetChars = [...ALPHABET];
+for (let n = 0; n < 1000; n++) {
+  let s = "";
+  for (let i = 0; i < n; i++) {
+    s += alphabetChars[randomInt(alphabetChars.length)];
+  }
+  cases.push(s);
+}
+
 const encoders = buildEncoders();
 for (const [name, enc] of Object.entries(encoders)) {
   for (const text of cases) {

@@ -30,35 +30,27 @@ encoders = {
 encoders['decider'] = DeciderEncoder(ALPHABET, list(encoders.values()))
 
 dataset = [
-#     """заказала аккумы, но они не скоро придут
-# в москве не нашла аккумов которые мне подошли бы, с таким маленьким вольтажом и габаритами только на алике есть""",
+    """заказала аккумы, но они не скоро придут
+в москве не нашла аккумов которые мне подошли бы, с таким маленьким вольтажом и габаритами только на алике есть""",
 
-#     """Будет не круто если не будет получаться стабильно сообщения получать""",
+    """Будет не круто если не будет получаться стабильно сообщения получать""",
 
-#     """Мне чета хочется сделать ноду на солнечной панели""",
+    """Мне чета хочется сделать ноду на солнечной панели""",
 
-#     """насчет внезапного 
-# расскажу потом продолжение про ту чувиху, которая пюдоебывала меня че я не работаю на вебке""",
+    """
+    for encoder_name, encoder in encoders.items():
+    print('-' * os.get_terminal_size().columns)
+    print(f"\{encoder_name\}:")
+    for text in dataset:
+        encoded = encoder.encode(text)
+        print(f"\{text\} -> \{encoded\}")
+        results[encoder_name].append((text, encoded))
+        assert encoder.decode(encoded) == text, f"Payload corrupted: \{text\} -> \{encoded\} -> \{encoder.decode(encoded)\}"
+    """,
 
-#     """
-#     for encoder_name, encoder in encoders.items():
-#     print('-' * os.get_terminal_size().columns)
-#     print(f"\{encoder_name\}:")
-#     for text in dataset:
-#         encoded = encoder.encode(text)
-#         print(f"\{text\} -> \{encoded\}")
-#         results[encoder_name].append((text, encoded))
-#         assert encoder.decode(encoded) == text, f"Payload corrupted: \{text\} -> \{encoded\} -> \{encoder.decode(encoded)\}"
-#     """,
-
-#     """
-# заказала аккумы, но они не скоро придут
-# в москве не нашла аккумов которые мне подошли бы, с таким маленьким вольтажом и габаритами только на алике есть
-"""
-я крч решила заказать ноду на др себе, не знаю что
-с ней теперь делать
-пупупупу
-конечно прикол даааа
+    """
+заказала аккумы, но они не скоро придут
+в москве не нашла аккумов которые мне подошли бы, с таким маленьким вольтажом и габаритами только на алике есть
 """
 ]
 
