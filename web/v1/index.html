@@ -4,96 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>unicode_compress encoders</title>
-    <style>
-      :root {
-        font-family: system-ui, sans-serif;
-        line-height: 1.45;
-        color: #1a1a1a;
-        background: #f4f4f2;
-      }
-      body {
-        max-width: 52rem;
-        margin: 0 auto;
-        padding: 1.25rem;
-      }
-      h1 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 0 0 1rem;
-      }
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1rem;
-        align-items: center;
-        margin-bottom: 0.75rem;
-      }
-      label {
-        font-size: 0.875rem;
-      }
-      select {
-        min-width: 12rem;
-        padding: 0.35rem 0.5rem;
-      }
-      textarea {
-        width: 100%;
-        min-height: 8rem;
-        box-sizing: border-box;
-        font-family: ui-monospace, monospace;
-        font-size: 0.875rem;
-        padding: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: vertical;
-      }
-      .field {
-        margin-bottom: 1rem;
-      }
-      .meta {
-        font-size: 0.8rem;
-        color: #555;
-        margin: 0.25rem 0 0.35rem;
-      }
-      button {
-        padding: 0.4rem 0.75rem;
-        border: 1px solid #888;
-        border-radius: 4px;
-        background: #fff;
-        cursor: pointer;
-        font-size: 0.875rem;
-      }
-      button:hover {
-        background: #eee;
-      }
-      .status {
-        font-size: 0.875rem;
-        margin-top: 0.75rem;
-        min-height: 1.25rem;
-      }
-      .status.error {
-        color: #a30;
-      }
-      .transport-warn {
-        display: none;
-        margin: 0.75rem 0 0;
-        padding: 0.6rem 0.75rem;
-        font-size: 0.85rem;
-        border: 1px solid #c9a227;
-        border-radius: 4px;
-        background: #fffbeb;
-        color: #5c4a00;
-      }
-      .transport-warn.visible {
-        display: block;
-      }
-      .transport-warn strong {
-        font-weight: 600;
-      }
-      .transport-warn ul {
-        margin: 0.35rem 0 0 1.1rem;
-        padding: 0;
-      }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <h1>Unicode compresser</h1>
@@ -119,6 +30,24 @@
       <button type="button" id="btn-copy">Copy output</button>
     </div>
     <p id="status" class="status" role="status"></p>
+    <footer class="site-footer">
+      <a
+        class="footer-source-link"
+        href="https://github.com/afmigoo/unicode_compressor"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+      <span class="footer-source-text">Source code</span>
+      <img
+        class="footer-source-icon"
+        src="img/GitHub_Invertocat_Black_Clearspace.svg"
+        width="16"
+        height="16"
+        alt=""
+        decoding="async"
+      />
+      </a>
+    </footer>
     <script type="module" src="./js/app.js"></script>
   </body>
 </html>
