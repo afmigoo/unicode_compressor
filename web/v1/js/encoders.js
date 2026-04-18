@@ -472,30 +472,35 @@ export class DeciderEncoder {
 const te = new TextEncoder();
 
 export function buildEncoders() {
-  const encoders = {
-    utf8: new UTF8Encoder(ALPHABET),
-    utf8_optimize: new UTF8Encoder(ALPHABET, ["cyrillic", "english"]),
-    base64: new Base64Encoder(ALPHABET, false),
-    base64_compress: new Base64Encoder(ALPHABET, true),
-    base91: new Base91Encoder(false),
-    base91_compress: new Base91Encoder(true),
-    base85: new Base85Encoder(false),
-    base85_compress: new Base85Encoder(true),
+  const utf8 = new UTF8Encoder(ALPHABET);
+  const utf8_optimize = new UTF8Encoder(ALPHABET, ["cyrillic", "english"]);
+  const base64 = new Base64Encoder(ALPHABET, false);
+  const base64_compress = new Base64Encoder(ALPHABET, true);
+  const base91 = new Base91Encoder(false);
+  const base91_compress = new Base91Encoder(true);
+  const base85 = new Base85Encoder(false);
+  const base85_compress = new Base85Encoder(true);
+  const decider = new DeciderEncoder(ALPHABET, [
+    utf8,
+    utf8_optimize,
+    base64,
+    base64_compress,
+    base91,
+    base91_compress,
+    base85,
+    base85_compress,
+  ]);
+  return {
+    decider,
+    utf8,
+    utf8_optimize,
+    base64,
+    base64_compress,
+    base91,
+    base91_compress,
+    base85,
+    base85_compress,
   };
-  encoders.decider = new DeciderEncoder(
-    ALPHABET,
-    [
-      encoders.utf8,
-      encoders.utf8_optimize,
-      encoders.base64,
-      encoders.base64_compress,
-      encoders.base91,
-      encoders.base91_compress,
-      encoders.base85,
-      encoders.base85_compress,
-    ],
-  );
-  return encoders;
 }
 
 export function utf8ByteLength(s) {

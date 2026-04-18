@@ -1,8 +1,8 @@
 services:
   web:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     ports:
       - "80:80"
-    volumes:
-      - ./web:/usr/share/nginx/html
     command: nginx -g "daemon off;"
