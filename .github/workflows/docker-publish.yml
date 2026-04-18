@@ -21,6 +21,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Run frontend tests
+        run: |
+          docker run --rm \
+            -v $(pwd)/web/v1:/app -w /app \
+            node:22-alpine \
+            node smoke_node.mjs
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
