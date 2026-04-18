@@ -73,6 +73,26 @@
       .status.error {
         color: #a30;
       }
+      .transport-warn {
+        display: none;
+        margin: 0.75rem 0 0;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.85rem;
+        border: 1px solid #c9a227;
+        border-radius: 4px;
+        background: #fffbeb;
+        color: #5c4a00;
+      }
+      .transport-warn.visible {
+        display: block;
+      }
+      .transport-warn strong {
+        font-weight: 600;
+      }
+      .transport-warn ul {
+        margin: 0.35rem 0 0 1.1rem;
+        padding: 0;
+      }
     </style>
   </head>
   <body>
@@ -88,11 +108,12 @@
     <div class="row">
       <button type="button" id="btn-encode">Encode</button>
       <button type="button" id="btn-decode">Decode</button>
-      <button type="button" id="btn-swap">Swap with output</button>
+      <button type="button" id="btn-clear">Clear all</button>
     </div>
     <div class="field">
       <div class="meta">Output — UTF-8 length: <span id="out-bytes">0</span> bytes</div>
       <textarea id="output" spellcheck="false"></textarea>
+      <div id="transport-warn" class="transport-warn" role="alert"></div>
     </div>
     <div class="row">
       <button type="button" id="btn-copy">Copy output</button>
