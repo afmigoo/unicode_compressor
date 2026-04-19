@@ -5,7 +5,7 @@ from encoders import BpeEncoder
 from alphabet import ALPHABET
 
 if __name__ == "__main__":
-    output_dir = Path(__file__).parent / "dictionaries"
+    output_dir = Path(__file__).parent.parent / "web/v0/fixtures/dictionaries"
     output_dir.mkdir(exist_ok=True)
     train_files = {
         'wiki': [
