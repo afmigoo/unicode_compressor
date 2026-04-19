@@ -1,11 +1,8 @@
-import { buildEncoders, utf8ByteLength } from "./encoders.js";
+import { buildEncodersFromFixtures, utf8ByteLength } from "./encoders.js";
 
 /** UTF-8 byte limits on the encoded string you paste/send (not raw plaintext). */
 const LIMIT_MESHCORE_PAYLOAD_UTF8 = 150;
 const LIMIT_MESHTASTIC_PAYLOAD_UTF8 = 200;
-
-const encoders = buildEncoders();
-const encoderNames = Object.keys(encoders);
 
 const $input = document.getElementById("input");
 const $output = document.getElementById("output");
@@ -19,12 +16,8 @@ const $btnCopy = document.getElementById("btn-copy");
 const $btnClear = document.getElementById("btn-clear");
 const $transportWarn = document.getElementById("transport-warn");
 
-for (const name of encoderNames) {
-  const opt = document.createElement("option");
-  opt.value = name;
-  opt.textContent = name;
-  $encoder.appendChild(opt);
-}
+/** @type {Awaited<ReturnType<typeof buildEncodersFromFixtures>> | null} */
+let encoders = null;
 
 function setStatus(msg, isError = false) {
   $status.textContent = msg;
@@ -67,56 +60,84 @@ function updateByteLabels() {
   $outBytes.textContent = String(utf8ByteLength($output.value));
 }
 
-$input.addEventListener("input", updateByteLabels);
-$output.addEventListener("input", updateByteLabels);
-updateByteLabels();
-
 function getEncoder() {
+  if (!encoders) {
+    throw new Error("Encoders not loaded yet.");
+  }
   return encoders[$encoder.value];
 }
 
-$btnEncode.addEventListener("click", () => {
-  setStatus("");
-  clearTransportWarnings();
+async function main() {
+  setStatus("Loading dictionaries…");
   try {
-    const enc = getEncoder();
-    const out = enc.encode($input.value);
-    $output.value = out;
-    updateByteLabels();
-    setTransportWarnings(utf8ByteLength($output.value));
-    setStatus("Encoded.");
+    encoders = await buildEncodersFromFixtures();
   } catch (e) {
-    setStatus(e.message || String(e), true);
+    setStatus(
+      (e && e.message) || String(e),
+      true,
+    );
+    return;
   }
-});
 
-$btnDecode.addEventListener("click", () => {
-  setStatus("");
-  clearTransportWarnings();
-  try {
-    const enc = getEncoder();
-    const text = enc.decode($input.value);
-    $output.value = text;
-    updateByteLabels();
-    setStatus("Decoded.");
-  } catch (e) {
-    setStatus(e.message || String(e), true);
+  const encoderNames = Object.keys(encoders);
+  for (const name of encoderNames) {
+    const opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    $encoder.appendChild(opt);
   }
-});
 
-$btnCopy.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText($output.value);
-    setStatus("Copied output.");
-  } catch (e) {
-    setStatus("Copy failed: " + (e.message || String(e)), true);
-  }
-});
-
-$btnClear.addEventListener("click", () => {
-  $input.value = "";
-  $output.value = "";
+  $input.addEventListener("input", updateByteLabels);
+  $output.addEventListener("input", updateByteLabels);
   updateByteLabels();
-  clearTransportWarnings();
-  setStatus("");
-});
+
+  $btnEncode.addEventListener("click", () => {
+    setStatus("");
+    clearTransportWarnings();
+    try {
+      const enc = getEncoder();
+      const out = enc.encode($input.value);
+      $output.value = out;
+      updateByteLabels();
+      setTransportWarnings(utf8ByteLength($output.value));
+      setStatus("Encoded.");
+    } catch (e) {
+      setStatus(e.message || String(e), true);
+    }
+  });
+
+  $btnDecode.addEventListener("click", () => {
+    setStatus("");
+    clearTransportWarnings();
+    try {
+      const enc = getEncoder();
+      const text = enc.decode($input.value);
+      $output.value = text;
+      updateByteLabels();
+      setStatus("Decoded.");
+    } catch (e) {
+      setStatus(e.message || String(e), true);
+    }
+  });
+
+  $btnCopy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText($output.value);
+      setStatus("Copied output.");
+    } catch (e) {
+      setStatus("Copy failed: " + (e.message || String(e)), true);
+    }
+  });
+
+  $btnClear.addEventListener("click", () => {
+    $input.value = "";
+    $output.value = "";
+    updateByteLabels();
+    clearTransportWarnings();
+    setStatus("");
+  });
+
+  setStatus("Ready.");
+}
+
+main();

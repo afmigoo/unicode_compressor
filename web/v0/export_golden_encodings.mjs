@@ -2,16 +2,23 @@
  * Encode golden plaintext fixtures with every encoder from buildEncoders()
  * and write JSON for manual review / regression snapshots. Frontend-only (Node + web encoders).
  *
- * Usage (from web/v1): node export_golden_encodings.mjs
+ * Usage (from web/v0): node export_golden_encodings.mjs
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { ALPHABET, buildEncoders, utf8ByteLength } from "./js/encoders.js";
+import { ALPHABET, BPE_DICT_NAMES, buildEncoders, utf8ByteLength } from "./js/encoders.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, "fixtures", "golden_encodings.json");
+const dictDir = join(__dirname, "fixtures", "dictionaries");
+const bpeDicts = Object.fromEntries(
+  BPE_DICT_NAMES.map((name) => [
+    name,
+    JSON.parse(readFileSync(join(dictDir, `${name}.json`), "utf8")),
+  ]),
+);
 
 /** Short placeholders — replace plaintext with real golden cases; chars must stay in ALPHABET. */
 const GOLDEN_CASES = [
@@ -35,7 +42,7 @@ function assertAlphabetOnly(plaintext, caseId) {
   }
 }
 
-const encoders = buildEncoders();
+const encoders = buildEncoders(bpeDicts);
 const encoderNames = Object.keys(encoders);
 
 const cases = GOLDEN_CASES.map(({ id, note, plaintext }) => {
@@ -59,7 +66,7 @@ const cases = GOLDEN_CASES.map(({ id, note, plaintext }) => {
 
 const payload = {
   meta: {
-    source: "web/v1/export_golden_encodings.mjs",
+    source: "web/v0/export_golden_encodings.mjs",
     encoderNames,
   },
   cases,

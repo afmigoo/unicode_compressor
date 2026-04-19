@@ -465,7 +465,84 @@ export class Base85Encoder {
   }
 }
 
-const MARKER_CHARS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+/** Same ordered markers as `scripts/v0/demo_decider.py` (36 slots). */
+const MARKER_CHARS = [
+  ..."0123456789",
+  ..."abcdefghijklmnopqrstuvwxyz",
+];
+
+/**
+ * Loads a pre-built token → single-character map (JSON from `generate_dictionaries.py`).
+ * Encode: greedy longest-prefix (parity with Python `StaticDictEncoder._encode_greedy`).
+ */
+export class StaticDictEncoder {
+  /**
+   * @param {Record<string, string>} token2unicode
+   */
+  constructor(token2unicode) {
+    this.token2unicode = Object.assign({}, token2unicode);
+    const keys = Object.keys(this.token2unicode);
+    if (keys.length === 0) {
+      throw new Error("StaticDictEncoder: empty dictionary");
+    }
+    this.maxTokenLen = Math.max(...keys.map((k) => k.length));
+    this.unicode2token = new Map();
+    for (const token of keys) {
+      const rep = this.token2unicode[token];
+      const units = [...rep];
+      if (units.length !== 1) {
+        throw new Error(
+          `StaticDictEncoder: replacement for token ${JSON.stringify(token)} must be exactly one Unicode scalar value, got length ${units.length}`,
+        );
+      }
+      const ch = units[0];
+      if (this.unicode2token.has(ch)) {
+        throw new Error(
+          `StaticDictEncoder: duplicate replacement character ${JSON.stringify(ch)}`,
+        );
+      }
+      this.unicode2token.set(ch, token);
+    }
+  }
+
+  encode(text) {
+    const parts = [];
+    let i = 0;
+    while (i < text.length) {
+      const rest = text.length - i;
+      const lim = Math.min(this.maxTokenLen, rest);
+      let matched = false;
+      for (let size = lim; size >= 1; size--) {
+        const token = text.slice(i, i + size);
+        if (Object.prototype.hasOwnProperty.call(this.token2unicode, token)) {
+          parts.push(this.token2unicode[token]);
+          i += size;
+          matched = true;
+          break;
+        }
+      }
+      if (!matched) {
+        throw new Error(
+          `StaticDictEncoder: cannot encode prefix at index ${i}: ${JSON.stringify(text.slice(i, Math.min(i + 48, text.length)))}`,
+        );
+      }
+    }
+    return parts.join("");
+  }
+
+  decode(encoded) {
+    let out = "";
+    for (const ch of encoded) {
+      if (!this.unicode2token.has(ch)) {
+        throw new Error(
+          `StaticDictEncoder: unknown code in encoded text: ${JSON.stringify(ch)}`,
+        );
+      }
+      out += this.unicode2token.get(ch);
+    }
+    return out;
+  }
+}
 
 export class DeciderEncoder {
   /**
@@ -515,7 +592,23 @@ export class DeciderEncoder {
 
 const te = new TextEncoder();
 
-export function buildEncoders() {
+/** Names and order aligned with `scripts/comparator.py` / `generate_dictionaries.py`. */
+export const BPE_DICT_NAMES = [
+  "bpe_wiki",
+  "bpe_wiki_ru",
+  "bpe_wiki_en",
+  "bpe_meshcoretel_ru",
+];
+
+/**
+ * @param {{
+ *   bpe_wiki: Record<string, string>,
+ *   bpe_wiki_ru: Record<string, string>,
+ *   bpe_wiki_en: Record<string, string>,
+ *   bpe_meshcoretel_ru: Record<string, string>,
+ * }} bpeDicts
+ */
+export function buildEncoders(bpeDicts) {
   const utf8 = new UTF8Encoder(ALPHABET);
   const utf8_optimize = new UTF8Encoder(ALPHABET, ["cyrillic", "english"]);
   const base64 = new Base64Encoder(ALPHABET, false);
@@ -524,6 +617,10 @@ export function buildEncoders() {
   const base91_compress = new Base91Encoder(ALPHABET, true);
   const base85 = new Base85Encoder(ALPHABET, false);
   const base85_compress = new Base85Encoder(ALPHABET, true);
+  const bpe_wiki = new StaticDictEncoder(bpeDicts.bpe_wiki);
+  const bpe_wiki_ru = new StaticDictEncoder(bpeDicts.bpe_wiki_ru);
+  const bpe_wiki_en = new StaticDictEncoder(bpeDicts.bpe_wiki_en);
+  const bpe_meshcoretel_ru = new StaticDictEncoder(bpeDicts.bpe_meshcoretel_ru);
   const decider = new DeciderEncoder(ALPHABET, [
     utf8,
     utf8_optimize,
@@ -533,6 +630,10 @@ export function buildEncoders() {
     base91_compress,
     base85,
     base85_compress,
+    bpe_wiki,
+    bpe_wiki_ru,
+    bpe_wiki_en,
+    bpe_meshcoretel_ru,
   ]);
   return {
     decider,
@@ -544,7 +645,28 @@ export function buildEncoders() {
     base91_compress,
     base85,
     base85_compress,
+    bpe_wiki,
+    bpe_wiki_ru,
+    bpe_wiki_en,
+    bpe_meshcoretel_ru,
   };
+}
+
+/** Browser: load JSON maps from `fixtures/dictionaries/` next to the app. */
+export async function buildEncodersFromFixtures() {
+  const base = new URL("../fixtures/dictionaries/", import.meta.url);
+  const entries = await Promise.all(
+    BPE_DICT_NAMES.map(async (name) => {
+      const res = await fetch(new URL(`${name}.json`, base));
+      if (!res.ok) {
+        throw new Error(
+          `Failed to load dictionary ${name}.json (${res.status} ${res.statusText}). Run scripts/generate_dictionaries.py.`,
+        );
+      }
+      return [name, await res.json()];
+    }),
+  );
+  return buildEncoders(Object.fromEntries(entries));
 }
 
 export function utf8ByteLength(s) {

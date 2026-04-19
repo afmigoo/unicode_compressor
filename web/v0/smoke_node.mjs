@@ -1,5 +1,25 @@
-import { b85encode, b85decode, base91Encode, base91Decode, buildEncoders, ALPHABET } from "./js/encoders.js";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import {
+  b85encode,
+  b85decode,
+  base91Encode,
+  base91Decode,
+  buildEncoders,
+  ALPHABET,
+  BPE_DICT_NAMES,
+} from "./js/encoders.js";
 import { randomBytes, randomInt } from "crypto";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const dictDir = join(__dirname, "fixtures", "dictionaries");
+const bpeDicts = Object.fromEntries(
+  BPE_DICT_NAMES.map((name) => [
+    name,
+    JSON.parse(readFileSync(join(dictDir, `${name}.json`), "utf8")),
+  ]),
+);
 
 for (let n = 0; n < 30; n++) {
   const u = new Uint8Array(randomBytes(n));
@@ -42,7 +62,7 @@ for (let n = 0; n < 1000; n++) {
   cases.push(s);
 }
 
-const encoders = buildEncoders();
+const encoders = buildEncoders(bpeDicts);
 for (const [name, enc] of Object.entries(encoders)) {
   for (const text of cases) {
     for (const ch of text) {
