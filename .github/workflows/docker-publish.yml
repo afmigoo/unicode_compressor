@@ -8,6 +8,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   MAJOR_VERSION: v0
+  DOCKER_RUN_IMAGE: node:22-alpine
 
 jobs:
   build:
@@ -25,8 +26,17 @@ jobs:
         run: |
           docker run --rm \
             -v $(pwd)/web/${{ env.MAJOR_VERSION }}:/app -w /app \
-            node:22-alpine \
+            ${{ env.DOCKER_RUN_IMAGE }} \
             node smoke_node.mjs
+
+      - name: Test compatibility with current version
+        run: |
+          cp web/${{ env.MAJOR_VERSION }}/fixtures/golden_encodings.json ./reference_golden_encodings.json
+          docker run --rm \
+            -v $(pwd)/web/${{ env.MAJOR_VERSION }}:/app -w /app \
+            ${{ env.DOCKER_RUN_IMAGE }} \
+            node export_golden_encodings.mjs
+          diff ./reference_golden_encodings.json web/${{ env.MAJOR_VERSION }}/fixtures/golden_encodings.json
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
