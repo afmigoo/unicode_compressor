@@ -3,3 +3,5 @@ env/
 .venv/
 .env/
 *.pyc
+scripts/corpus/raw/coding
+scripts/corpus/processed/coding

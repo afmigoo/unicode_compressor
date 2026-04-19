@@ -30,5 +30,6 @@ if __name__ == "__main__":
             if 'meshcoretel' in walked_dir.name:
                 processed_text = remove_mentions(processed_text)
             processed_text = filter_alphabet(processed_text)
-            processed_text = collapse_whitespace(processed_text)
+            if not 'coding' in str(walked_dir):
+                processed_text = collapse_whitespace(processed_text)
             processed_file.write_text(processed_text)

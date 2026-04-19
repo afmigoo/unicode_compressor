@@ -14,7 +14,8 @@
       "bpe_wiki",
       "bpe_wiki_ru",
       "bpe_wiki_en",
-      "bpe_meshcoretel_ru"
+      "bpe_meshcoretel_ru",
+      "bpe_coding"
     ]
   },
   "cases": [
@@ -36,7 +37,8 @@
         "bpe_wiki": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|",
         "bpe_wiki_ru": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|",
         "bpe_wiki_en": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{|",
-        "bpe_meshcoretel_ru": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|"
+        "bpe_meshcoretel_ru": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|",
+        "bpe_coding": "\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|"
       },
       "encodedUtf8Bytes": {
         "decider": 201,
@@ -51,7 +53,8 @@
         "bpe_wiki": 214,
         "bpe_wiki_ru": 214,
         "bpe_wiki_en": 230,
-        "bpe_meshcoretel_ru": 216
+        "bpe_meshcoretel_ru": 216,
+        "bpe_coding": 229
       }
     },
     {
@@ -72,7 +75,8 @@
         "bpe_wiki": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Յ56789:;շÇÈ̠åËÌωלÑĆċ˱ÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ǖeǫhƚklmnopǘstĭwxyz{|",
         "bpe_wiki_ru": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2ظ56789:;ڽÇ٢åËɪÎѾӟÔÕèØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\cdefghijklmnopqrstuvwxyz{|",
         "bpe_wiki_en": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{߫!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2Ӱ56789:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ŔeŚhĺklmnoƛrstąwxyz{|",
-        "bpe_meshcoretel_ru": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|"
+        "bpe_meshcoretel_ru": "\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|\"!#$%&'()*+,-./01<=>?@AB]^_`ab}~¡¢2̵56789:;ՙÇӜåËÌÍÎ̧Ñ÷۾êØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRSTUVWXYZ[\\ۨeϩhijklmnoɢrstՓwxyz{|",
+        "bpe_coding": "\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|\"!#$%&'()ľ,-./01<=>?@AB]^_`ab}~¡¢2Θ567ޔ:;ÅÆÇÈÉÊåËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãä¤¥¦§¨©£ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄCDEFGHIJKLMNOPQRST͈WXYZ[\\ƌeɑijklmnoƊrstïwxyz{|"
       },
       "encodedUtf8Bytes": {
         "decider": 231,
@@ -87,7 +91,8 @@
         "bpe_wiki": 2140,
         "bpe_wiki_ru": 2140,
         "bpe_wiki_en": 2300,
-        "bpe_meshcoretel_ru": 2160
+        "bpe_meshcoretel_ru": 2160,
+        "bpe_coding": 2290
       }
     },
     {
@@ -108,7 +113,8 @@
         "bpe_wiki": "dŨyűhqϺlʫrè̐Ďnc|ăfߛ",
         "bpe_wiki_ru": "d֚yp\"hqz\"lworˠqxʲ\"ڸnc|ډfqi",
         "bpe_wiki_en": "֪yĦhqɉlƸrçӨîפ|óߘi",
-        "bpe_meshcoretel_ru": "d֢yp\"hqz\"l֤Ƀ\"qԆ\"Эƻnc|ؗfϪ"
+        "bpe_meshcoretel_ru": "d֢yp\"hqz\"l֤Ƀ\"qԆ\"Эƻnc|ؗfϪ",
+        "bpe_coding": "dēyģɮz\"lƃròqŜŢnܥŝǆi"
       },
       "encodedUtf8Bytes": {
         "decider": 28,
@@ -123,7 +129,8 @@
         "bpe_wiki": 28,
         "bpe_wiki_ru": 31,
         "bpe_wiki_en": 27,
-        "bpe_meshcoretel_ru": 32
+        "bpe_meshcoretel_ru": 32,
+        "bpe_coding": 29
       }
     },
     {
@@ -144,7 +151,8 @@
         "bpe_wiki": "ÖßÊÝěϔθɖǽÑäÈԍę؝ʝÆϽ؈ʞśÔǠÜÅã",
         "bpe_wiki_ru": "ÖßÊÝęߦ\"ޮđÑäÈĐđϤˉЖŐĴ͋ƿэöǍã",
         "bpe_wiki_en": "ÖßÊÝá\"ÊÞå\"â×ÍÚ\"ÑäÈÏÍÚ\"ÙÕÅÒÛØÌÖÏÍÚ\"ÆØÐÓÏ\"ÉÅ\"ÇàÔÊÎ\"ÜÅã",
-        "bpe_meshcoretel_ru": "Ößנӌ́҂Ñ϶ğŤÙȋÛØÌɑŤ؟ŻĠōƌÔˀǭã"
+        "bpe_meshcoretel_ru": "Ößנӌ́҂Ñ϶ğŤÙȋÛØÌɑŤ؟ŻĠōƌÔˀǭã",
+        "bpe_coding": "ÖßÊÝá\"ÊÞå\"â×ÍÚ\"ÑäÈÏÍÚ\"ÙÕÅÒÛØÌÖÏÍÚ\"ÆØÐÓÏ\"ÉÅ\"ÇàÔÊÎ\"ÜÅã"
       },
       "encodedUtf8Bytes": {
         "decider": 50,
@@ -159,7 +167,8 @@
         "bpe_wiki": 52,
         "bpe_wiki_ru": 49,
         "bpe_wiki_en": 96,
-        "bpe_meshcoretel_ru": 52
+        "bpe_meshcoretel_ru": 52,
+        "bpe_coding": 96
       }
     },
     {
@@ -180,7 +189,8 @@
         "bpe_wiki": "Ωǌ\"˕nf",
         "bpe_wiki_ru": "jݥnq\"yѭnf",
         "bpe_wiki_en": "ȗō\"ƴэ",
-        "bpe_meshcoretel_ru": "̶ԅ\"y˯nf"
+        "bpe_meshcoretel_ru": "̶ԅ\"y˯nf",
+        "bpe_coding": "ǐЀq\"ʰnf"
       },
       "encodedUtf8Bytes": {
         "decider": 10,
@@ -195,7 +205,8 @@
         "bpe_wiki": 9,
         "bpe_wiki_ru": 11,
         "bpe_wiki_en": 9,
-        "bpe_meshcoretel_ru": 10
+        "bpe_meshcoretel_ru": 10,
+        "bpe_coding": 10
       }
     },
     {
@@ -216,7 +227,8 @@
         "bpe_wiki": "ɸѥ\"ئ",
         "bpe_wiki_ru": "ӡ̿\"ٳ",
         "bpe_wiki_en": "ÔÕÍÇÊ×\"ÑÍÕ",
-        "bpe_meshcoretel_ru": "˻ýÍÕ"
+        "bpe_meshcoretel_ru": "˻ýÍÕ",
+        "bpe_coding": "ÔÕÍÇÊ×\"ÑÍÕ"
       },
       "encodedUtf8Bytes": {
         "decider": 8,
@@ -231,7 +243,8 @@
         "bpe_wiki": 7,
         "bpe_wiki_ru": 7,
         "bpe_wiki_en": 19,
-        "bpe_meshcoretel_ru": 8
+        "bpe_meshcoretel_ru": 8,
+        "bpe_coding": 19
       }
     },
     {
@@ -252,7 +265,8 @@
         "bpe_wiki": "UKIPCNKՆ͇гʷìƒæѷȷxŉϹŨt\"ȷǫėịǫηǘɞߖ۴ԧė߇ڛ֍ͥ*ǋحīı[şk\"ɯòűĘDĂdĂđ֚vvΘpȝĘܵͰɞJʫݷæIŕϢDĉǣIŕœĘRnǶŧoӤ۔œȪՕ݊Ύk/͜\"݇Ũ/hٮşŧߏf{ĭǘѢǑvԒیøԣĥ٫èGnĭנđɰǫƺıǑpČǡɊŨʮ\"ێì/ƖҾòʰФژȪkmяĦڞɡȪĀœøǖɊ÷Ĉۨ;ըޜeŏΑU45/Ukòrìuհʋ͍iŕ˖nȾŤ͔Чŏăìɹƃɞɠٸ̹ѷȷxŉϹŨt\"iŕœUŏǡJތĘژдǡGȷnçɈƪ̏ʾ\"خȱ۔œȽ֛ĹĀèƵݹJʮϭհ\"ϥpqçɯñţăMˁкƴĘFѴʮ\"N{pľȨịìޠnxœױْxϗЎrwݺţ˹֍Ʋīįȗdšۋǟeԝ̑Ļȋ;ԝӤ͵đǴvŉıhٿێʿĕu0",
         "bpe_wiki_ru": "UKIPCNKU\"в\"Ռ֍ʪ̭fkȖuٝxkxә\"jѭ֚t\"xkfgq\"icoȖfgxݥqr״dډIʲoɴ\"fwq\"֚ug/̾i̭Ȗ*e͘uвvۢ\"qh\"[ٝkܠvʲp\"ߢD˶d˶ՌYΠvoɴpǮߢrwdnвj״dډJwodnȖIcoguîDәѭ\"IcogˠߢRnc{вo÷Kԓvcmgˠrn۩Ṷ̑\"Ռuek/hk\"ܢv֚/hwvٝвvҥ\"f{uvqrkɴ\"ugvvۢ\"yjʲȖڸrnc{ʲ\"hغnqyˠGnuvʲîՌoqfݥ\"qh\"u̾vk̾ԓɴf֚k͗mpqyp\"̭/ܣkxʲuȖڷ\"ՌTgrnkmcîڷ\"uчgzrnѭgˠڸcdɴf͘״ܣfʲi֚ܣ͗h۩knΠډU45/Ukʲr̭umk÷Kvˠicogrncډв\"rtko˶knډ̭ur֙״dډenڷuҥ\"uٝxkxә\"jѭ֚t\"icogˠUkn̾ԓJkг\"ߢTgukf̾ԓGxknîyjknȖΠˠ˶ԓf֙gevع\"vcmgˠh֚o\"eܢͥѭˠnkmȖJkfgcmk\"CppqîUvɴngډMwdtҥm\"ߢFcxk͗N{pej÷VчicoṶ̑xغxgˠuغxۢ\"x˶kq؆\"rw||ngˠߢ̾iciۢ\"̭\"eqodͥ\"yj̾\"pgeguu˶ډvq\"r֚iܢuu÷Kԓjڷ\"Ռvqvә\"qh\"hqٝ\"mpqyp\"̾fۢu0",
         "bpe_wiki_en": "UKIPCNKъǧ̒ʆ߮æɞźބ\"ȭġt\"߉Ҋֿƃ߀\"ʺýϔ́̍Ǹ*Ŋ̃ăĆ[ߦՠšĦþDòdкˤvvȅpʜþΉ׃ĹJƸҫIęȩDöŖIۛþRפ{߸ʐ͞ĖٜίȄk/Ƿ\"ςġ/ȟߦ̖e\"fϪŘrɥՄʫ͗îʯÿ̢çGnۙϏƎլٲŌp÷ŗſġҋ߬͘і͕æȾߓ߾ɐāؔͅōŭùŔſíõͻׄpêϧĕȃUش/UkëréܢkƕǬүƷפóğؚȯĩéƏұêĹ֍īe\"ɞźބ\"ȭġt\"үĖUĕŗJαþͯɅŗGޅðМǈƭ\"̑Ű͞Ėŵ˥ċñçօJҲƣk\"ɆƛðƙìֹMƱɔŃþFҪêN{pčūҊ֙Ė̤̗ݙېԲϼ̍łăĄũdĞ͖ۏʬǏČťډuȑըǻûŘvđĆڇ͘Ưüu0",
-        "bpe_meshcoretel_ru": "UKIPCNKU\"Ћ\"͢ҩߣ\"ȧٷƻuwtxkxϨ\"j˯֢t\"xkϩʃi۩ƻϩxǮqΓϙdؗIȔɥp\"fwʃ֢ݝ/ʽξƻ*ǷuЋƸٹ\"qh\"[wtk\"UvȔp\"ЊϙD͵d͵͢Yݛvɥpp+òЊϙ̣dͣݞgϙdؗJ֤dnƻI۩ƕòDϨ˯\"I۩ƕ\"ЊϙRnc{ЋoĉKʭvؒƕ\"۫ؐƻȧ\"͢uek/hk\"Ʉv֢/hwvwtЋƸe\"f{ՓqrkЊҨՏƸٹ\"yjȔƻЭƻ۫c{Ȕ\"hqnԅyu\"GnՓȔò͢ӕϩn\"qhҨۑkۑ\"Њf֢kϙmɢyp\"ȧ/wpkԆݝ\"ˡ\"͢Tg۫kmcòˡҨjƻؔ۫˯ƕ\"ЭƻۨЊfŗgϙwpϩti֢wpϙhؐkͣvؗU45/UkȔrȧ̤kĉK߭\"i۩g۫cؗЋ\"rtݚ͵knؗȧurkɄϙdؗenˡukeҨwtxkxϨ\"j˯֢t\"i۩ƕ\"Uknۑ\"Jknn\"ЊϙTƕkϩpʭGxknòyjknƻݛu\"͵ʭٷɄeȆ\"vؒƕ\"h֢o\"eɄͶ˯u\"ͣmƻJkϩؒk\"CpɢòUvЊngؗMӘtǩ\"ЊϙF۪kϙN{pЬĉVjƻi۩ƻȧxqnxƕҨqnxЅ\"x͵kҭu\"̣||nƕ\"Њϙʽicξi\"ȧ\"ǕodͶ\"yjʽ\"pŢƕu͵ؗvʃr֢iɄuuĉKʭjˡ\"͢vqvϨ\"qh\"hҭt\"mɢyp\"ʽٷٹu0"
+        "bpe_meshcoretel_ru": "UKIPCNKU\"Ћ\"͢ҩߣ\"ȧٷƻuwtxkxϨ\"j˯֢t\"xkϩʃi۩ƻϩxǮqΓϙdؗIȔɥp\"fwʃ֢ݝ/ʽξƻ*ǷuЋƸٹ\"qh\"[wtk\"UvȔp\"ЊϙD͵d͵͢Yݛvɥpp+òЊϙ̣dͣݞgϙdؗJ֤dnƻI۩ƕòDϨ˯\"I۩ƕ\"ЊϙRnc{ЋoĉKʭvؒƕ\"۫ؐƻȧ\"͢uek/hk\"Ʉv֢/hwvwtЋƸe\"f{ՓqrkЊҨՏƸٹ\"yjȔƻЭƻ۫c{Ȕ\"hqnԅyu\"GnՓȔò͢ӕϩn\"qhҨۑkۑ\"Њf֢kϙmɢyp\"ȧ/wpkԆݝ\"ˡ\"͢Tg۫kmcòˡҨjƻؔ۫˯ƕ\"ЭƻۨЊfŗgϙwpϩti֢wpϙhؐkͣvؗU45/UkȔrȧ̤kĉK߭\"i۩g۫cؗЋ\"rtݚ͵knؗȧurkɄϙdؗenˡukeҨwtxkxϨ\"j˯֢t\"i۩ƕ\"Uknۑ\"Jknn\"ЊϙTƕkϩpʭGxknòyjknƻݛu\"͵ʭٷɄeȆ\"vؒƕ\"h֢o\"eɄͶ˯u\"ͣmƻJkϩؒk\"CpɢòUvЊngؗMӘtǩ\"ЊϙF۪kϙN{pЬĉVjƻi۩ƻȧxqnxƕҨqnxЅ\"x͵kҭu\"̣||nƕ\"Њϙʽicξi\"ȧ\"ǕodͶ\"yjʽ\"pŢƕu͵ؗvʃr֢iɄuuĉKʭjˡ\"͢vqvϨ\"qh\"hҭt\"mɢyp\"ʽٷٹu0",
+        "bpe_coding": "UKIPؙ֫ϑŠŊ44\"ҊkîˤtǒŎ\"ڦƮǔǒčq\"ۍǥ\"čБĝrǾћIê٨\"fwq\"ēó/öiɻۀńuƕƤŽ[ҳ\"ƬêģǭDĈdĈŠYĥv٨pʁǭžޢǾћJƃdʋI͔éDùǔI͔֪ɚ˦ŸoӺøvΝˏ΅աǅŠЌk/ĢΌĨq/ܽҳïݲf{ïōkȽǧӵ\"ܟѵ΅˦ǝɮЀɳòGnïêéŠұٻЋkʠɶēяm֩ģë/Ġ׳tȦǴŠĻ΅kmcéǴɝîȖĝƉŢƌɶǞċ։НГpċhāݫ\"U45/UkêrëumkӺvòۍǥ΅˦ϑڃΖĮŝëŏɼǾћєuݲˤtǒŎ\"ڦƮǔۍǥòUҥʎ\"Jϸǭƒѡ\"Gǒnéߦʋĥòό\"Άì˲\"vΝˏ̴ܱΏòĚmîJڻΝk\"ӝƊéƬÿĄŝMňڽm֪F́яNݳjӥۍǥ\"ëٞnБòʴnǒpi\"э̘۟rw||ĄòǭöۍiƤǅȒdð\"˪λӾȢ߶γűНȢӺøڑӘğv̑ŽɮĎ\"m֩ģǟăĤ"
       },
       "encodedUtf8Bytes": {
         "decider": 482,
@@ -267,7 +281,8 @@
         "bpe_wiki": 538,
         "bpe_wiki_ru": 710,
         "bpe_wiki_en": 481,
-        "bpe_meshcoretel_ru": 730
+        "bpe_meshcoretel_ru": 730,
+        "bpe_coding": 587
       }
     },
     {
@@ -288,7 +303,8 @@
         "bpe_wiki": "°äÈͿȵ/\"ЇÊØӏՏɝͬ݉Ӣݼӭ\"ËƾĒƢȣĒϰʞÆƞÚؑ̽ÌŷǰþĖÚƠضÝɏǆŰͶӰÐïΡԻ\"$ȞÈͿŁ͓؍֊řʢ܌ĄԤ͚äĄĒϰʞÆƞÚؑà΄ĩ̮ЖˍØÇēȚÒӅŸÉĸȿȎΠȕäܟԲӒևäɻ\"ˍċàÈУ˭۪ض˵бͶӰÐïԘ݉ӢɸɀäΉǁ؍ÝԜŋԤ͚äĄٕƻАĬîΔÞǽȞÈͿƔó°ȼďȵȞÈͿߠĬÌ̌їř֟öȒޤ̅0",
         "bpe_wiki_ru": "°äȞÝƈ/ǥȮƏěóɨ՚ʦیˬַľޑ×ŻƦěДéΏÖÚĄнđؿրÉǠ̠ŵŸòΖÖȋŊðɌ؎\"$ũȞÝĆ$ƥӏًʇÇۣ֡لěДéΏÖÚĄн˳Κɦ̇üØѼǧì̹ıÉϒêƆÊÜƳäЇٽɁɢĒäҪ۳Ôŉ۰áֵܘŵɍΖÖȋŊðթیˬӡŭäʱɁƥҚԞĴÔŋƉɽل֡Ŧ˓þɧƄđũȞͪÏ÷°ǧČƈũȞͪĴþӼŶدڠćƜĪĆĮ0",
         "bpe_wiki_en": "°äÈØÝÏÍ\"سÓÆÞÊØÔÓ×ÕÊÆÍ×ÊÐáÒÓÊ\"ÒÅÌÇÅÒÍÊ\"ÈÕØÔÔà\"ËÍÇÓ×ÒàÚ\"ÍÌ\"Ó×ÕäÉÅ\"ÆÊÖÚÇÓÖ×àÚ\"ÌÊÑÒÓÇÓÉÒàÚ]3_Ā¦\"ÝÍÕÓÏÓÑ\"ÖÑàÖÐÊ\"×ÊÕÑÍÒ\"$ÐäÈØÝÏÅǠÓ×ÒÓÖÍ×Öä\"ÏÓ\"ÇÖÊÑ\"ÔÕÊÉÖ×ÅÇÍ×ÊÐäÑ\"Ó×ÕäÉÅ\"ÆÊÖÚÇÓÖ×àÚðÓÆÐÅÉÅãÞÍÑ\"ØÇÊÐÍÜÊÒÒàÑÍ\"ÌÅÉÒÍÑÍ\"ÏÓÒÊÜÒÓÖ×äÑÍðÏÓ×ÓÕàÊ\"ÔÓÌÇÓÐäã×\"ÍÑ\"ÔÕàÈÅ×á]4ž5_Ā¦\"ØÌÏÓÑ\"ÖÑàÖÐÊ\"â×Ó\"ÒÅÌÇÅÒÍÊ\"ÔÕÍÑÊÒäÊ×Öä\"ÔÓ\"Ó×ÒÓÝÊÒÍã\"Ï\"ÔÕÊÉÖ×ÅÇÍ×ÊÐäÑ\"ÖÊÑÊÎÖ×ÇÅ\"ÒÅÖ×ÓäÞÍÚ\"ÐäÈØÝÊÏĀ°ÍÜÍÒÏÍ\"ÐäÈØÝÊÏ\"ÒÅÌàÇÅã×Öä\"ÈÓÐÓÇÅÖ×ÍÏÅÑÍ0",
-        "bpe_meshcoretel_ru": "°϶ɱƳƯšÊкøһӭʔčÌǉęç۔ΕøпǏøЄèڇÚłêàŤԎܕÉѤ]3_ٍɽîҎÖ˂ّίʏͨ$ƊɦÝùՇøҐϋɔæԳëˑƃوäģøЄèڇÚłêàÚòގŝãɈģֿ̑ÜôܥõѨȮõͯЕäʏòԄçĈÌłƊׂҲ۾àȿ×á]4_]5_ٍØÌҎÖ˂ّĿčÌǉęçůʻԡȜø÷ÝĹƗĠۿÉƃوäģÖąŹ܍ݽƉäɈŤƊɦÝɣĉ°ʶĲƳƊɦÝ۴čАȗǄںĐچڪ0"
+        "bpe_meshcoretel_ru": "°϶ɱƳƯšÊкøһӭʔčÌǉęç۔ΕøпǏøЄèڇÚłêàŤԎܕÉѤ]3_ٍɽîҎÖ˂ّίʏͨ$ƊɦÝùՇøҐϋɔæԳëˑƃوäģøЄèڇÚłêàÚòގŝãɈģֿ̑ÜôܥõѨȮõͯЕäʏòԄçĈÌłƊׂҲ۾àȿ×á]4_]5_ٍØÌҎÖ˂ّĿčÌǉęçůʻԡȜø÷ÝĹƗĠۿÉƃوäģÖąŹ܍ݽƉäɈŤƊɦÝɣĉ°ʶĲƳƊɦÝ۴čАȗǄںĐچڪ0",
+        "bpe_coding": "°äÈØÝÏÍ\"҇ÓÆÞÊØÔÓ×ÕÊÆÍ×ÊÐáÒÓÊ\"ÒÅÌÇÅÒÍÊ\"ÈÕØÔÔà\"ËÍÇÓ×ÒàÚ\"ÍÌ\"Ó×ÕäÉÅ\"ÆÊÖÚÇÓÖ×àÚ\"ÌÊÑÒÓÇÓÉÒàÚ]3_Ʃ¦\"ÝÍÕÓÏÓÑ\"ÖÑàÖÐÊ\"×ÊÕÑÍÒ̋ÐäÈØÝÏÅɾÓ×ÒÓÖÍ×Öä\"ÏÓ\"ÇÖÊÑ\"ÔÕÊÉÖ×ÅÇÍ×ÊÐäÑ\"Ó×ÕäÉÅ\"ÆÊÖÚÇÓÖ×àÚéÓÆÐÅÉÅãÞÍÑ\"ØÇÊÐÍÜÊÒÒàÑÍ\"ÌÅÉÒÍÑÍ\"ÏÓÒÊÜÒÓÖ×äÑÍéÏÓ×ÓÕàÊ\"ÔÓÌÇÓÐäã×\"ÍÑ\"ÔÕàÈÅ×á]4_]5_Ʃ¦\"ØÌÏÓÑ\"ÖÑàÖÐÊ\"â×Ó\"ÒÅÌÇÅÒÍÊ\"ÔÕÍÑÊÒäÊ×Öä\"ÔÓ\"Ó×ÒÓÝÊÒÍã\"Ï\"ÔÕÊÉÖ×ÅÇÍ×ÊÐäÑ\"ÖÊÑÊÎÖ×ÇÅ\"ÒÅÖ×ÓäÞÍÚ\"ÐäÈØÝÊÏƩ°ÍÜÍÒÏÍ\"ÐäÈØÝÊÏ\"ÒÅÌàÇÅã×Öä\"ÈÓÐÓÇÅÖ×ÍÏÅÑÍ0"
       },
       "encodedUtf8Bytes": {
         "decider": 310,
@@ -303,7 +319,8 @@
         "bpe_wiki": 319,
         "bpe_wiki_ru": 309,
         "bpe_wiki_en": 737,
-        "bpe_meshcoretel_ru": 337
+        "bpe_meshcoretel_ru": 337,
+        "bpe_coding": 737
       }
     }
   ]

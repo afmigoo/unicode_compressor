@@ -592,13 +592,29 @@ export class DeciderEncoder {
 
 const te = new TextEncoder();
 
-/** Names and order aligned with `scripts/comparator.py` / `generate_dictionaries.py`. */
-export const BPE_DICT_NAMES = [
-  "bpe_wiki",
-  "bpe_wiki_ru",
-  "bpe_wiki_en",
-  "bpe_meshcoretel_ru",
+/**
+ * Single source of truth: this order is used for Decider children and for `Object.keys` order
+ * after `decider` in the returned map (`{ decider, ...named }`).
+ * @type {readonly [string, (d: Record<string, Record<string, string>>) => object][]}
+ */
+const ENCODER_SPECS = [
+  ["utf8", () => new UTF8Encoder(ALPHABET)],
+  ["utf8_optimize", () => new UTF8Encoder(ALPHABET, ["cyrillic", "english"])],
+  ["base64", () => new Base64Encoder(ALPHABET, false)],
+  ["base64_compress", () => new Base64Encoder(ALPHABET, true)],
+  ["base91", () => new Base91Encoder(ALPHABET, false)],
+  ["base91_compress", () => new Base91Encoder(ALPHABET, true)],
+  ["base85", () => new Base85Encoder(ALPHABET, false)],
+  ["base85_compress", () => new Base85Encoder(ALPHABET, true)],
+  ["bpe_wiki", (d) => new StaticDictEncoder(d.bpe_wiki)],
+  ["bpe_wiki_ru", (d) => new StaticDictEncoder(d.bpe_wiki_ru)],
+  ["bpe_wiki_en", (d) => new StaticDictEncoder(d.bpe_wiki_en)],
+  ["bpe_meshcoretel_ru", (d) => new StaticDictEncoder(d.bpe_meshcoretel_ru)],
+  ["bpe_coding", (d) => new StaticDictEncoder(d.bpe_coding)]
 ];
+
+/** Fixture JSON basenames, same order as `bpe_*` rows in `ENCODER_SPECS`. */
+export const BPE_DICT_NAMES = ENCODER_SPECS.filter(([name]) => name.startsWith("bpe_")).map(([name]) => name);
 
 /**
  * @param {{
@@ -606,50 +622,16 @@ export const BPE_DICT_NAMES = [
  *   bpe_wiki_ru: Record<string, string>,
  *   bpe_wiki_en: Record<string, string>,
  *   bpe_meshcoretel_ru: Record<string, string>,
+ *   bpe_coding: Record<string, string>
  * }} bpeDicts
  */
 export function buildEncoders(bpeDicts) {
-  const utf8 = new UTF8Encoder(ALPHABET);
-  const utf8_optimize = new UTF8Encoder(ALPHABET, ["cyrillic", "english"]);
-  const base64 = new Base64Encoder(ALPHABET, false);
-  const base64_compress = new Base64Encoder(ALPHABET, true);
-  const base91 = new Base91Encoder(ALPHABET, false);
-  const base91_compress = new Base91Encoder(ALPHABET, true);
-  const base85 = new Base85Encoder(ALPHABET, false);
-  const base85_compress = new Base85Encoder(ALPHABET, true);
-  const bpe_wiki = new StaticDictEncoder(bpeDicts.bpe_wiki);
-  const bpe_wiki_ru = new StaticDictEncoder(bpeDicts.bpe_wiki_ru);
-  const bpe_wiki_en = new StaticDictEncoder(bpeDicts.bpe_wiki_en);
-  const bpe_meshcoretel_ru = new StaticDictEncoder(bpeDicts.bpe_meshcoretel_ru);
-  const decider = new DeciderEncoder(ALPHABET, [
-    utf8,
-    utf8_optimize,
-    base64,
-    base64_compress,
-    base91,
-    base91_compress,
-    base85,
-    base85_compress,
-    bpe_wiki,
-    bpe_wiki_ru,
-    bpe_wiki_en,
-    bpe_meshcoretel_ru,
-  ]);
-  return {
-    decider,
-    utf8,
-    utf8_optimize,
-    base64,
-    base64_compress,
-    base91,
-    base91_compress,
-    base85,
-    base85_compress,
-    bpe_wiki,
-    bpe_wiki_ru,
-    bpe_wiki_en,
-    bpe_meshcoretel_ru,
-  };
+  const allEncoders = ENCODER_SPECS.map(([, build]) => build(bpeDicts));
+  const decider = new DeciderEncoder(ALPHABET, allEncoders);
+  const named = Object.fromEntries(
+    ENCODER_SPECS.map(([name], i) => [name, allEncoders[i]]),
+  );
+  return { decider, ...named };
 }
 
 /** Browser: load JSON maps from `fixtures/dictionaries/` next to the app. */

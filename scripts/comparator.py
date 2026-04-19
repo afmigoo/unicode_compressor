@@ -43,6 +43,14 @@ encoders = {
     'bpe_meshcoretel_ru': BpeEncoder(ALPHABET, train_files=[
         Path(__file__).parent / "corpus/processed/meshcoretel/ru.txt",
     ]),
+    'bpe_coding': BpeEncoder(ALPHABET, compress=False, train_files=[
+        Path(__file__).parent / "corpus/processed/coding/c/train.txt",
+        Path(__file__).parent / "corpus/processed/coding/arduino/train.txt",
+        Path(__file__).parent / "corpus/processed/coding/python/train.txt",
+        Path(__file__).parent / "corpus/processed/coding/go/train.txt",
+        Path(__file__).parent / "corpus/processed/coding/rust/train.txt",
+        Path(__file__).parent / "corpus/processed/coding/clojure/train.txt",
+    ])
 }
 encoders['decider'] = DeciderEncoder(ALPHABET, list(encoders.values()))
 
