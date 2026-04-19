@@ -23,10 +23,10 @@ def _build_encoders():
         "utf8_optimize": UTF8Encoder(ALPHABET, optimize_preference=["cyrillic", "english"]),
         "base64": Base64Encoder(ALPHABET),
         "base64_compress": Base64Encoder(ALPHABET, compress=True),
-        "base91": Base91Encoder(compress=False),
-        "base91_compress": Base91Encoder(compress=True),
-        "base85": Base85Encoder(compress=False),
-        "base85_compress": Base85Encoder(compress=True),
+        "base91": Base91Encoder(ALPHABET, compress=False),
+        "base91_compress": Base91Encoder(ALPHABET, compress=True),
+        "base85": Base85Encoder(ALPHABET, compress=False),
+        "base85_compress": Base85Encoder(ALPHABET, compress=True),
     }
     encoders["decider"] = DeciderEncoder(ALPHABET, list(encoders.values()))
     return encoders
@@ -41,7 +41,9 @@ _ALPHABET_CASES = [
     "hello 123",
     "лтфлстзлфытьсзфь",
     "заказала аккумы\nно они не скоро",
-    "Test: !@# with mixed АБВ and xyz."
+    "Test: !@# with mixed АБВ and xyz.",
+    ALPHABET,
+    ALPHABET * 10
 ]
 
 _ALPHABET_CASES.extend(

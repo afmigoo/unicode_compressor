@@ -376,17 +376,31 @@ export class Base64Encoder {
 }
 
 export class Base91Encoder {
-  constructor(compress = false) {
+  constructor(alphabet, compress = false) {
+    this.alphabet = alphabet;
     this.compress = compress;
+    this.charToIndex = Object.fromEntries(
+      [...alphabet].map((ch, i) => [ch, i]),
+    );
+    this.indexToChar = Object.fromEntries(
+      [...alphabet].map((ch, i) => [i, ch]),
+    );
   }
 
   encode(text) {
-    const te = new TextEncoder();
-    let payload = te.encode(text);
-    if (this.compress) {
-      payload = zlibSync(payload, { level: 9 });
+    const payload = new Uint8Array(text.length);
+    let i = 0;
+    for (const ch of text) {
+      if (!(ch in this.charToIndex)) {
+        throw new Error(`Character not in alphabet: ${JSON.stringify(ch)}`);
+      }
+      payload[i++] = this.charToIndex[ch];
     }
-    return base91Encode(payload);
+    let bytes = payload;
+    if (this.compress) {
+      bytes = zlibSync(bytes, { level: 9 });
+    }
+    return base91Encode(bytes);
   }
 
   decode(encoded) {
@@ -394,22 +408,44 @@ export class Base91Encoder {
     if (this.compress) {
       payload = unzlibSync(payload);
     }
-    return new TextDecoder().decode(payload);
+    let out = "";
+    for (let j = 0; j < payload.length; j++) {
+      const b = payload[j];
+      if (!(b in this.indexToChar)) {
+        throw new Error(`Byte out of alphabet range: ${b}`);
+      }
+      out += this.indexToChar[b];
+    }
+    return out;
   }
 }
 
 export class Base85Encoder {
-  constructor(compress = false) {
+  constructor(alphabet, compress = false) {
+    this.alphabet = alphabet;
     this.compress = compress;
+    this.charToIndex = Object.fromEntries(
+      [...alphabet].map((ch, i) => [ch, i]),
+    );
+    this.indexToChar = Object.fromEntries(
+      [...alphabet].map((ch, i) => [i, ch]),
+    );
   }
 
   encode(text) {
-    const te = new TextEncoder();
-    let payload = te.encode(text);
-    if (this.compress) {
-      payload = zlibSync(payload, { level: 9 });
+    const payload = new Uint8Array(text.length);
+    let i = 0;
+    for (const ch of text) {
+      if (!(ch in this.charToIndex)) {
+        throw new Error(`Character not in alphabet: ${JSON.stringify(ch)}`);
+      }
+      payload[i++] = this.charToIndex[ch];
     }
-    return b85encode(payload, false);
+    let bytes = payload;
+    if (this.compress) {
+      bytes = zlibSync(bytes, { level: 9 });
+    }
+    return b85encode(bytes, false);
   }
 
   decode(encoded) {
@@ -417,7 +453,15 @@ export class Base85Encoder {
     if (this.compress) {
       payload = unzlibSync(payload);
     }
-    return new TextDecoder().decode(payload);
+    let out = "";
+    for (let j = 0; j < payload.length; j++) {
+      const b = payload[j];
+      if (!(b in this.indexToChar)) {
+        throw new Error(`Byte out of alphabet range: ${b}`);
+      }
+      out += this.indexToChar[b];
+    }
+    return out;
   }
 }
 
@@ -476,10 +520,10 @@ export function buildEncoders() {
   const utf8_optimize = new UTF8Encoder(ALPHABET, ["cyrillic", "english"]);
   const base64 = new Base64Encoder(ALPHABET, false);
   const base64_compress = new Base64Encoder(ALPHABET, true);
-  const base91 = new Base91Encoder(false);
-  const base91_compress = new Base91Encoder(true);
-  const base85 = new Base85Encoder(false);
-  const base85_compress = new Base85Encoder(true);
+  const base91 = new Base91Encoder(ALPHABET, false);
+  const base91_compress = new Base91Encoder(ALPHABET, true);
+  const base85 = new Base85Encoder(ALPHABET, false);
+  const base85_compress = new Base85Encoder(ALPHABET, true);
   const decider = new DeciderEncoder(ALPHABET, [
     utf8,
     utf8_optimize,

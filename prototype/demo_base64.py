@@ -14,11 +14,9 @@ class Base64Encoder:
             payload = bytes(self.char_to_index[ch] for ch in text)
             if self.compress:
                 payload = zlib.compress(payload, level=9)
-            # print('payload:', payload)
-            # print('payload bytes:', len(payload))
         except KeyError as err:
             raise ValueError(f"Character not in alphabet: {err.args[0]!r}") from None
-        return base64.b64encode(payload).decode("ascii")
+        return base64.b64encode(payload).decode("utf-8")
 
     def decode(self, encoded: str) -> str:
         """Decode Base64 back to the original custom-alphabet text."""

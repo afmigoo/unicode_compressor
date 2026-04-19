@@ -28,6 +28,8 @@ const cases = [
   "съешь ещё этих мягких французских булок, да выпей чаю",
   "brown fox jumps over the lazy dog",
   "Test: !@# with mixed АБВ and xyz.",
+  ALPHABET,
+  ALPHABET.repeat(10),
 ];
 
 /** Same as prototype/test_encoders.py: choices(ALPHABET, k=n) for n in range(1000) */
