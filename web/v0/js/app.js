@@ -96,7 +96,19 @@ async function main() {
     clearTransportWarnings();
     try {
       const enc = getEncoder();
-      const out = enc.encode($input.value);
+      const plain = $input.value;
+      const out = enc.encode(plain);
+      const roundTrip = enc.decode(out);
+      if (roundTrip !== plain) {
+        setStatus(
+          `Decoded payload does not match the original plaintext. Please report this to the developer or try another encoder or payload.\
+          Debug data: payload: ${plain} -> ${out} -> ${roundTrip}`,
+          true,
+        );
+        $output.value = out;
+        updateByteLabels();
+        return;
+      }
       $output.value = out;
       updateByteLabels();
       setTransportWarnings(utf8ByteLength($output.value));
