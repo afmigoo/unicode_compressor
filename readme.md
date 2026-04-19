@@ -15,11 +15,20 @@ This is a web application that allows you to compress utf-8 strings into utf-8 s
 - `base91_compress` - like `base91`, but compresses the raw bytes using zlib
 - `base85` - maps each alphabet character into raw bytes, then encodes them into base85
 - `base85_compress` - like `base85`, but compresses the raw bytes using zlib
+- `bpe_wiki` - pretrained BPE dictionary with python. Frontend encodes/decodes using said dictionary (greedy encoding). Trained on wikipedia articles in Russian and English.
+- `bpe_wiki_ru` - like `bpe_wiki`, but trained Russian articles.
+- `bpe_wiki_en` - like `bpe_wiki`, but trained English articles.
+- `bpe_meshcoretel_ru` - like `bpe_wiki`, but trained with messages taken from #public Meshcore channel (Moscow region).
+- `bpe_coding` - like `bpe_wiki`, but trained on a tiny subset of [The Stack Dataset](https://huggingface.co/datasets/bigcode/the-stack).
 
 ## Stack and acknowledgements
 
-- **Prototype** ([prototype/](prototype/)) written in **Python by hand**
-- **Frontend ([web/](web/))** vibe-coded in **JS**. Model was instructed to mimick Python code as closely as possible. The result was tested by hand and by unit tests
+- **All but frontend** written in **Python by hand**
+- **Frontend ([web/](web/))** vibe-coded in **JS**. Model is instructed to mimick Python code as closely as possible and is supervised. The result is tested by hand and by smoke tests.
+- **Datasets** used
+    - [wikipedia](https://wikipedia.org/) crawled for training `bpe_wiki`, `bpe_wiki_ru` and `bpe_wiki_en` dictionaries.
+    - [Meshcoretel](https://meshcoretel.ru/) messages taken from #public Meshcore channel (Moscow region) for training `bpe_meshcoretel_ru` dictionary.
+    - [The Stack Dataset](https://huggingface.co/datasets/bigcode/the-stack) for training `bpe_coding` dictionary.
 
 ## Quick start
 
@@ -38,7 +47,7 @@ docker build . -f docker/Dockerfile -t ghcr.io/afmigoo/unicode_compressor:latest
 ```bash
 docker compose up
 ```
-Then go to http://localhost:80/v1/
+Then go to http://localhost:80/v0/
 
 ## Testing
 
