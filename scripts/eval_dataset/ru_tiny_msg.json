@@ -1,0 +1,9 @@
+[
+    "Ставится нода, цепляется к компу, а на компе скрипт работает",
+    "Как бы втихую на репу тастика засунуть через эфир коровскую прошивку?",
+    "в настройках репитера появилась опция исключать петли в маршрутах",
+    "как дела у тебя Катенька??",
+    "Ну ты наконец то попался",
+    "    def encode(self, text: str, full_search: bool = False) -> str:\n        if full_search:\n            return self._encode_full_search(text)\n        return self._encode_greedy(text)",
+    "Привет! Вот ссылка: https://man.archlinux.org/man/extra/waybar/waybar-niri-workspaces.5.en"
+]

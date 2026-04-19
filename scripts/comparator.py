@@ -1,9 +1,13 @@
-from demo_base64 import Base64Encoder
-from demo_utf8 import UTF8Encoder
-from demo_base91 import Base91Encoder
-from demo_decider import DeciderEncoder
-from demo_base85 import Base85Encoder
+from v0.demo_base64 import Base64Encoder
+from v0.demo_utf8 import UTF8Encoder
+from v0.demo_base91 import Base91Encoder
+from v0.demo_decider import DeciderEncoder
+from v0.demo_base85 import Base85Encoder
+from encoders import BpeEncoder
+
 import os
+import json
+from pathlib import Path
 from string import punctuation
 
 ALPHABET = " \n"
@@ -25,34 +29,24 @@ encoders = {
     'base91': Base91Encoder(ALPHABET, compress=False),
     'base91_compress': Base91Encoder(ALPHABET, compress=True),
     'base85': Base85Encoder(ALPHABET, compress=False),
-    'base85_compress': Base85Encoder(ALPHABET, compress=True)
+    'base85_compress': Base85Encoder(ALPHABET, compress=True),
+    'bpe_wiki': BpeEncoder(ALPHABET, train_files=[
+        Path(__file__).parent / "corpus/processed/wiki/ru.txt",
+        Path(__file__).parent / "corpus/processed/wiki/en.txt",
+    ]),
+    'bpe_wiki_ru': BpeEncoder(ALPHABET, train_files=[
+        Path(__file__).parent / "corpus/processed/wiki/ru.txt",
+    ]),
+    'bpe_wiki_en': BpeEncoder(ALPHABET, train_files=[
+        Path(__file__).parent / "corpus/processed/wiki/en.txt",
+    ]),
+    'bpe_meshcoretel_ru': BpeEncoder(ALPHABET, train_files=[
+        Path(__file__).parent / "corpus/processed/meshcoretel/ru.txt",
+    ]),
 }
 encoders['decider'] = DeciderEncoder(ALPHABET, list(encoders.values()))
 
-dataset = [
-    """заказала аккумы, но они не скоро придут
-в москве не нашла аккумов которые мне подошли бы, с таким маленьким вольтажом и габаритами только на алике есть""",
-
-    """Будет не круто если не будет получаться стабильно сообщения получать""",
-
-    """Мне чета хочется сделать ноду на солнечной панели""",
-
-    """
-    for encoder_name, encoder in encoders.items():
-    print('-' * os.get_terminal_size().columns)
-    print(f"\{encoder_name\}:")
-    for text in dataset:
-        encoded = encoder.encode(text)
-        print(f"\{text\} -> \{encoded\}")
-        results[encoder_name].append((text, encoded))
-        assert encoder.decode(encoded) == text, f"Payload corrupted: \{text\} -> \{encoded\} -> \{encoder.decode(encoded)\}"
-    """,
-
-    """
-заказала аккумы, но они не скоро придут
-в москве не нашла аккумов которые мне подошли бы, с таким маленьким вольтажом и габаритами только на алике есть
-"""
-]
+dataset = json.load(open(Path(__file__).parent / "eval_dataset/ru_tiny_msg.json", "r", encoding="utf-8"))
 
 results = {
     enc: []
