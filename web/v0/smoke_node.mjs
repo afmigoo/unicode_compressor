@@ -72,11 +72,11 @@ for (const [name, enc] of Object.entries(encoders)) {
     }
     const encoded = enc.encode(text);
     const decoded = enc.decode(encoded);
-    console.log(`${name}: ${text.slice(0, 10)}... -> ${encoded.slice(0, 10)}... -> ${decoded.slice(0, 10)}... -> ${decoded === text ? "OK" : "FAIL"}`);
     if (decoded !== text) {
-      console.error("round-trip fail", name, JSON.stringify(text), JSON.stringify(decoded));
+      console.error(`FAIL: ${name}: ${text} -> ${encoded} -> ${decoded}`);
       process.exit(1);
     }
   }
+  console.log(`${name}: OK`);
 }
-console.log("smoke ok");
+console.log("OK: smoke test");
