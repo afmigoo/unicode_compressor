@@ -1,0 +1,12 @@
+[package]
+name = "unipress"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+phf = { version = "0.13.1", features = ["macros"] }
+clap = { version = "4.0", features = ["derive"] }
+wasm-bindgen = "0.2"
+
+[lib]
+crate-type = ["cdylib"]
