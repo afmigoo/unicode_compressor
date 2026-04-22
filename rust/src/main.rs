@@ -1,6 +1,6 @@
 use std::process::exit;
 use clap::Parser;
-use std::io::stdin;
+use std::io::{stdin,read_to_string};
 
 mod dictionaries;
 mod encoders;
@@ -34,8 +34,7 @@ fn main() -> Result<(), Error> {
     return Ok(());
   }
 
-  let mut payload = String::new();
-  stdin().read_line(&mut payload).expect("Failed to read payload string");
+  let payload = read_to_string(stdin()).expect("Failed to read payload string");
   let payload = payload.trim();
 
   match process_payload(payload, &args.encoder, args.decode) {
