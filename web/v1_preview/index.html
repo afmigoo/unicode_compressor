@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>unicode_compress encoders</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <h1>Unicode compresser</h1>
+    <div class="row">
+      <label for="encoder">Encoder</label>
+      <select id="encoder" aria-label="Encoder"></select>
+    </div>
+    <div class="field">
+      <div class="meta">Input — UTF-8 length: <span id="in-bytes">0</span> bytes</div>
+      <textarea id="input" spellcheck="false" placeholder="Plain text or encoded payload..."></textarea>
+    </div>
+    <div class="row">
+      <button type="button" id="btn-encode">Encode</button>
+      <button type="button" id="btn-decode">Decode</button>
+      <button type="button" id="btn-clear">Clear all</button>
+    </div>
+    <div class="field">
+      <div class="meta">Output — UTF-8 length: <span id="out-bytes">0</span> bytes</div>
+      <textarea id="output" spellcheck="false"></textarea>
+      <div id="transport-warn" class="transport-warn" role="alert"></div>
+    </div>
+    <div class="row">
+      <button type="button" id="btn-copy">Copy output</button>
+    </div>
+    <p id="status" class="status" role="status"></p>
+    <footer class="site-footer">
+      <a
+        class="footer-source-link"
+        href="https://github.com/afmigoo/unicode_compressor"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+      <span class="footer-source-text">Source code</span>
+      <img
+        class="footer-source-icon"
+        src="../v0/img/GitHub_Invertocat_Black_Clearspace.svg"
+        width="16"
+        height="16"
+        alt=""
+        decoding="async"
+      />
+      </a>
+    </footer>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>
