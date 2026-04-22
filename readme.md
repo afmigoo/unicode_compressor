@@ -1,4 +1,4 @@
-# Unicode compresser
+# Unicode-to-unicode compression tool
 
 ## Description
 
