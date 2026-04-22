@@ -1,5 +1,13 @@
+FROM rust:1.95.0-slim-bookworm AS wasm-builder
+RUN cargo install wasm-pack --locked
+RUN rustup target add wasm32-unknown-unknown
+WORKDIR /app/rust
+COPY ./rust/ ./
+RUN wasm-pack build --target web --release --out-dir /tmp/pkg
+
 FROM nginx:latest
-RUN rm /usr/share/nginx/html/*
+RUN rm -rf /usr/share/nginx/html/*
 COPY ./web /usr/share/nginx/html
+COPY --from=wasm-builder /tmp/pkg /usr/share/nginx/html/v1_preview/pkg
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 CMD ["nginx", "-g", "daemon off;"]
