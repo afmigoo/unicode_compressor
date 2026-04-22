@@ -2,12 +2,16 @@
 
 ## Description
 
-This is a web application that allows you to compress utf-8 strings into utf-8 strings using different algorithms. It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 payload.
+This is a tool that allows you to compress utf-8 strings into utf-8 strings using static dicttionaries compression algorithms. It is implemented in Rust and is available as a CLI tool and a web application powered by WASM.
+
+It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 payload.
 
 ## Stack and acknowledgements
 
-- **All but frontend** written in **Python by hand**
-- **Frontend ([web/](web/))** vibe-coded in **JS**. Model is instructed to mimick Python code as closely as possible and is supervised. The result is tested by hand and by smoke tests.
+- **Tool's core** written in **Rust** by hand.
+- **Static dictionaries** are generated with **Python** scripts written by hand.
+- **Web-app module** is backendless and is powered by WASM.
+- **Frontend** (*.js, *.css, *.html) vibe-coded in **JS**. Model is instructed to integrade Rust WASM module into the user interface.
 - **Datasets** used
     - [wikipedia](https://wikipedia.org/) crawled for training `bpe_wiki`, `bpe_wiki_ru` and `bpe_wiki_en` dictionaries.
     - [Meshcoretel](https://meshcoretel.ru/) messages taken from #public Meshcore channel (Moscow region) for training `bpe_meshcoretel_ru` dictionary.
@@ -15,42 +19,50 @@ This is a web application that allows you to compress utf-8 strings into utf-8 s
 
 ## How to use
 
-### General
+### CLI tool
 
-Just serve directory `web/` (or `web/vX` for specific version) with any webserver. There is no backend
-
-### Docker
-
-#### Build (optional)
 ```bash
+# Build
+cd rust && cargo build --release
+# Use
+./target/release/unipress --help
+```
+
+### Web-app
+#### Public version
+Public version is available at https://zip.cyanshark.org/
+
+#### Self-hosted version
+
+```bash
+# Build (optional)
 docker build . -f docker/Dockerfile -t ghcr.io/afmigoo/unicode_compressor:latest
-```
-
-#### Run
-```bash
+# Run
 docker compose up
+# Go to http://localhost:80/
 ```
-Then go to http://localhost:80/v0/
-
 ## How to test
 
 ```bash
+# v0
 docker run --rm \
     -v $(pwd)/web/v1:/app -w /app \
     node:22-alpine \
     node smoke_node.mjs
+# v1-preview ... TODO
 ```
 
 ## Privacy note
 
-- It is a frontend-only web-application, meaning your data never leaves your browser.
+- In web-app mode your data never leaves your browser side, there is no backend where it could be stored.
 - This is not encryption, this is encoding. Using payloads generated with this project in unencrypted channels exposes your messages.
 
 ## Planned
 - `v1`
     - [ ] Create reference dataset for performance measurement
     - [ ] Rewrite greedy encoding of static dict encoder
-    - [ ] Refactor encoders to support diferent alphabets. Now global hard-coded alphabet is shared between all encoders
+    - [x] Rewrite core in Rust for compatability between cli and web.
+    - [x] Refactor encoders to support diferent alphabets. Now global hard-coded alphabet is shared between all encoders
 
 ## Algorithms (names are not final)
 
