@@ -62,9 +62,22 @@
     font-size: 0.875rem;
     margin-top: 0.75rem;
     min-height: 1.25rem;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #c9d6ea;
+    border-radius: 4px;
+    background: #edf4ff;
+    color: #19385f;
   }
   .status.error {
-    color: #a30;
+    border-color: #e2b6ab;
+    background: #fff1ed;
+    color: #8f2300;
+  }
+  button:disabled,
+  select:disabled,
+  textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
   .transport-warn {
     display: none;

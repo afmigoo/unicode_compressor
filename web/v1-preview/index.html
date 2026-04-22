@@ -10,24 +10,24 @@
     <h1>Unicode compresser</h1>
     <div class="row">
       <label for="encoder">Encoder</label>
-      <select id="encoder" aria-label="Encoder"></select>
+      <select id="encoder" aria-label="Encoder" disabled></select>
     </div>
     <div class="field">
       <div class="meta">Input — UTF-8 length: <span id="in-bytes">0</span> bytes</div>
-      <textarea id="input" spellcheck="false" placeholder="Plain text or encoded payload..."></textarea>
+      <textarea id="input" spellcheck="false" placeholder="Plain text or encoded payload..." disabled></textarea>
     </div>
     <div class="row">
-      <button type="button" id="btn-encode">Encode</button>
-      <button type="button" id="btn-decode">Decode</button>
-      <button type="button" id="btn-clear">Clear all</button>
+      <button type="button" id="btn-encode" disabled>Encode</button>
+      <button type="button" id="btn-decode" disabled>Decode</button>
+      <button type="button" id="btn-clear" disabled>Clear all</button>
     </div>
     <div class="field">
       <div class="meta">Output — UTF-8 length: <span id="out-bytes">0</span> bytes</div>
-      <textarea id="output" spellcheck="false"></textarea>
+      <textarea id="output" spellcheck="false" disabled></textarea>
       <div id="transport-warn" class="transport-warn" role="alert"></div>
     </div>
     <div class="row">
-      <button type="button" id="btn-copy">Copy output</button>
+      <button type="button" id="btn-copy" disabled>Copy output</button>
     </div>
     <p id="status" class="status" role="status"></p>
     <footer class="site-footer">

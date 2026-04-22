@@ -16,6 +16,8 @@ const $transportWarn = document.getElementById("transport-warn");
 let wasmEncode = null;
 let wasmDecode = null;
 let wasmListEncoders = null;
+const WASM_INIT_TIMEOUT_MS = 60000;
+const CONTROLS = [$encoder, $input, $output, $btnEncode, $btnDecode, $btnCopy, $btnClear];
 
 function utf8ByteLength(text) {
   return new TextEncoder().encode(text).length;
@@ -69,11 +71,52 @@ function ensureWasmLoaded() {
   }
 }
 
+function setControlsEnabled(enabled) {
+  for (const el of CONTROLS) {
+    el.disabled = !enabled;
+  }
+}
+
+async function withTimeout(promise, timeoutMs, label) {
+  let timeoutId = null;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      reject(new Error(`${label} timed out after ${timeoutMs} ms`));
+    }, timeoutMs);
+  });
+  try {
+    return await Promise.race([promise, timeoutPromise]);
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 async function main() {
-  setStatus("Loading wasm module...");
+  setStatus("Loading wasm module JS...");
   try {
     const wasm = await import("../pkg/unipress.js");
-    await wasm.default();
+    setStatus("Loading wasm binary...");
+    const wasmUrl = new URL("../pkg/unipress_bg.wasm", import.meta.url);
+    const wasmResp = await withTimeout(
+      fetch(wasmUrl),
+      WASM_INIT_TIMEOUT_MS,
+      "WASM download",
+    );
+    if (!wasmResp.ok) {
+      throw new Error(`Failed to load wasm binary: HTTP ${wasmResp.status}`);
+    }
+    setStatus("Reading wasm binary...");
+    const wasmBytes = await withTimeout(
+      wasmResp.arrayBuffer(),
+      WASM_INIT_TIMEOUT_MS,
+      "WASM read",
+    );
+    setStatus("Initializing wasm module...");
+    await withTimeout(
+      wasm.default(wasmBytes),
+      WASM_INIT_TIMEOUT_MS,
+      "WASM initialization",
+    );
     wasmEncode = wasm.encode;
     wasmDecode = wasm.decode;
     wasmListEncoders = wasm.list_encoders;
@@ -146,6 +189,7 @@ async function main() {
     setStatus("");
   });
 
+  setControlsEnabled(true);
   setStatus("Ready.");
 }
 
