@@ -3,6 +3,8 @@ use wasm_bindgen::prelude::*;
 mod encoders;
 mod dictionaries;
 
+use encoders::consts::ENCODER_NAMES;
+
 #[wasm_bindgen]
 extern "C" {
     pub fn alert(s: &str);
@@ -27,7 +29,7 @@ pub fn decode(payload: &str, encoder: &str) -> String {
 #[wasm_bindgen]
 pub fn list_encoders() -> Vec<String> {
     let mut encoders = Vec::new();
-    for encoder in encoders::NAMED_ENCODERS.keys() {
+    for encoder in ENCODER_NAMES {
         encoders.push(encoder.to_string());
     }
     encoders

@@ -1,19 +1,20 @@
 use std::cmp::min;
+use phf::Map;
 
 use super::errors::Error;
 use super::traits::Encoder;
 
 pub struct TokenEncoder {
-    pub token2unicode: &'static phf::Map<&'static str, &'static str>,
-    pub unicode2token: &'static phf::Map<&'static str, &'static str>,
+    pub token2unicode: &'static Map<&'static str, &'static str>,
+    pub unicode2token: &'static Map<&'static str, &'static str>,
     pub token_max_chars: u8,
 }
 
 impl Encoder for TokenEncoder {
-    fn token2unicode(&self) -> &'static phf::Map<&'static str, &'static str> {
+    fn token2unicode(&self) -> &'static Map<&'static str, &'static str> {
         &self.token2unicode
     }
-    fn unicode2token(&self) -> &'static phf::Map<&'static str, &'static str> {
+    fn unicode2token(&self) -> &'static Map<&'static str, &'static str> {
         &self.unicode2token
     }
 

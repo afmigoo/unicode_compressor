@@ -4,6 +4,9 @@ use std::io::stdin;
 
 mod dictionaries;
 mod encoders;
+use encoders::consts::ENCODER_NAMES;
+use encoders::errors::Error;
+use encoders::process_payload;
 
 /// Unipress - Unicode-based text compression tool. 
 /// Takes payload from stdin and outputs the processed payload to stdout.
@@ -21,11 +24,13 @@ struct Args {
     list_encoders: bool,
 }
 
-fn main() -> Result<(), encoders::errors::Error> {
+fn main() -> Result<(), Error> {
   let args = Args::parse();
 
   if args.list_encoders {
-    list_encoders();
+    for encoder in ENCODER_NAMES {
+      println!("{}", encoder);
+    }
     return Ok(());
   }
 
@@ -33,7 +38,7 @@ fn main() -> Result<(), encoders::errors::Error> {
   stdin().read_line(&mut payload).expect("Failed to read payload string");
   let payload = payload.trim();
 
-  match encoders::process_payload(payload, &args.encoder, args.decode) {
+  match process_payload(payload, &args.encoder, args.decode) {
     Err(e) => { 
       eprintln!("Failed to process payload: {e}");
       exit(1);
@@ -43,10 +48,4 @@ fn main() -> Result<(), encoders::errors::Error> {
       return Ok(());
     },
   };
-}
-
-fn list_encoders() {
-  for encoder in encoders::NAMED_ENCODERS.keys() {
-    println!("{}", encoder);
-  }
 }

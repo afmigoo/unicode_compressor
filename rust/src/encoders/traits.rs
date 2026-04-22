@@ -1,8 +1,10 @@
+use phf::Map;
+
 use super::errors::Error;
 
 pub trait Encoder: Send + Sync {
-    fn token2unicode(&self) -> &'static phf::Map<&'static str, &'static str>;
-    fn unicode2token(&self) -> &'static phf::Map<&'static str, &'static str>;
+    fn token2unicode(&self) -> &'static Map<&'static str, &'static str>;
+    fn unicode2token(&self) -> &'static Map<&'static str, &'static str>;
 
     fn encode(&self, payload: &str) -> Result<String, Error> {
         let token2unicode = self.token2unicode();
