@@ -38,6 +38,7 @@ impl Encoder for TokenEncoder {
 }
 
 impl TokenEncoder {
+    // TODO: rename
     fn encode_greedy(&self, payload: &str) -> Result<String, Error> {
         let mut encoded = String::new();
         
@@ -99,6 +100,7 @@ impl TokenEncoder {
     ) -> Result<Region, Error> {
         let max_window = min(max_window, i_bounds.1 - i_bounds.0 + 1);
         for w_size in (1..max_window+1).rev() {
+            // TODO: iterate only over existing sizes
             for i in i_bounds.0..i_bounds.1-(w_size-1) {
                 let slice = &payload[payload_char_idx[i]..payload_char_idx[i+w_size]];
                 if let Some(unicode) = self.token2unicode.get(slice) {
@@ -117,6 +119,7 @@ impl TokenEncoder {
         );
     }
 
+    // TODO: rename
     fn encode_greedy_fast(&self, payload: &str) -> Result<String, Error> {
         let mut encoded = String::new();
         let payload_chars: Vec<char> = payload.chars().collect();

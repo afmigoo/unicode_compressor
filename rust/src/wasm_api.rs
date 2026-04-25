@@ -4,31 +4,25 @@ use crate::options::CompressionLevel;
 use crate::options::EncodeOptions;
 
 #[wasm_bindgen]
-extern "C" {
-    pub fn alert(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn encode(payload: &str, encoder: &str, level: &str) -> String {
-    let opts = EncodeOptions {
-        level: match level {
-            "fast" => CompressionLevel::Fast,
-            "balanced" => CompressionLevel::Balanced,
-            _ => return "<failed>".to_string(),
-        },
+// TODO: ensure errors propagate correctly to js
+pub fn encode(payload: &str, encoder: &str, level: &str) -> Result<String, String> {
+    let level = match level {
+        "fast" => CompressionLevel::Fast,
+        "balanced" => CompressionLevel::Balanced,
+        _ => {
+            return Err(format!(
+                "invalid encode level '{}'. Supported values: fast, balanced.",
+                level
+            ));
+        }
     };
-    match encoders::encode(payload, encoder, &opts) {
-        Ok(processed_payload) => processed_payload,
-        Err(_) => "<failed>".to_string(),
-    }
+    let opts = EncodeOptions { level };
+    encoders::encode(payload, encoder, &opts).map_err(|e| e.to_string())
 }
 
 #[wasm_bindgen]
-pub fn decode(payload: &str, encoder: &str) -> String {
-    match encoders::decode(payload, encoder) {
-        Ok(processed_payload) => processed_payload,
-        Err(_) => "<failed>".to_string(),
-    }
+pub fn decode(payload: &str, encoder: &str) -> Result<String, String> {
+    encoders::decode(payload, encoder).map_err(|e| e.to_string())
 }
 
 #[wasm_bindgen]

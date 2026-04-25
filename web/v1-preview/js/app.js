@@ -1,5 +1,6 @@
 const LIMIT_MESHCORE_PAYLOAD_UTF8 = 150;
 const LIMIT_MESHTASTIC_PAYLOAD_UTF8 = 200;
+const ENCODE_LEVEL_THRESHOLD_BYTES = 512;
 
 const $input = document.getElementById("input");
 const $output = document.getElementById("output");
@@ -63,6 +64,14 @@ function updateByteLabels() {
 
 function getEncoderName() {
   return $encoder.value;
+}
+
+function getEncodeLevel(payload) {
+  const payloadBytes = utf8ByteLength(payload);
+  if (payloadBytes <= ENCODE_LEVEL_THRESHOLD_BYTES) {
+    return "balanced";
+  }
+  return "fast";
 }
 
 function ensureWasmLoaded() {
@@ -132,11 +141,6 @@ async function main() {
     opt.textContent = name;
     $encoder.appendChild(opt);
   }
-  if (encoderNames.includes("bpe_meshcoretel_ru")) {
-    $encoder.value = "bpe_meshcoretel_ru";
-  } else if (encoderNames.length > 0) {
-    $encoder.value = encoderNames[0];
-  }
 
   $input.addEventListener("input", updateByteLabels);
   $output.addEventListener("input", updateByteLabels);
@@ -148,7 +152,8 @@ async function main() {
     try {
       ensureWasmLoaded();
       const plain = $input.value;
-      const out = wasmEncode(plain, getEncoderName());
+      const level = getEncodeLevel(plain);
+      const out = wasmEncode(plain, getEncoderName(), level);
       $output.value = out;
       updateByteLabels();
       setTransportWarnings(utf8ByteLength($output.value));

@@ -5,6 +5,7 @@ use clap::ValueEnum;
 
 #[derive(Debug, Clone, Copy, ValueEnum)]
 pub enum CompressionLevel {
+    // TODO: rename
     Fast,
     Balanced,
 }
