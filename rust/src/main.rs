@@ -2,7 +2,7 @@ use std::process::exit;
 use std::io::{stdin,read_to_string};
 use clap::Parser;
 
-use unipress::encoders::{consts::ENCODER_NAMES, errors::Error, process_payload};
+use unipress::encoders::{consts::ENCODER_NAMES, errors::Error, encode, decode};
 use unipress::options::{CompressionLevel, EncodeOptions};
 
 /// Unipress - Unicode-based text compression tool. 
@@ -38,14 +38,20 @@ fn main() -> Result<(), Error> {
   let payload = payload.trim();
   let options = EncodeOptions { level: args.compression_level };
 
-  match process_payload(payload, &args.encoder, args.decode, &options) {
+  let processed_payload = if args.decode {
+    decode(payload, &args.encoder)
+  } else {
+    encode(payload, &args.encoder, &options)
+  };
+  
+  match processed_payload {
+    Ok(processed_payload) => { 
+      println!("{}", processed_payload);
+      return Ok(());
+    }
     Err(e) => { 
       eprintln!("Failed to process payload: {e}");
       exit(1);
     }
-    Ok(processed_payload) => { 
-      println!("{}", processed_payload);
-      return Ok(());
-    },
-  };
+  }
 }

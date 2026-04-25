@@ -17,14 +17,12 @@ pub fn get_encoder(encoder: &str) -> Result<&dyn Encoder, Error> {
   }
 }
 
-pub fn process_payload(payload: &str, encoder: &str, decode: bool, options: &EncodeOptions) -> Result<String, Error> {
+pub fn encode(payload: &str, encoder: &str, options: &EncodeOptions) -> Result<String, Error> {
   let encoder = get_encoder(&encoder)?;
+  encoder.encode(payload, options)
+}
 
-  let processed_payload = if decode {
-    encoder.decode(payload)?
-  } else {
-    encoder.encode(payload, options)?
-  };
-
-  return Ok(processed_payload);
+pub fn decode(payload: &str, encoder: &str) -> Result<String, Error> {
+  let encoder = get_encoder(&encoder)?;
+  encoder.decode(payload)
 }
