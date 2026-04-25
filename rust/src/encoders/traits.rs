@@ -1,12 +1,13 @@
 use phf::Map;
 
 use super::errors::Error;
+use crate::options::EncodeOptions;
 
 pub trait Encoder: Send + Sync {
     fn token2unicode(&self) -> &'static Map<&'static str, &'static str>;
     fn unicode2token(&self) -> &'static Map<&'static str, &'static str>;
 
-    fn encode(&self, payload: &str) -> Result<String, Error> {
+    fn encode(&self, payload: &str, _: &EncodeOptions) -> Result<String, Error> {
         let token2unicode = self.token2unicode();
         let mut encoded = String::new();
 

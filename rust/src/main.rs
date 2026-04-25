@@ -1,12 +1,9 @@
 use std::process::exit;
-use clap::Parser;
 use std::io::{stdin,read_to_string};
+use clap::Parser;
 
-mod dictionaries;
-mod encoders;
-use encoders::consts::ENCODER_NAMES;
-use encoders::errors::Error;
-use encoders::process_payload;
+use unipress::encoders::{consts::ENCODER_NAMES, errors::Error, process_payload};
+use unipress::options::{CompressionLevel, EncodeOptions};
 
 /// Unipress - Unicode-based text compression tool. 
 /// Takes payload from stdin and outputs the processed payload to stdout.
@@ -19,6 +16,9 @@ struct Args {
     /// Encoder to use
     #[arg(short, long, default_value = "bpe_meshcoretel_ru")]
     encoder: String,
+    /// Compression level
+    #[arg(short, long, default_value_t = CompressionLevel::Fast)]
+    compression_level: CompressionLevel,
     /// List available encoders
     #[arg(short, long, default_value_t = false)]
     list_encoders: bool,
@@ -36,8 +36,9 @@ fn main() -> Result<(), Error> {
 
   let payload = read_to_string(stdin()).expect("Failed to read payload string");
   let payload = payload.trim();
+  let options = EncodeOptions { level: args.compression_level };
 
-  match process_payload(payload, &args.encoder, args.decode) {
+  match process_payload(payload, &args.encoder, args.decode, &options) {
     Err(e) => { 
       eprintln!("Failed to process payload: {e}");
       exit(1);
