@@ -2,7 +2,7 @@ use std::process::exit;
 use std::io::{stdin,read_to_string};
 use clap::Parser;
 
-use unipress::encoders::{consts::ENCODER_NAMES, errors::Error, encode, decode};
+use unipress::encoders::{instances::NAMED_ENCODERS, errors::Error, encode, decode};
 use unipress::options::{CompressionLevel, EncodeOptions};
 
 /// Unipress - Unicode-based text compression tool. 
@@ -14,7 +14,7 @@ struct Args {
     #[arg(short, long, default_value_t = false)]
     decode: bool,
     /// Encoder to use
-    #[arg(short, long, default_value = "bpe_meshcoretel_ru")]
+    #[arg(short, long, default_value = "adaptive")]
     encoder: String,
     /// Compression level
     #[arg(short, long, default_value_t = CompressionLevel::Fast)]
@@ -28,8 +28,8 @@ fn main() -> Result<(), Error> {
   let args = Args::parse();
 
   if args.list_encoders {
-    for encoder in ENCODER_NAMES {
-      println!("{}", encoder);
+    for (name, _) in NAMED_ENCODERS {
+      println!("{}", name);
     }
     return Ok(());
   }

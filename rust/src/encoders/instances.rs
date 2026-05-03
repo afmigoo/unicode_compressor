@@ -1,16 +1,5 @@
-use super::map_encoder::MapEncoder;
-use super::token_encoder::TokenEncoder;
-use super::traits::Encoder;
-use crate::dictionaries as dict;
-
-pub const ENCODER_NAMES: &[&str] = &[
-  "bpe_dummy",
-  "bpe_coding",
-  "bpe_meshcoretel_ru",
-  "bpe_wiki_en",
-  "bpe_wiki_ru",
-  "bpe_wiki",
-];
+use super::types::{Encoder, MapEncoder, TokenEncoder, AdaptiveEncoder};
+use crate::{dictionaries as dict};
 
 pub const DUMMY_ENCODER: MapEncoder = MapEncoder {
   token2unicode: &dict::bpe::dummy::TOKEN2UNICODE,
@@ -42,11 +31,23 @@ pub const WIKI_ENCODER: TokenEncoder = TokenEncoder {
   token_max_chars: dict::bpe::wiki::TOKEN_MAX_CHARS,
 };
 
+pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
+  encoders_inventory: &[
+    ('0', &DUMMY_ENCODER),
+    ('1', &CODING_ENCODER),
+    ('2', &MESHCORETEL_RU_ENCODER),
+    ('3', &WIKI_EN_ENCODER),
+    ('4', &WIKI_RU_ENCODER),
+    ('5', &WIKI_ENCODER),
+  ]
+};
+
 pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
+  ("adaptive", &ADAPTIVE_ENCODER),
   ("bpe_dummy", &DUMMY_ENCODER),
-  ("bpe_coding", &CODING_ENCODER),
-  ("bpe_meshcoretel_ru", &MESHCORETEL_RU_ENCODER),
-  ("bpe_wiki_en", &WIKI_EN_ENCODER),
-  ("bpe_wiki_ru", &WIKI_RU_ENCODER),
-  ("bpe_wiki", &WIKI_ENCODER),
+  ("token_coding", &CODING_ENCODER),
+  ("token_meshcoretel_ru", &MESHCORETEL_RU_ENCODER),
+  ("token_wiki_en", &WIKI_EN_ENCODER),
+  ("token_wiki_ru", &WIKI_RU_ENCODER),
+  ("token_wiki", &WIKI_ENCODER),
 ];

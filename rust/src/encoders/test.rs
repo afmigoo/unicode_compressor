@@ -1,4 +1,4 @@
-use super::consts::NAMED_ENCODERS;
+use super::instances::NAMED_ENCODERS;
 use crate::options::EncodeOptions;
 use crate::options::CompressionLevel;
 

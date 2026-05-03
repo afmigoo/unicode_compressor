@@ -28,8 +28,8 @@ pub fn decode(payload: &str, encoder: &str) -> Result<String, String> {
 #[wasm_bindgen]
 pub fn list_encoders() -> Vec<String> {
     let mut encoders = Vec::new();
-    for encoder in encoders::consts::ENCODER_NAMES {
-        encoders.push(encoder.to_string());
+    for (name, _) in encoders::instances::NAMED_ENCODERS {
+        encoders.push(name.to_string());
     }
     encoders
 }
