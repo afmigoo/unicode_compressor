@@ -1,6 +1,9 @@
 pub mod coding;
 pub mod dummy;
 pub mod meshcoretel_ru;
-pub mod wiki_en;
-pub mod wiki_ru;
-pub mod wiki;
+pub mod en_wiki_32_utf8;
+pub mod en_wiki_alpha_64_utf8;
+pub mod en_wiki_punct_64_utf8;
+pub mod ru_wiki_32_utf8;
+pub mod ru_wiki_alpha_64_utf8;
+pub mod ru_wiki_punct_64_utf8;

@@ -15,30 +15,50 @@ pub const MESHCORETEL_RU_ENCODER: TokenEncoder = TokenEncoder {
   unicode2token: &dict::bpe::meshcoretel_ru::UNICODE2TOKEN,
   token_max_chars: dict::bpe::meshcoretel_ru::TOKEN_MAX_CHARS,
 };
-pub const WIKI_EN_ENCODER: TokenEncoder = TokenEncoder {
-  token2unicode: &dict::bpe::wiki_en::TOKEN2UNICODE,
-  unicode2token: &dict::bpe::wiki_en::UNICODE2TOKEN,
-  token_max_chars: dict::bpe::wiki_en::TOKEN_MAX_CHARS,
+pub const EN_WIKI_32_UTF8_ENCODER: TokenEncoder = TokenEncoder {
+  token2unicode: &dict::bpe::en_wiki_32_utf8::TOKEN2UNICODE,
+  unicode2token: &dict::bpe::en_wiki_32_utf8::UNICODE2TOKEN,
+  token_max_chars: dict::bpe::en_wiki_32_utf8::TOKEN_MAX_CHARS,
 };
-pub const WIKI_RU_ENCODER: TokenEncoder = TokenEncoder {
-  token2unicode: &dict::bpe::wiki_ru::TOKEN2UNICODE,
-  unicode2token: &dict::bpe::wiki_ru::UNICODE2TOKEN,
-  token_max_chars: dict::bpe::wiki_ru::TOKEN_MAX_CHARS,
+pub const EN_WIKI_ALPHA_64_UTF8_ENCODER: TokenEncoder = TokenEncoder {
+  token2unicode: &dict::bpe::en_wiki_alpha_64_utf8::TOKEN2UNICODE,
+  unicode2token: &dict::bpe::en_wiki_alpha_64_utf8::UNICODE2TOKEN,
+  token_max_chars: dict::bpe::en_wiki_alpha_64_utf8::TOKEN_MAX_CHARS,
 };
-pub const WIKI_ENCODER: TokenEncoder = TokenEncoder {
-  token2unicode: &dict::bpe::wiki::TOKEN2UNICODE,
-  unicode2token: &dict::bpe::wiki::UNICODE2TOKEN,
-  token_max_chars: dict::bpe::wiki::TOKEN_MAX_CHARS,
+pub const EN_WIKI_PUNCT_64_UTF8_ENCODER: TokenEncoder = TokenEncoder {
+  token2unicode: &dict::bpe::en_wiki_punct_64_utf8::TOKEN2UNICODE,
+  unicode2token: &dict::bpe::en_wiki_punct_64_utf8::UNICODE2TOKEN,
+  token_max_chars: dict::bpe::en_wiki_punct_64_utf8::TOKEN_MAX_CHARS,
+};
+pub const RU_WIKI_32_UTF8_ENCODER: TokenEncoder = TokenEncoder {
+  token2unicode: &dict::bpe::ru_wiki_32_utf8::TOKEN2UNICODE,
+  unicode2token: &dict::bpe::ru_wiki_32_utf8::UNICODE2TOKEN,
+  token_max_chars: dict::bpe::ru_wiki_32_utf8::TOKEN_MAX_CHARS,
+};
+pub const RU_WIKI_ALPHA_64_UTF8_ENCODER: TokenEncoder = TokenEncoder {
+  token2unicode: &dict::bpe::ru_wiki_alpha_64_utf8::TOKEN2UNICODE,
+  unicode2token: &dict::bpe::ru_wiki_alpha_64_utf8::UNICODE2TOKEN,
+  token_max_chars: dict::bpe::ru_wiki_alpha_64_utf8::TOKEN_MAX_CHARS,
+};
+pub const RU_WIKI_PUNCT_64_UTF8_ENCODER: TokenEncoder = TokenEncoder {
+  token2unicode: &dict::bpe::ru_wiki_punct_64_utf8::TOKEN2UNICODE,
+  unicode2token: &dict::bpe::ru_wiki_punct_64_utf8::UNICODE2TOKEN,
+  token_max_chars: dict::bpe::ru_wiki_punct_64_utf8::TOKEN_MAX_CHARS,
 };
 
+// available codes:
+// ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~']
 pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
   encoders_inventory: &[
-    ('0', &DUMMY_ENCODER),
-    ('1', &CODING_ENCODER),
-    ('2', &MESHCORETEL_RU_ENCODER),
-    ('3', &WIKI_EN_ENCODER),
-    ('4', &WIKI_RU_ENCODER),
-    ('5', &WIKI_ENCODER),
+    ('!', &DUMMY_ENCODER),
+    ('"', &CODING_ENCODER),
+    ('#', &MESHCORETEL_RU_ENCODER),
+    ('$', &EN_WIKI_32_UTF8_ENCODER),
+    ('%', &EN_WIKI_ALPHA_64_UTF8_ENCODER),
+    ('&', &EN_WIKI_PUNCT_64_UTF8_ENCODER),
+    ('\'', &RU_WIKI_32_UTF8_ENCODER),
+    ('(', &RU_WIKI_ALPHA_64_UTF8_ENCODER),
+    (')', &RU_WIKI_PUNCT_64_UTF8_ENCODER),
   ]
 };
 
@@ -47,7 +67,10 @@ pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
   ("bpe_dummy", &DUMMY_ENCODER),
   ("token_coding", &CODING_ENCODER),
   ("token_meshcoretel_ru", &MESHCORETEL_RU_ENCODER),
-  ("token_wiki_en", &WIKI_EN_ENCODER),
-  ("token_wiki_ru", &WIKI_RU_ENCODER),
-  ("token_wiki", &WIKI_ENCODER),
+  ("token_en_wiki_32_utf8", &EN_WIKI_32_UTF8_ENCODER),
+  ("token_en_wiki_alpha_64_utf8", &EN_WIKI_ALPHA_64_UTF8_ENCODER),
+  ("token_en_wiki_punct_64_utf8", &EN_WIKI_PUNCT_64_UTF8_ENCODER),
+  ("token_ru_wiki_32_utf8", &RU_WIKI_32_UTF8_ENCODER),
+  ("token_ru_wiki_alpha_64_utf8", &RU_WIKI_ALPHA_64_UTF8_ENCODER),
+  ("token_ru_wiki_punct_64_utf8", &RU_WIKI_PUNCT_64_UTF8_ENCODER),
 ];
