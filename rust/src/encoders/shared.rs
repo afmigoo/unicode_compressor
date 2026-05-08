@@ -14,9 +14,9 @@ pub fn remap(payload: &str, old2new: &Map<&'static str, &'static str>) -> Result
     Ok(payload_remapped)
 }
 
-pub fn covered_by_alphabet(payload: &str, token2unicode: &Map<&'static str, &'static str>) -> Result<(), Error> {
+pub fn covered_by_alphabet(payload: &str, token2encoded: &Map<&'static str, &'static str>) -> Result<(), Error> {
     for ch in payload.chars() {
-        match token2unicode.get(&ch.to_string()) {
+        match token2encoded.get(&ch.to_string()) {
             Some(_) => continue,
             None => return Err(Error::CharacterNotInAlphabet(ch)),
         }

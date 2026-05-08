@@ -1,4 +1,4 @@
-FROM rust:1.95.0-slim-bookworm AS wasm-builder
+FROM rust:1.95.0-alpine3.22 AS wasm-builder
 RUN cargo install wasm-pack --locked
 RUN rustup target add wasm32-unknown-unknown
 WORKDIR /app/rust

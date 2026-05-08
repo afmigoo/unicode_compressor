@@ -8,16 +8,16 @@ use super::errors::Error;
 /// First match tokenization encoding algorithm
 /// ### Parameters
 /// - `payload` - the string to encode
-/// - `token2unicode` - the map of tokens to unicode characters
+/// - `token2encoded` - the map of tokens to unicode characters
 /// - `token_max_chars` - the maximum number of characters in a token
 /// ### Algorithm
 /// 1. Starts at the beginning of the payload string (`i=0`)
-/// 2. Finds longest match in `token2unicode` map that starts at index `i`
+/// 2. Finds longest match in `token2encoded` map that starts at index `i`
 /// 3. Pushes the matched token to the encoded string, advances `i` to the end of the matched token.
 /// 4. Go to step 2.
 pub fn first_match(
     payload: &str, 
-    token2unicode: &Map<&'static str, &'static str>, 
+    token2encoded: &Map<&'static str, &'static str>, 
     token_max_chars: usize
 ) -> Result<String, Error> {
     let mut encoded = String::new();
@@ -30,7 +30,7 @@ pub fn first_match(
         let max_j = min(i+max_window, payload_chars.len());
         for j in (i+1..max_j+1).rev() {
             let slice: String = payload_chars[i..j].iter().collect();
-            if let Some(unicode_char) = token2unicode.get(&slice) {
+            if let Some(unicode_char) = token2encoded.get(&slice) {
                 encoded.push_str(unicode_char);
                 matched_end = Some(j);
                 break;
@@ -49,12 +49,12 @@ pub fn first_match(
 /// Longest match tokenization encoding algorithm
 /// ### Parameters
 /// - `payload` - the string to encode
-/// - `token2unicode` - the map of tokens to unicode characters
+/// - `token2encoded` - the map of tokens to unicode characters
 /// - `token_max_chars` - the maximum number of characters in a token
 /// ### Algorithm
 /// 1. Finds largest token in the whole payload string
 /// 2. Repeats step 1. for the remaining parts of the payload string until the whole payload is encoded.
-pub fn longest_match(payload: &str, token2unicode: &Map<&'static str, &'static str>, token_max_chars: usize) -> Result<String, Error> {
+pub fn longest_match(payload: &str, token2encoded: &Map<&'static str, &'static str>, token_max_chars: usize) -> Result<String, Error> {
     let mut encoded = String::new();
     
     let payload_char_idx: Vec<usize> = payload
@@ -66,7 +66,7 @@ pub fn longest_match(payload: &str, token2unicode: &Map<&'static str, &'static s
     let mut regions: LinkedList<Region> = LinkedList::new();
     regions.push_back(subregion(
         payload, &payload_char_idx,
-        token2unicode,
+        token2encoded,
         (0, payload_char_idx.len() - 1),
         token_max_chars
     )?);
@@ -77,7 +77,7 @@ pub fn longest_match(payload: &str, token2unicode: &Map<&'static str, &'static s
         if curr_region.token_bounds.0 != curr_region.bounds.0 {
             let left_region = subregion(
                 payload, &payload_char_idx,
-                token2unicode,
+                token2encoded,
                 (curr_region.bounds.0, curr_region.token_bounds.0),
                 token_max_chars
             )?;
@@ -96,7 +96,7 @@ pub fn longest_match(payload: &str, token2unicode: &Map<&'static str, &'static s
             // going deeper into right subregion
             let right_region = subregion(
                 payload, &payload_char_idx,
-                token2unicode,
+                token2encoded,
                 (curr_region.token_bounds.1, curr_region.bounds.1),
                 token_max_chars
             )?;
@@ -119,7 +119,7 @@ struct Region {
 fn subregion(
     payload: &str,
     payload_char_idx: &Vec<usize>,
-    token2unicode: &Map<&'static str, &'static str>,
+    token2encoded: &Map<&'static str, &'static str>,
     i_bounds: (usize, usize),
     max_window: usize
 ) -> Result<Region, Error> {
@@ -128,7 +128,7 @@ fn subregion(
         // TODO: iterate only over existing sizes
         for i in i_bounds.0..i_bounds.1-(w_size-1) {
             let slice = &payload[payload_char_idx[i]..payload_char_idx[i+w_size]];
-            if let Some(unicode) = token2unicode.get(slice) {
+            if let Some(unicode) = token2encoded.get(slice) {
                 return Ok(Region {
                     bounds: i_bounds,
                     token_bounds: (i, i+w_size),

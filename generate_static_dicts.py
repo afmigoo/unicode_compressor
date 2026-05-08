@@ -8,7 +8,7 @@ import itertools
 
 if __name__ == '__main__':
     corpus_dir = Path(__file__).parent / 'corpus'
-    output_dir = Path(__file__).parent / 'rust/src/dictionaries/bpe'
+    output_dir = Path(__file__).parent / 'rust/src/encoders/instances'
 
     alphabets = [
       {'lang': 'ru', 'name': '32', 'alphabet': alphabet.RU_32},
@@ -29,8 +29,9 @@ if __name__ == '__main__':
     # map dicts
     options = itertools.product(alphabets, token_types)
     for (alph, token_type) in options:
-        output_file = output_dir / f'{alph["lang"]}_{alph["name"]}_{token_type}_map.rs'
-        print(f"Generating {output_file}...")
+        name = f'{alph["lang"]}_{alph["name"]}_{token_type}_map'
+        output_file = output_dir / f'{name}.rs'
+        print(f"Generating {name}...")
         render_map_dict(output_file, alph['alphabet'], token_type)
 
     # token-to-unicode dicts
@@ -39,12 +40,13 @@ if __name__ == '__main__':
     for (alph, ds) in options:
         if ds['lang'] != alph['lang']:
           continue
-        output_file = output_dir / f'{ds["lang"]}_{ds["name"]}_{alph["name"]}_utf8_tkn.rs'
-        print(f"Generating {output_file}...")
+        name = f'{ds["lang"]}_{ds["name"]}_{alph["name"]}_utf8_tkn'
+        output_file = output_dir / f'{name}.rs'
+        print(f"Generating {name}...")
         render_bpe_dict(
           output_file=output_file,
           dataset_file=ds['file'],
           alphabet=alph['alphabet'],
           vocab_size=1914,
-          token_type='utf8',
+          token_type='utf8'
         )

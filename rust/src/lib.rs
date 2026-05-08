@@ -1,5 +1,4 @@
 pub mod encoders;
-pub mod dictionaries;
 pub mod options;
 
 
