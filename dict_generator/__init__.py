@@ -16,25 +16,32 @@ def get_printable_utf8(size: int) -> list[str]:
 
     return result
 
+def _render_static_dict(
+  output_file: str | Path,
+  static_dict: dict[str, int],
+  token_type: Literal['bin', 'utf8'],
+):
+    if token_type == 'utf8':
+        utf8_chars = get_printable_utf8(1) + get_printable_utf8(2) + get_printable_utf8(3)
+        if len(static_dict) > len(utf8_chars):
+            raise ValueError(f"Static dict size is larger than the number of printable UTF-8 characters: {len(static_dict)}")
+        static_dict = {k: utf8_chars[v] for k, v in static_dict.items()}
+    rustgen.write(static_dict, output_file, token_type)
+
+def render_map_dict(
+  output_file: str | Path,
+  alphabet: list[str],
+  token_type: Literal['bin', 'utf8'],
+):
+    static_dict = {ch: i for i, ch in enumerate(alphabet)}
+    _render_static_dict(output_file, static_dict, token_type)
+
 def render_bpe_dict(
     output_file: str | Path,
     dataset_file: str | Path,
     alphabet: list[str],
     vocab_size: int,
-    token_type: Literal['u16', 'utf8'],
+    token_type: Literal['bin', 'utf8'],
 ):
-    if isinstance(dataset_file, str):
-        dataset_file = Path(dataset_file)
-    if not token_type in ['u16', 'utf8']:
-        raise ValueError(f"Invalid token type: {token_type}")
-
     token2int = trainer.train_bpe_dict(dataset_file, alphabet, vocab_size)
-    if token_type == 'u16':
-        static_dict = {k: f'{v}u16' for k, v in token2int.items()}
-    elif token_type == 'utf8':
-        utf8_chars = get_printable_utf8(1) + get_printable_utf8(2)
-        if vocab_size > len(utf8_chars):
-            raise ValueError(f"Vocab size is larger than the number of printable UTF-8 characters: {vocab_size}")
-        static_dict = {k: utf8_chars[v] for k, v in token2int.items()}
-
-    rustgen.write(static_dict, output_file)
+    _render_static_dict(output_file, token2int, token_type)
