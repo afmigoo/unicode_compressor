@@ -18,6 +18,8 @@ def get_encoder_variants(split: Literal['train', 'test']) -> list[EncoderVariant
         # map dicts can not be trained with no alphabet
         if alph['alphabet'] is None:
             continue
+        if token_type not in alph['token_type']:
+            continue
         options.append(MapEncoderVariant(
             lang=alph['lang'],
             alphabet=alph['alphabet'],
@@ -31,6 +33,8 @@ def get_encoder_variants(split: Literal['train', 'test']) -> list[EncoderVariant
         # this means that the token dicts are trained with all the characters
         if ds['lang'] != alph['lang'] and alph['alphabet'] is not None:
           continue
+        if token_type not in alph['token_type']:
+            continue
         options.append(TokenEncoderVariant(
             lang=alph['lang'],
             alphabet=alph['alphabet'],

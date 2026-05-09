@@ -1,28 +1,13 @@
 use super::types::{Encoder, EchoEncoder, AdaptiveEncoder};
 
-mod en_32_utf8_map;
 mod en_128_utf8_map;
-mod en_alpha_64_utf8_map;
-mod en_punct_64_utf8_map;
-mod ru_32_utf8_map;
 mod ru_128_utf8_map;
-mod ru_alpha_64_utf8_map;
-mod ru_punct_64_utf8_map;
-mod en_wiki_32_1914_utf8_tkn;
 mod en_wiki_128_1914_utf8_tkn;
 mod en_wiki_all_1914_utf8_tkn;
-mod en_wiki_alpha_64_1914_utf8_tkn;
-mod en_wiki_punct_64_1914_utf8_tkn;
-mod ru_wiki_32_1914_utf8_tkn;
 mod ru_wiki_128_1914_utf8_tkn;
 mod ru_wiki_all_1914_utf8_tkn;
-mod ru_wiki_alpha_64_1914_utf8_tkn;
-mod ru_wiki_punct_64_1914_utf8_tkn;
-mod ru_meshcoretel_32_1914_utf8_tkn;
 mod ru_meshcoretel_128_1914_utf8_tkn;
 mod ru_meshcoretel_all_1914_utf8_tkn;
-mod ru_meshcoretel_alpha_64_1914_utf8_tkn;
-mod ru_meshcoretel_punct_64_1914_utf8_tkn;
 
 pub const ECHO_ENCODER: EchoEncoder = EchoEncoder;
 
@@ -31,50 +16,25 @@ pub const ECHO_ENCODER: EchoEncoder = EchoEncoder;
 pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
   encoders_inventory: &[
     ('!', &ECHO_ENCODER),
-    ('"', &en_32_utf8_map::ENCODER),
-    ('#', &en_128_utf8_map::ENCODER),
-    ('$', &en_alpha_64_utf8_map::ENCODER),
-    ('%', &en_punct_64_utf8_map::ENCODER),
-    ('&', &ru_32_utf8_map::ENCODER),
-    ('\'', &ru_128_utf8_map::ENCODER),
-    ('(', &ru_alpha_64_utf8_map::ENCODER),
-    (')', &ru_punct_64_utf8_map::ENCODER),
-    ('*', &en_wiki_32_1914_utf8_tkn::ENCODER),
-    ('+', &en_wiki_128_1914_utf8_tkn::ENCODER),
-    (',', &en_wiki_all_1914_utf8_tkn::ENCODER),
-    ('-', &en_wiki_alpha_64_1914_utf8_tkn::ENCODER),
-    ('.', &en_wiki_punct_64_1914_utf8_tkn::ENCODER),
-    ('/', &ru_wiki_32_1914_utf8_tkn::ENCODER),
-    ('0', &ru_wiki_128_1914_utf8_tkn::ENCODER),
-    ('1', &ru_wiki_all_1914_utf8_tkn::ENCODER),
-    ('2', &ru_wiki_alpha_64_1914_utf8_tkn::ENCODER),
-    ('3', &ru_wiki_punct_64_1914_utf8_tkn::ENCODER),
-    ('4', &ru_meshcoretel_32_1914_utf8_tkn::ENCODER),
-    ('5', &ru_meshcoretel_128_1914_utf8_tkn::ENCODER),
-    ('6', &ru_meshcoretel_all_1914_utf8_tkn::ENCODER),
-    ('7', &ru_meshcoretel_alpha_64_1914_utf8_tkn::ENCODER),
-    ('8', &ru_meshcoretel_punct_64_1914_utf8_tkn::ENCODER),
+    ('"', &en_128_utf8_map::ENCODER),
+    ('#', &ru_128_utf8_map::ENCODER),
+    ('$', &en_wiki_128_1914_utf8_tkn::ENCODER),
+    ('%', &en_wiki_all_1914_utf8_tkn::ENCODER),
+    ('&', &ru_wiki_128_1914_utf8_tkn::ENCODER),
+    ('\'', &ru_wiki_all_1914_utf8_tkn::ENCODER),
+    ('(', &ru_meshcoretel_128_1914_utf8_tkn::ENCODER),
+    (')', &ru_meshcoretel_all_1914_utf8_tkn::ENCODER),
   ]
 };
 
 pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
   ("adaptive", &ADAPTIVE_ENCODER),
-  ("en_32_utf8_map", &en_32_utf8_map::ENCODER),
-  ("en_alpha_64_utf8_map", &en_alpha_64_utf8_map::ENCODER),
-  ("en_punct_64_utf8_map", &en_punct_64_utf8_map::ENCODER),
-  ("ru_32_utf8_map", &ru_32_utf8_map::ENCODER),
+  ("en_128_utf8_map", &en_128_utf8_map::ENCODER),
   ("ru_128_utf8_map", &ru_128_utf8_map::ENCODER),
-  ("ru_alpha_64_utf8_map", &ru_alpha_64_utf8_map::ENCODER),
-  ("ru_punct_64_utf8_map", &ru_punct_64_utf8_map::ENCODER),
-  ("en_wiki_32_utf8_tkn", &en_wiki_32_1914_utf8_tkn::ENCODER),
-  ("en_wiki_alpha_64_utf8_tkn", &en_wiki_alpha_64_1914_utf8_tkn::ENCODER),
-  ("en_wiki_punct_64_utf8_tkn", &en_wiki_punct_64_1914_utf8_tkn::ENCODER),
-  ("ru_meshcoretel_32_1914_utf8_tkn", &ru_meshcoretel_32_1914_utf8_tkn::ENCODER),
-  ("ru_meshcoretel_128_1914_utf8_tkn", &ru_meshcoretel_128_1914_utf8_tkn::ENCODER),
-  ("ru_meshcoretel_alpha_64_1914_utf8_tkn", &ru_meshcoretel_alpha_64_1914_utf8_tkn::ENCODER),
-  ("ru_meshcoretel_punct_64_1914_utf8_tkn", &ru_meshcoretel_punct_64_1914_utf8_tkn::ENCODER),
-  ("ru_wiki_32_utf8_tkn", &ru_wiki_32_1914_utf8_tkn::ENCODER),
+  ("en_wiki_128_1914_utf8_tkn", &en_wiki_128_1914_utf8_tkn::ENCODER),
+  ("en_wiki_all_1914_utf8_tkn", &en_wiki_all_1914_utf8_tkn::ENCODER),
   ("ru_wiki_128_1914_utf8_tkn", &ru_wiki_128_1914_utf8_tkn::ENCODER),
-  ("ru_wiki_alpha_64_utf8_tkn", &ru_wiki_alpha_64_1914_utf8_tkn::ENCODER),
-  ("ru_wiki_punct_64_utf8_tkn", &ru_wiki_punct_64_1914_utf8_tkn::ENCODER),
+  ("ru_wiki_all_1914_utf8_tkn", &ru_wiki_all_1914_utf8_tkn::ENCODER),
+  ("ru_meshcoretel_128_1914_utf8_tkn", &ru_meshcoretel_128_1914_utf8_tkn::ENCODER),
+  ("ru_meshcoretel_all_1914_utf8_tkn", &ru_meshcoretel_all_1914_utf8_tkn::ENCODER),
 ];

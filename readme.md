@@ -23,21 +23,21 @@ It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 pa
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
-|ru_wiki_all|0.5266 / 0.5420 / 0.1289|0.0009|576.3641|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
-|ru_wiki_32|0.6898 / 0.6980 / 0.0650|0.0021|539.6869|1102|одна богатая и знатная дама госпожа шереметева утр...|
-|ru_wiki_punct_64|0.6284 / 0.6426 / 0.0982|0.0017|561.2219|1104|одна богатая и знатная дама, госпожа шереметева, у...|
-|ru_wiki_alpha_64|0.6639 / 0.6741 / 0.0664|0.0015|539.7205|1102|Одна богатая и знатная дама госпожа Шереметева утр...|
-|ru_wiki_128|0.6048 / 0.6210 / 0.0997|0.0013|561.7111|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
-|en_wiki_all|0.3548 / 0.3644 / 0.1274|0.0012|379.2629|1107|Gates started to publish articles on the macrofung...|
-|en_wiki_32|0.4500 / 0.4611 / 0.1496|0.0016|360.9447|1104|gates started to publish articles on the macrofung...|
-|en_wiki_punct_64|0.4168 / 0.4214 / 0.1010|0.0014|376.3550|1107|gates started to publish articles on the macrofung...|
-|en_wiki_alpha_64|0.4250 / 0.4421 / 0.1600|0.0013|361.8659|1104|Gates started to publish articles on the macrofung...|
-|en_wiki_128|0.3792 / 0.3871 / 0.1161|0.0013|376.5176|1107|Gates started to publish articles on the macrofung...|
-|ru_meshcoretel_all|0.5501 / 0.6000 / 0.2052|0.0007|58.7890|583|у меня t-deck|
-|ru_meshcoretel_32|0.6609 / 0.6871 / 0.1543|0.0008|55.7101|552|у меня|
-|ru_meshcoretel_punct_64|0.5808 / 0.6406 / 0.2819|0.0008|57.0549|565|у меня -|
-|ru_meshcoretel_alpha_64|0.6406 / 0.6667 / 0.1586|0.0008|55.6329|553|у меня|
-|ru_meshcoretel_128|0.5666 / 0.6190 / 0.2701|0.0007|57.1451|565|у меня -|
+|ru_wiki_all|0.5259 / 0.5415 / 0.1286|0.0006|576.3641|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
+|ru_wiki_32|0.6354 / 0.6438 / 0.0653|0.0009|539.6869|1102|одна богатая и знатная дама госпожа шереметева утр...|
+|ru_wiki_punct_64|0.6071 / 0.6232 / 0.0996|0.0010|561.2219|1104|одна богатая и знатная дама, госпожа шереметева, у...|
+|ru_wiki_alpha_64|0.6305 / 0.6390 / 0.0658|0.0009|539.7205|1102|Одна богатая и знатная дама госпожа Шереметева утр...|
+|ru_wiki_128|0.6041 / 0.6206 / 0.0999|0.0009|561.7111|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
+|en_wiki_all|0.3516 / 0.3618 / 0.1256|0.0008|379.2629|1107|Gates started to publish articles on the macrofung...|
+|en_wiki_32|0.3751 / 0.3920 / 0.1476|0.0009|360.9447|1104|gates started to publish articles on the macrofung...|
+|en_wiki_punct_64|0.3723 / 0.3846 / 0.0979|0.0009|376.3550|1107|gates started to publish articles on the macrofung...|
+|en_wiki_alpha_64|0.3797 / 0.3956 / 0.1601|0.0009|361.8659|1104|Gates started to publish articles on the macrofung...|
+|en_wiki_128|0.3751 / 0.3850 / 0.1153|0.0009|376.5176|1107|Gates started to publish articles on the macrofung...|
+|ru_meshcoretel_all|0.5367 / 0.5897 / 0.2060|0.0004|58.7890|583|у меня t-deck|
+|ru_meshcoretel_32|0.6016 / 0.6323 / 0.1476|0.0005|55.7101|552|у меня|
+|ru_meshcoretel_punct_64|0.5449 / 0.6111 / 0.2776|0.0004|57.0549|565|у меня -|
+|ru_meshcoretel_alpha_64|0.5992 / 0.6267 / 0.1558|0.0004|55.6329|553|у меня|
+|ru_meshcoretel_128|0.5514 / 0.6067 / 0.2677|0.0004|57.1451|565|у меня -|
 
 ## Stack and acknowledgements
 
