@@ -1,10 +1,34 @@
 # Unicode-to-unicode compression tool
 
+## Table of contents
+- [Table of contents](#table-of-contents)
+- [Description](#description)
+- [Metrics](#metrics)
+- [Stack and acknowledgements](#stack-and-acknowledgements)
+- [How to use](#how-to-use)
+    - [CLI tool](#cli-tool)
+    - [Web-app](#web-app)
+- [Privacy note](#privacy-note)
+
 ## Description
 
 This is a tool that allows you to compress utf-8 strings into utf-8 strings using static dicttionaries compression algorithms. It is implemented in Rust and is available as a CLI tool and a web application powered by WASM.
 
 It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 payload.
+
+## Metrics
+
+> - Compression=`0.6` means payload size was reduced by 60%
+> - Name format: `<lang>_<dataset>_<alphabet>`; so `en_wiki_punct_64` means English Wikipedia dataset with `punct_64`. alphabet
+
+|Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
+|---|---|---|---|---|---|
+|ru_wiki_32|0.6900 / 0.6985 / 0.0656|0.0017|536.4148|998|то при ряд сходится а при расходится если то данны...|
+|ru_wiki_punct_64|0.6266 / 0.6400 / 0.0933|0.0012|558.2040|1000|то при > 1 >1 ряд сходится, а при < 1 <1 расходитс...|
+|ru_wiki_alpha_64|0.6607 / 0.6714 / 0.0680|0.0011|536.4850|998|то при ряд сходится а при расходится Если то данны...|
+|en_wiki_32|0.4532 / 0.4585 / 0.1574|0.0059|366.8987|997|joanna baillie, english poem|
+|en_wiki_punct_64|0.4204 / 0.4208 / 0.1230|0.0029|381.8458|999|joanna baillie, english poem (1849)|
+|en_wiki_alpha_64|0.4321 / 0.4457 / 0.1668|0.0025|367.7713|997|Joanna Baillie, English Poem|
 
 ## Stack and acknowledgements
 

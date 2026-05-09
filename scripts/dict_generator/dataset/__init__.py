@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 
 from datasets import load_dataset
 
@@ -19,5 +20,11 @@ def alphabet_filtered(file: str | Path, alphabet: list[str]):
       elif ch.upper() in alphabet_map:
         filtered_s += ch.upper()
     if len(filtered_s) > 0:
+      if not 'coding' in file:
+        filtered_s = re.sub(r'\s+', ' ', filtered_s)
       yield filtered_s
 
+DATASETS = [
+  {'lang': 'ru', 'name': 'wiki', 'train': 'corpus/ru_wiki_train.jsonl', 'test': 'corpus/ru_wiki_test.jsonl'},
+  {'lang': 'en', 'name': 'wiki', 'train': 'corpus/en_wiki_train.jsonl', 'test': 'corpus/en_wiki_test.jsonl'},
+]

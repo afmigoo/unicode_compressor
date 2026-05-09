@@ -3,25 +3,17 @@ from tokenizers.models import BPE
 from tokenizers.trainers import BpeTrainer
 
 from dict_generator import render_bpe_dict, render_map_dict, alphabet
+from dict_generator.dataset import DATASETS
+from dict_generator.alphabet import ALPHABETS
 from pathlib import Path
 import itertools
 
 if __name__ == '__main__':
-    corpus_dir = Path(__file__).parent / 'corpus'
-    output_dir = Path(__file__).parent / 'rust/src/encoders/instances'
+    corpus_dir = Path(__file__).parent.parent / 'corpus'
+    output_dir = Path(__file__).parent.parent / 'rust/src/encoders/instances'
 
-    alphabets = [
-      {'lang': 'ru', 'name': '32', 'alphabet': alphabet.RU_32},
-      {'lang': 'ru', 'name': 'punct_64', 'alphabet': alphabet.RU_PUNCT_64},
-      {'lang': 'ru', 'name': 'alpha_64', 'alphabet': alphabet.RU_ALPHA_64},
-      {'lang': 'en', 'name': '32', 'alphabet': alphabet.EN_32},
-      {'lang': 'en', 'name': 'punct_64', 'alphabet': alphabet.EN_PUNCT_64},
-      {'lang': 'en', 'name': 'alpha_64', 'alphabet': alphabet.EN_ALPHA_64},
-    ]
-    datasets = [
-      {'lang': 'ru', 'name': 'wiki', 'file': corpus_dir / 'ru_wiki_train.jsonl'},
-      {'lang': 'en', 'name': 'wiki', 'file': corpus_dir / 'en_wiki_train.jsonl'},
-    ]
+    alphabets = ALPHABETS
+    datasets = DATASETS
     #token_types = ['utf8', 'bin']
     token_types = ['utf8']
 
@@ -45,7 +37,7 @@ if __name__ == '__main__':
         print(f"Generating {name}...")
         render_bpe_dict(
           output_file=output_file,
-          dataset_file=ds['file'],
+          dataset_file=ds['train'],
           alphabet=alph['alphabet'],
           vocab_size=1914,
           token_type='utf8'

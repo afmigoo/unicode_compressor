@@ -46,6 +46,19 @@ pub struct TokenEncoder {
     }
 }
 
+pub struct EchoEncoder;
+impl Encoder for EchoEncoder {
+    fn encode(&self, payload: &str, _: &EncodeOptions) -> Result<String, Error> {
+        Ok(payload.to_string())
+    }
+    fn decode(&self, payload: &str) -> Result<String, Error> {
+        Ok(payload.to_string())
+    }
+    fn can_encode(&self, _: &str) -> Result<(), Error> {
+        Ok(())
+    }
+}
+
 pub struct AdaptiveEncoder<'a> {
     pub encoders_inventory: &'a[(char, &'a dyn Encoder)],
 } impl Encoder for AdaptiveEncoder<'_> {
