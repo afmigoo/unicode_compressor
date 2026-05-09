@@ -11,7 +11,7 @@ const $inBytes = document.getElementById("in-bytes");
 const $outBytes = document.getElementById("out-bytes");
 const $outCompression = document.getElementById("out-compression");
 
-/** Same as readme metrics: (input_utf8 − output_utf8) / input_utf8; shown as % after Encode only. */
+/** Relative UTF-8 size change after Encode: (output − input) / input × 100. Negative = smaller output (saved), positive = larger (inflated). */
 let outputCompressionPercent = null;
 const $btnEncode = document.getElementById("btn-encode");
 const $btnDecode = document.getElementById("btn-decode");
@@ -29,11 +29,12 @@ function utf8ByteLength(text) {
   return new TextEncoder().encode(text).length;
 }
 
-/** Readme: compression 0.6 ⇒ reduced by 60%. Here `p` is already 0–100 (can be negative if output larger). */
+/** e.g. readme “saved 60%” → −60%; inflated 60% → +60%. */
 function formatCompressionPercent(p) {
   if (!Number.isFinite(p)) return "";
   const rounded = Math.round(p * 10) / 10;
   const s = rounded % 1 === 0 ? String(Math.round(rounded)) : rounded.toFixed(1);
+  if (rounded > 0) return `+${s}`;
   return s;
 }
 
@@ -188,7 +189,7 @@ async function main() {
       const inBytes = utf8ByteLength(plain);
       const outBytes = utf8ByteLength(out);
       outputCompressionPercent =
-        inBytes > 0 ? ((inBytes - outBytes) / inBytes) * 100 : null;
+        inBytes > 0 ? ((outBytes - inBytes) / inBytes) * 100 : null;
       updateByteLabels();
       setTransportWarnings(utf8ByteLength($output.value));
       setStatus("Encoded.");
