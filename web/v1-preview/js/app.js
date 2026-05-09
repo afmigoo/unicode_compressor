@@ -1,6 +1,7 @@
 const LIMIT_MESHCORE_PAYLOAD_UTF8 = 150;
 const LIMIT_MESHTASTIC_PAYLOAD_UTF8 = 200;
-const ENCODE_LEVEL_THRESHOLD_BYTES = 512;
+/** Above this UTF-8 size, use first-match (faster); at or below, use longest-match (often smaller). */
+const TOKENIZATION_STRATEGY_THRESHOLD_BYTES = 512;
 
 const $input = document.getElementById("input");
 const $output = document.getElementById("output");
@@ -66,12 +67,13 @@ function getEncoderName() {
   return $encoder.value;
 }
 
-function getEncodeLevel(payload) {
+/** @returns {"first-match" | "longest-match"} — wasm `encode` third argument */
+function getTokenizationStrategy(payload) {
   const payloadBytes = utf8ByteLength(payload);
-  if (payloadBytes <= ENCODE_LEVEL_THRESHOLD_BYTES) {
-    return "balanced";
+  if (payloadBytes <= TOKENIZATION_STRATEGY_THRESHOLD_BYTES) {
+    return "longest-match";
   }
-  return "fast";
+  return "first-match";
 }
 
 function ensureWasmLoaded() {
@@ -152,8 +154,8 @@ async function main() {
     try {
       ensureWasmLoaded();
       const plain = $input.value;
-      const level = getEncodeLevel(plain);
-      const out = wasmEncode(plain, getEncoderName(), level);
+      const strategy = getTokenizationStrategy(plain);
+      const out = wasmEncode(plain, getEncoderName(), strategy);
       $output.value = out;
       updateByteLabels();
       setTransportWarnings(utf8ByteLength($output.value));

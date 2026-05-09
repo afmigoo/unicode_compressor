@@ -1,22 +1,22 @@
 use wasm_bindgen::prelude::*;
 use crate::encoders;
-use crate::options::CompressionLevel;
+use crate::options::TokenizationStrategy;
 use crate::options::EncodeOptions;
 
 #[wasm_bindgen]
 // TODO: ensure errors propagate correctly to js
-pub fn encode(payload: &str, encoder: &str, level: &str) -> Result<String, String> {
-    let level = match level {
-        "fast" => CompressionLevel::Low,
-        "balanced" => CompressionLevel::Balanced,
+pub fn encode(payload: &str, encoder: &str, tokenization_strategy: &str) -> Result<String, String> {
+    let tokenization_strategy_option = match tokenization_strategy {
+        "first-match" => TokenizationStrategy::FirstMatch,
+        "longest-match" => TokenizationStrategy::LongestMatch,
         _ => {
             return Err(format!(
-                "invalid encode level '{}'. Supported values: fast, balanced.",
-                level
+                "invalid tokenization strategy '{}'. Supported values: first-match, longest-match.",
+                tokenization_strategy
             ));
         }
     };
-    let opts = EncodeOptions { level };
+    let opts = EncodeOptions { tokenization_strategy: tokenization_strategy_option };
     encoders::encode(payload, encoder, &opts).map_err(|e| e.to_string())
 }
 
