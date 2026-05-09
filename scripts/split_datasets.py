@@ -3,8 +3,9 @@ from datasets import load_dataset
 
 if __name__ == '__main__':
   datasets = [
-    Path('corpus/wiki_ru.jsonl'),
-    Path('corpus/wiki_en.jsonl')
+    Path('corpus/ru_wiki.jsonl'),
+    Path('corpus/en_wiki.jsonl'),
+    Path('corpus/ru_meshcoretel.jsonl'),
   ]
 
   for f in datasets:

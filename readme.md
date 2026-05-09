@@ -23,12 +23,15 @@ It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 pa
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
-|ru_wiki_32|0.6901 / 0.6984 / 0.0658|0.0007|536.4148|998|то при ряд сходится а при расходится если то данны...|
-|ru_wiki_punct_64|0.6267 / 0.6410 / 0.0935|0.0005|558.2040|1000|то при > 1 >1 ряд сходится, а при < 1 <1 расходитс...|
-|ru_wiki_alpha_64|0.6635 / 0.6737 / 0.0682|0.0005|536.4850|998|то при ряд сходится а при расходится Если то данны...|
-|en_wiki_32|0.4539 / 0.4644 / 0.1489|0.0007|366.8987|997|joanna baillie, english poem|
-|en_wiki_punct_64|0.4180 / 0.4229 / 0.1108|0.0005|381.8458|999|joanna baillie, english poem (1849)|
-|en_wiki_alpha_64|0.4307 / 0.4478 / 0.1582|0.0005|367.7713|997|Joanna Baillie, English Poem|
+|ru_wiki_32|0.6896 / 0.6978 / 0.0649|0.0013|539.6869|1102|одна богатая и знатная дама госпожа шереметева утр...|
+|ru_wiki_punct_64|0.6256 / 0.6411 / 0.0994|0.0008|561.2219|1104|одна богатая и знатная дама, госпожа шереметева, у...|
+|ru_wiki_alpha_64|0.6638 / 0.6740 / 0.0657|0.0008|539.7205|1102|Одна богатая и знатная дама госпожа Шереметева утр...|
+|en_wiki_32|0.4500 / 0.4611 / 0.1496|0.0008|360.9447|1104|gates started to publish articles on the macrofung...|
+|en_wiki_punct_64|0.4141 / 0.4194 / 0.1021|0.0006|376.3550|1107|gates started to publish articles on the macrofung...|
+|en_wiki_alpha_64|0.4247 / 0.4421 / 0.1607|0.0005|361.8659|1104|Gates started to publish articles on the macrofung...|
+|ru_meshcoretel_32|0.6343 / 0.6759 / 0.1874|0.0006|53.9650|571|у меня|
+|ru_meshcoretel_punct_64|0.5850 / 0.6400 / 0.2503|0.0005|58.4471|577|@[052] у меня -|
+|ru_meshcoretel_alpha_64|0.6082 / 0.6481 / 0.1839|0.0005|53.9877|571|у меня|
 
 ## Stack and acknowledgements
 

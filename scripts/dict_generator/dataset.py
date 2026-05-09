@@ -27,4 +27,5 @@ def alphabet_filtered(file: str | Path, alphabet: list[str]):
 DATASETS = [
   {'lang': 'ru', 'name': 'wiki', 'train': 'corpus/ru_wiki_train.jsonl', 'test': 'corpus/ru_wiki_test.jsonl'},
   {'lang': 'en', 'name': 'wiki', 'train': 'corpus/en_wiki_train.jsonl', 'test': 'corpus/en_wiki_test.jsonl'},
+  {'lang': 'ru', 'name': 'meshcoretel', 'train': 'corpus/ru_meshcoretel_train.jsonl', 'test': 'corpus/ru_meshcoretel_test.jsonl'},
 ]

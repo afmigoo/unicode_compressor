@@ -1,17 +1,28 @@
-from datasets import load_dataset
-from pathlib import Path
+import hashlib
+import json
 import os
+from pathlib import Path
+
+from datasets import load_dataset
 
 token = os.getenv("HUGGINGFACE_TOKEN")
+if token:
+    print("Token found")
+else:
+    raise ValueError("Token not found")
+
 N = 100
 LANGUAGES = [
-    # "python",
+    "python",
     # "go",
-    "rust",
+    # "rust",
     # "c",
     # "clojure",
-    # "arduino"
+    # "arduino",
 ]
+output_dir = Path(__file__).parent.parent.parent / "corpus"
+output_dir.mkdir(parents=True, exist_ok=True)
+
 
 def crawl_language(language, split):
     return load_dataset(
@@ -19,20 +30,27 @@ def crawl_language(language, split):
         data_dir=f"data/{language}",
         split=split,
         streaming=True,
-        token=token
+        token=token,
     )
 
+def code_row(row: dict) -> dict:
+    text = row.get("content") or ""
+    return {
+        "text": text,
+    }
+
+
 for language in LANGUAGES:
-    for split in ["train", "validation"]:
-        output_dir = Path(__file__).parent.parent / "corpus/raw/coding" / language
-        output_dir.mkdir(exist_ok=True, parents=True)
+    print(f"Crawling {language}")
+    for split in ["train", "test"]:
         ds = crawl_language(language, split)
-        with open(output_dir / f"{split}.txt", "w") as f:
+        with open(output_dir / f"{language}_{split}.jsonl", "w", encoding="utf-8") as f:
             for i, row in enumerate(ds):
-                print(f"Crawling {language} {split}... [{i + 1}/{N}]" )
+                print(f"Crawling {language} {split}... [{i + 1}/{N}]")
                 if i >= N:
                     break
-                print(f"[{i + 1}/{N}]" )
-                f.write(row["content"] + "\n")
+                out = code_row(row)
+                f.write(json.dumps(out, ensure_ascii=False) + "\n")
                 f.flush()
         break
+    break
