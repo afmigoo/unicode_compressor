@@ -9,6 +9,10 @@ const $encoder = document.getElementById("encoder");
 const $status = document.getElementById("status");
 const $inBytes = document.getElementById("in-bytes");
 const $outBytes = document.getElementById("out-bytes");
+const $outCompression = document.getElementById("out-compression");
+
+/** Same as readme metrics: (input_utf8 − output_utf8) / input_utf8; shown as % after Encode only. */
+let outputCompressionPercent = null;
 const $btnEncode = document.getElementById("btn-encode");
 const $btnDecode = document.getElementById("btn-decode");
 const $btnCopy = document.getElementById("btn-copy");
@@ -23,6 +27,14 @@ const CONTROLS = [$encoder, $input, $output, $btnEncode, $btnDecode, $btnCopy, $
 
 function utf8ByteLength(text) {
   return new TextEncoder().encode(text).length;
+}
+
+/** Readme: compression 0.6 ⇒ reduced by 60%. Here `p` is already 0–100 (can be negative if output larger). */
+function formatCompressionPercent(p) {
+  if (!Number.isFinite(p)) return "";
+  const rounded = Math.round(p * 10) / 10;
+  const s = rounded % 1 === 0 ? String(Math.round(rounded)) : rounded.toFixed(1);
+  return s;
 }
 
 function setStatus(msg, isError = false) {
@@ -61,6 +73,16 @@ function setTransportWarnings(payloadUtf8Bytes) {
 function updateByteLabels() {
   $inBytes.textContent = String(utf8ByteLength($input.value));
   $outBytes.textContent = String(utf8ByteLength($output.value));
+  if (outputCompressionPercent === null) {
+    $outCompression.textContent = "";
+  } else {
+    $outCompression.textContent = ` (${formatCompressionPercent(outputCompressionPercent)}%)`;
+  }
+}
+
+function clearOutputCompression() {
+  outputCompressionPercent = null;
+  $outCompression.textContent = "";
 }
 
 function getEncoderName() {
@@ -144,8 +166,14 @@ async function main() {
     $encoder.appendChild(opt);
   }
 
-  $input.addEventListener("input", updateByteLabels);
-  $output.addEventListener("input", updateByteLabels);
+  $input.addEventListener("input", () => {
+    clearOutputCompression();
+    updateByteLabels();
+  });
+  $output.addEventListener("input", () => {
+    clearOutputCompression();
+    updateByteLabels();
+  });
   updateByteLabels();
 
   $btnEncode.addEventListener("click", () => {
@@ -157,6 +185,10 @@ async function main() {
       const strategy = getTokenizationStrategy(plain);
       const out = wasmEncode(plain, getEncoderName(), strategy);
       $output.value = out;
+      const inBytes = utf8ByteLength(plain);
+      const outBytes = utf8ByteLength(out);
+      outputCompressionPercent =
+        inBytes > 0 ? ((inBytes - outBytes) / inBytes) * 100 : null;
       updateByteLabels();
       setTransportWarnings(utf8ByteLength($output.value));
       setStatus("Encoded.");
@@ -170,6 +202,7 @@ async function main() {
     clearTransportWarnings();
     try {
       ensureWasmLoaded();
+      clearOutputCompression();
       const text = wasmDecode($input.value, getEncoderName());
       $output.value = text;
       updateByteLabels();
@@ -191,6 +224,7 @@ async function main() {
   $btnClear.addEventListener("click", () => {
     $input.value = "";
     $output.value = "";
+    clearOutputCompression();
     updateByteLabels();
     clearTransportWarnings();
     setStatus("");
