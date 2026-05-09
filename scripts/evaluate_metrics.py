@@ -1,6 +1,3 @@
-import subprocess
-import resource
-from dataclasses import dataclass
 from pathlib import Path
 from tqdm import tqdm
 import itertools
@@ -14,25 +11,32 @@ UNIPRESS_BINARY = Path(__file__).parent.parent / 'rust/target/release/unipress'
 
 if __name__ == '__main__':
   corpus_dir = Path(__file__).parent.parent / 'corpus'
+  
   datasets = dataset.DATASETS
   alphabets = alphabet.ALPHABETS
   combinations = itertools.product(datasets, alphabets)
+
   results = defaultdict(list)
   examples = defaultdict(str)
 
   for ds, alph in combinations:
     if ds['lang'] != alph['lang']:
       continue
+
     name = f"{ds['lang']}_{ds['name']}_{alph['name']}"
     print(f"Evaluating {name}...")
+
     results[name] = []
-    if name not in examples:
-      examples[name] = next(dataset.alphabet_filtered(ds['test'], alph['alphabet'])).strip()
     for payload in tqdm(dataset.alphabet_filtered(ds['test'], alph['alphabet'])):
       stripped_payload = payload.strip()
+
+      if name not in examples:
+        examples[name] = stripped_payload
+
       encoding_result = encode(stripped_payload, 'adaptive')
       decoding_result = decode(encoding_result.encoded_payload, 'adaptive')
       assert decoding_result.decoded_payload == stripped_payload, f"Roundtrip failed: {decoding_result.decoded_payload} != {stripped_payload}"
+      
       results[name].append(encoding_result)
 
   print('|Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|')

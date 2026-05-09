@@ -56,6 +56,9 @@ pub fn first_match(
 /// 2. Repeats step 1. for the remaining parts of the payload string until the whole payload is encoded.
 pub fn longest_match(payload: &str, token2encoded: &Map<&'static str, &'static str>, token_max_chars: usize) -> Result<String, Error> {
     let mut encoded = String::new();
+    if payload.len() == 0 {
+        return Ok(encoded);
+    }
     
     let payload_char_idx: Vec<usize> = payload
         .char_indices()

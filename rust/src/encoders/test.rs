@@ -1,6 +1,6 @@
 use super::instances::NAMED_ENCODERS;
 use crate::options::EncodeOptions;
-use crate::options::CompressionLevel;
+use crate::options::TokenizationStrategy;
 
 use clap::ValueEnum;
 
@@ -34,11 +34,11 @@ NWEyY2VmNDNhMWM0YzZiZWI2NjkxMjJiMmY2Nzk1NmFhODA1MmZkYzI2YmRlZWI4NTRlODlmYWI3YjUy
 YTcxNWM3YWZhMTVkYjAwNTNiZDZmOWQ3MGRlNTJjMmY5MDAyZjU0M2VmNzc5YzdhNTY1OWE0NTlmNTA3ZTI5YWFjMTQ5MDU0NDM5";
 
   for (name, encoder) in NAMED_ENCODERS {
-    for level in CompressionLevel::value_variants() {
+    for tkn_strat in TokenizationStrategy::value_variants() {
         if *name == "bpe_dummy" {
             continue;
         }
-        let encoded = match encoder.encode(&payload, &EncodeOptions { level: level.clone() }) {
+        let encoded = match encoder.encode(&payload, &EncodeOptions { tokenization_strategy: tkn_strat.clone() }) {
             Ok(encoded) => encoded,
             Err(e) => {
                 panic!("Encoding failed: {}: {} -> {}", name, payload, e);
@@ -51,7 +51,7 @@ YTcxNWM3YWZhMTVkYjAwNTNiZDZmOWQ3MGRlNTJjMmY5MDAyZjU0M2VmNzc5YzdhNTY1OWE0NTlmNTA3
             }
         };
         assert_eq!(decoded, payload);
-        println!("{}: {:?} -> OK", name, level);
+        println!("{}: {:?} -> OK", name, tkn_strat);
     }
   }
 }

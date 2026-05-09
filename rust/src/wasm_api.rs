@@ -7,7 +7,7 @@ use crate::options::EncodeOptions;
 // TODO: ensure errors propagate correctly to js
 pub fn encode(payload: &str, encoder: &str, level: &str) -> Result<String, String> {
     let level = match level {
-        "fast" => CompressionLevel::Fast,
+        "fast" => CompressionLevel::Low,
         "balanced" => CompressionLevel::Balanced,
         _ => {
             return Err(format!(

@@ -6,12 +6,12 @@ mod en_punct_64_utf8_map;
 mod ru_32_utf8_map;
 mod ru_alpha_64_utf8_map;
 mod ru_punct_64_utf8_map;
-mod en_wiki_32_utf8_tkn;
-mod en_wiki_alpha_64_utf8_tkn;
-mod en_wiki_punct_64_utf8_tkn;
-mod ru_wiki_32_utf8_tkn;
-mod ru_wiki_alpha_64_utf8_tkn;
-mod ru_wiki_punct_64_utf8_tkn;
+mod en_wiki_32_1914_utf8_tkn;
+mod en_wiki_alpha_64_1914_utf8_tkn;
+mod en_wiki_punct_64_1914_utf8_tkn;
+mod ru_wiki_32_1914_utf8_tkn;
+mod ru_wiki_alpha_64_1914_utf8_tkn;
+mod ru_wiki_punct_64_1914_utf8_tkn;
 
 pub const ECHO_ENCODER: EchoEncoder = EchoEncoder;
 
@@ -26,12 +26,12 @@ pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
     ('%', &ru_32_utf8_map::ENCODER),
     ('&', &ru_alpha_64_utf8_map::ENCODER),
     ('\'', &ru_punct_64_utf8_map::ENCODER),
-    ('(', &en_wiki_32_utf8_tkn::ENCODER),
-    (')', &en_wiki_alpha_64_utf8_tkn::ENCODER),
-    ('*', &en_wiki_punct_64_utf8_tkn::ENCODER),
-    ('+', &ru_wiki_32_utf8_tkn::ENCODER),
-    (',', &ru_wiki_alpha_64_utf8_tkn::ENCODER),
-    ('-', &ru_wiki_punct_64_utf8_tkn::ENCODER),
+    ('(', &en_wiki_32_1914_utf8_tkn::ENCODER),
+    (')', &en_wiki_alpha_64_1914_utf8_tkn::ENCODER),
+    ('*', &en_wiki_punct_64_1914_utf8_tkn::ENCODER),
+    ('+', &ru_wiki_32_1914_utf8_tkn::ENCODER),
+    (',', &ru_wiki_alpha_64_1914_utf8_tkn::ENCODER),
+    ('-', &ru_wiki_punct_64_1914_utf8_tkn::ENCODER),
   ]
 };
 
@@ -43,10 +43,10 @@ pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
   ("ru_32_utf8_map", &ru_32_utf8_map::ENCODER),
   ("ru_alpha_64_utf8_map", &ru_alpha_64_utf8_map::ENCODER),
   ("ru_punct_64_utf8_map", &ru_punct_64_utf8_map::ENCODER),
-  ("en_wiki_32_utf8_tkn", &en_wiki_32_utf8_tkn::ENCODER),
-  ("en_wiki_alpha_64_utf8_tkn", &en_wiki_alpha_64_utf8_tkn::ENCODER),
-  ("en_wiki_punct_64_utf8_tkn", &en_wiki_punct_64_utf8_tkn::ENCODER),
-  ("ru_wiki_32_utf8_tkn", &ru_wiki_32_utf8_tkn::ENCODER),
-  ("ru_wiki_alpha_64_utf8_tkn", &ru_wiki_alpha_64_utf8_tkn::ENCODER),
-  ("ru_wiki_punct_64_utf8_tkn", &ru_wiki_punct_64_utf8_tkn::ENCODER),
+  ("en_wiki_32_utf8_tkn", &en_wiki_32_1914_utf8_tkn::ENCODER),
+  ("en_wiki_alpha_64_utf8_tkn", &en_wiki_alpha_64_1914_utf8_tkn::ENCODER),
+  ("en_wiki_punct_64_utf8_tkn", &en_wiki_punct_64_1914_utf8_tkn::ENCODER),
+  ("ru_wiki_32_utf8_tkn", &ru_wiki_32_1914_utf8_tkn::ENCODER),
+  ("ru_wiki_alpha_64_utf8_tkn", &ru_wiki_alpha_64_1914_utf8_tkn::ENCODER),
+  ("ru_wiki_punct_64_utf8_tkn", &ru_wiki_punct_64_1914_utf8_tkn::ENCODER),
 ];

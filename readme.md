@@ -23,12 +23,12 @@ It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 pa
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
-|ru_wiki_32|0.6900 / 0.6985 / 0.0656|0.0017|536.4148|998|то при ряд сходится а при расходится если то данны...|
-|ru_wiki_punct_64|0.6266 / 0.6400 / 0.0933|0.0012|558.2040|1000|то при > 1 >1 ряд сходится, а при < 1 <1 расходитс...|
-|ru_wiki_alpha_64|0.6607 / 0.6714 / 0.0680|0.0011|536.4850|998|то при ряд сходится а при расходится Если то данны...|
-|en_wiki_32|0.4532 / 0.4585 / 0.1574|0.0059|366.8987|997|joanna baillie, english poem|
-|en_wiki_punct_64|0.4204 / 0.4208 / 0.1230|0.0029|381.8458|999|joanna baillie, english poem (1849)|
-|en_wiki_alpha_64|0.4321 / 0.4457 / 0.1668|0.0025|367.7713|997|Joanna Baillie, English Poem|
+|ru_wiki_32|0.6901 / 0.6984 / 0.0658|0.0007|536.4148|998|то при ряд сходится а при расходится если то данны...|
+|ru_wiki_punct_64|0.6267 / 0.6410 / 0.0935|0.0005|558.2040|1000|то при > 1 >1 ряд сходится, а при < 1 <1 расходитс...|
+|ru_wiki_alpha_64|0.6635 / 0.6737 / 0.0682|0.0005|536.4850|998|то при ряд сходится а при расходится Если то данны...|
+|en_wiki_32|0.4539 / 0.4644 / 0.1489|0.0007|366.8987|997|joanna baillie, english poem|
+|en_wiki_punct_64|0.4180 / 0.4229 / 0.1108|0.0005|381.8458|999|joanna baillie, english poem (1849)|
+|en_wiki_alpha_64|0.4307 / 0.4478 / 0.1582|0.0005|367.7713|997|Joanna Baillie, English Poem|
 
 ## Stack and acknowledgements
 

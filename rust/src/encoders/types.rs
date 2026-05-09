@@ -4,7 +4,7 @@ use super::errors::Error;
 use super::shared;
 use super::strategies;
 
-use crate::options::{EncodeOptions, CompressionLevel};
+use crate::options::{EncodeOptions, TokenizationStrategy};
 
 pub trait Encoder: Send + Sync {
     fn encode(&self, payload: &str, options: &EncodeOptions) -> Result<String, Error>;
@@ -33,9 +33,9 @@ pub struct TokenEncoder {
     pub token_max_chars: u8,
 } impl Encoder for TokenEncoder {
     fn encode(&self, payload: &str, options: &EncodeOptions) -> Result<String, Error> {
-        match options.level {
-            CompressionLevel::Fast => return strategies::first_match(&payload, self.token2encoded, self.token_max_chars as usize),
-            CompressionLevel::Balanced => return strategies::longest_match(&payload, self.token2encoded, self.token_max_chars as usize),
+        match options.tokenization_strategy {
+            TokenizationStrategy::FirstMatch => return strategies::first_match(&payload, self.token2encoded, self.token_max_chars as usize),
+            TokenizationStrategy::LongestMatch => return strategies::longest_match(&payload, self.token2encoded, self.token_max_chars as usize),
         }
     }
     fn decode(&self, payload: &str) -> Result<String, Error> {

@@ -3,7 +3,7 @@ use std::io::{stdin,read_to_string};
 use clap::Parser;
 
 use unipress::encoders::{instances::NAMED_ENCODERS, errors::Error, encode, decode};
-use unipress::options::{CompressionLevel, EncodeOptions};
+use unipress::options::{EncodeOptions, TokenizationStrategy};
 
 /// Unipress - Unicode-based text compression tool. 
 /// Takes payload from stdin and outputs the processed payload to stdout.
@@ -17,8 +17,8 @@ struct Args {
     #[arg(short, long, default_value = "adaptive")]
     encoder: String,
     /// Compression level
-    #[arg(short, long, default_value_t = CompressionLevel::Fast)]
-    compression_level: CompressionLevel,
+    #[arg(short, long, default_value_t = TokenizationStrategy::FirstMatch)]
+    tokenization_strategy: TokenizationStrategy,
     /// List available encoders
     #[arg(short, long, default_value_t = false)]
     list_encoders: bool,
@@ -36,7 +36,7 @@ fn main() -> Result<(), Error> {
 
   let payload = read_to_string(stdin()).expect("Failed to read payload string");
   let payload = payload.trim();
-  let options = EncodeOptions { level: args.compression_level };
+  let options = EncodeOptions { tokenization_strategy: args.tokenization_strategy.clone() };
 
   let processed_payload = if args.decode {
     decode(payload, &args.encoder)

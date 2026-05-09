@@ -32,7 +32,7 @@ def _call_unipress(payload: str, encoder: str, decode: bool = False) -> tuple[st
     )
     stdout = result.stdout.strip()
   except subprocess.CalledProcessError as e:
-    raise Exception(f"Failed to call unipress: {e.stderr}")
+    raise Exception(f"Failed to call unipress: {e.stderr}\npayload: {payload} (len={len(payload)})")
   after = resource.getrusage(resource.RUSAGE_CHILDREN)
   user_time = after.ru_utime - before.ru_utime
   result_len, payload_len = len(stdout.encode('utf-8')), len(payload.encode('utf-8'))
