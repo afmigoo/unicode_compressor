@@ -3,9 +3,15 @@ import re
 
 from datasets import load_dataset
 
+def meshcoretel_filter(s: str):
+  # remove mentions as they do not make sense in the encoded format
+  return re.sub(r'^@\[[^\]]*\] ', '', s)
+
 def raw(file: str | Path):
   ds = load_dataset('json', data_files=str(file))['train']
   for s in ds:
+    if 'meshcoretel' in file:
+      s['text'] = meshcoretel_filter(s['text'])
     yield s['text']
 
 def alphabet_filtered(file: str | Path, alphabet: list[str] | None):
