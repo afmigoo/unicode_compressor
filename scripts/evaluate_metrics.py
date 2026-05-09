@@ -13,14 +13,14 @@ if __name__ == '__main__':
   corpus_dir = Path(__file__).parent.parent / 'corpus'
   
   datasets = dataset.DATASETS
-  alphabets = alphabet.ALPHABETS
+  alphabets = alphabet.ALPHABETS + [{'lang': 'all', 'name': 'all', 'alphabet': None}]
   combinations = itertools.product(datasets, alphabets)
 
   results = defaultdict(list)
   examples = defaultdict(str)
 
   for ds, alph in combinations:
-    if ds['lang'] != alph['lang']:
+    if ds['lang'] != alph['lang'] and alph['lang'] != 'all':
       continue
 
     name = f"{ds['lang']}_{ds['name']}_{alph['name']}"

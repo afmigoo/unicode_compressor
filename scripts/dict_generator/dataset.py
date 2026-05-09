@@ -8,9 +8,12 @@ def raw(file: str | Path):
   for s in ds:
     yield s['text']
 
-def alphabet_filtered(file: str | Path, alphabet: list[str]):
-  alphabet_map = set(alphabet)
+def alphabet_filtered(file: str | Path, alphabet: list[str] | None):
+  alphabet_map = None if alphabet is None else set(alphabet)
   for s in raw(file):
+    if alphabet is None:
+      yield s
+      continue
     filtered_s = ''
     for ch in s:
       if ch in alphabet_map:
