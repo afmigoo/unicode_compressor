@@ -5,7 +5,7 @@ from tokenizers.trainers import BpeTrainer
 
 from dict_generator import dataset
 
-def train_bpe_dict(file: str | Path, alphabet: list[str], vocab_size: int) -> dict[str, int]:
+def train_bpe_dict(file: str | Path, alphabet: list[str] | None, vocab_size: int) -> dict[str, int]:
   trainer = BpeTrainer(
     vocab_size=vocab_size,
     show_progress=False,

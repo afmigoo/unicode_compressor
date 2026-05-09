@@ -13,7 +13,7 @@ if __name__ == '__main__':
   corpus_dir = Path(__file__).parent.parent / 'corpus'
   
   datasets = dataset.DATASETS
-  alphabets = alphabet.ALPHABETS + [{'lang': 'all', 'name': 'all', 'alphabet': None}]
+  alphabets = alphabet.ALPHABETS
   combinations = itertools.product(datasets, alphabets)
 
   results = defaultdict(list)
