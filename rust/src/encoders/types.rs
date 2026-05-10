@@ -1,9 +1,9 @@
+use std::collections::HashSet;
 use phf::Map;
 
 use super::errors::Error;
 use super::shared;
 use super::strategies;
-use super::packing;
 use super::dictionaries::plain_map;
 
 use crate::options::{EncodeOptions, TokenizationStrategy};
@@ -16,6 +16,7 @@ pub enum Transport {
 pub trait Encoder: Send + Sync {
     fn encode(&self, payload: &str, options: &EncodeOptions) -> Result<String, Error>;
     fn decode(&self, payload: &str) -> Result<String, Error>;
+    fn get_alphabet(&self) -> String;
     fn can_encode(&self, payload: &str) -> Result<(), Error>;
 }
 
@@ -26,28 +27,13 @@ pub struct MapEncoder {
 } impl Encoder for MapEncoder {
     fn encode(&self, payload: &str, _: &EncodeOptions) -> Result<String, Error> {
         let ints = shared::remap_utf2int(payload, self.token2int)?;
-        match self.transport {
-            Transport::UTF8 => {
-                shared::remap_int2utf(ints, &plain_map::INT2UTF)
-            }
-            Transport::BIN(bits) => {
-                let packed_bits = packing::pack_int(&ints, bits)?;
-                Ok(packing::base91_encode(&packed_bits))
-            }
-        }
+        shared::encode(ints, &self.transport, &plain_map::INT2UTF)
     }
     fn decode(&self, payload: &str) -> Result<String, Error> {
-        match self.transport {
-            Transport::UTF8 => {
-                let ints = shared::remap_utf2int(payload, &plain_map::UTF2INT)?;
-                shared::remap_int2utf(ints, self.int2token)
-            }
-            Transport::BIN(bits) => {
-                let packed_bits = packing::base91_decode(payload);
-                let ints = packing::unpack_int(packed_bits, bits);
-                shared::remap_int2utf(ints, &self.int2token)
-            }
-        }
+        shared::decode(payload, &self.transport, &plain_map::UTF2INT, &self.int2token)
+    }
+    fn get_alphabet(&self) -> String {
+        shared::get_alphabet(&self.token2int)
     }
     fn can_encode(&self, payload: &str) -> Result<(), Error> {
         shared::covered_by_alphabet(payload, self.token2int)
@@ -70,28 +56,13 @@ pub struct TokenEncoder {
                 &payload, self.token2int, self.token_max_chars as usize
             ),
         }?;
-        match self.transport {
-            Transport::UTF8 => {
-                shared::remap_int2utf(ints, &plain_map::INT2UTF)
-            }
-            Transport::BIN(bits) => {
-                let packed_bits = packing::pack_int(&ints, bits)?;
-                Ok(packing::base91_encode(&packed_bits))
-            }
-        }
+        shared::encode(ints, &self.transport, &plain_map::INT2UTF)
     }
     fn decode(&self, payload: &str) -> Result<String, Error> {
-        match self.transport {
-            Transport::UTF8 => {
-                let ints = shared::remap_utf2int(payload, &plain_map::UTF2INT)?;
-                shared::remap_int2utf(ints, self.int2token)
-            }
-            Transport::BIN(bits) => {
-                let packed_bits = packing::base91_decode(payload);
-                let ints = packing::unpack_int(packed_bits, bits);
-                shared::remap_int2utf(ints, &self.int2token)
-            }
-        }
+        shared::decode(payload, &self.transport, &plain_map::UTF2INT, &self.int2token)
+    }
+    fn get_alphabet(&self) -> String {
+        shared::get_alphabet(&self.token2int)
     }
     fn can_encode(&self, payload: &str) -> Result<(), Error> {
         shared::covered_by_alphabet(payload, self.token2int)
@@ -105,6 +76,9 @@ impl Encoder for EchoEncoder {
     }
     fn decode(&self, payload: &str) -> Result<String, Error> {
         Ok(payload.to_string())
+    }
+    fn get_alphabet(&self) -> String {
+        String::new()
     }
     fn can_encode(&self, _: &str) -> Result<(), Error> {
         Ok(())
@@ -144,6 +118,15 @@ pub struct AdaptiveEncoder<'a> {
             .ok_or(Error::DecoderNotFound(encoder_id))?;
 
         decoder.decode(&payload[1..])
+    }
+    fn get_alphabet(&self) -> String {
+        let mut alphabet = HashSet::<char>::new();
+        for (_, encoder) in self.encoders_inventory {
+            for ch in encoder.get_alphabet().chars() {
+                alphabet.insert(ch);
+            }
+        }
+        String::from_iter(alphabet.iter())
     }
     fn can_encode(&self, payload: &str) -> Result<(), Error> {
         for (_, encoder) in self.encoders_inventory {

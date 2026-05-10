@@ -1,5 +1,7 @@
 from pathlib import Path
+from typing import Counter
 from tqdm import tqdm
+from pprint import pprint
 import itertools
 from collections import defaultdict
 import statistics
@@ -18,6 +20,7 @@ if __name__ == '__main__':
   combinations = itertools.product(datasets, alphabets)
 
   results = defaultdict(list)
+  most_used_prefixes = defaultdict(Counter)
   examples = defaultdict(str)
 
   for ds, alph in combinations:
@@ -39,6 +42,9 @@ if __name__ == '__main__':
       assert decoding_result.decoded_payload == stripped_payload, \
         f"Roundtrip failed: {decoding_result.decoded_payload} != {stripped_payload}"
       
+      most_used_prefixes[name][encoding_result.encoded_payload[0]] += 1
+      most_used_prefixes['total'][encoding_result.encoded_payload[0]] += 1
+      results['total'].append(encoding_result)
       results[name].append(encoding_result)
 
   print('|Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|')
@@ -54,3 +60,6 @@ if __name__ == '__main__':
       len(results),
       examples[name][:50] + '...' if len(examples[name]) > 50 else examples[name]
     ))
+
+  pprint(most_used_prefixes)
+

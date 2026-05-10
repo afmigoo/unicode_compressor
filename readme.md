@@ -82,7 +82,8 @@ docker run --rm \
     -v $(pwd)/web/v1:/app -w /app \
     node:22-alpine \
     node smoke_node.mjs
-# v1-preview ... TODO
+# v1-preview
+cd rust && cargo test --release
 ```
 
 ## Privacy note
@@ -92,24 +93,22 @@ docker run --rm \
 
 ## Planned
 - `v1`
-    - [ ] Create reference dataset for performance measurement
-    - [ ] Rewrite greedy encoding of static dict encoder
+    - [x] Create reference dataset for performance measurement
+    - [x] Rewrite greedy encoding of static dict encoder
     - [x] Rewrite core in Rust for compatability between cli and web.
     - [x] Refactor encoders to support diferent alphabets. Now global hard-coded alphabet is shared between all encoders
 
 ## Algorithms (names are not final)
 
-- `decider` (default, recommended) - tries all the algorithms from below and chooses the best one based on the size of the encoded string. Costs one extra utf-8 character to mark which algorithm was used
-- `utf8` - just maps each alphabet character to a utf-8 character one to one
-- `utf8_optimize` - like `utf8`, but puts frequent letters first, so they use less bytes
-- `base64` - maps each alphabet character into raw bytes, then encodes them into base64
-- `base64_compress` - like `base64`, but compresses the raw bytes using zlib
-- `base91` - maps each alphabet character into raw bytes, then encodes them into base91
-- `base91_compress` - like `base91`, but compresses the raw bytes using zlib
-- `base85` - maps each alphabet character into raw bytes, then encodes them into base85
-- `base85_compress` - like `base85`, but compresses the raw bytes using zlib
-- `bpe_wiki` - pretrained BPE dictionary with python. Frontend encodes/decodes using said dictionary (greedy encoding). Trained on wikipedia articles in Russian and English.
-- `bpe_wiki_ru` - like `bpe_wiki`, but trained Russian articles.
-- `bpe_wiki_en` - like `bpe_wiki`, but trained English articles.
-- `bpe_meshcoretel_ru` - like `bpe_wiki`, but trained with messages taken from #public Meshcore channel (Moscow region).
-- `bpe_coding` - like `bpe_wiki`, but trained on a tiny subset of [The Stack Dataset](https://huggingface.co/datasets/bigcode/the-stack).
+- `adaptive` (default, recommended) - tries all the algorithms and chooses the best one based on the size of the encoded string. Costs one extra utf-8 character to mark which algorithm was used
+- encoder variation parameters:
+    - `map` vs `token`
+        - `map` encoders simply map unicode characters one-to-one. This may compress data, if payload contains multi-byte characters and they are mapped to ASCII range. Not the best choice, but a decent fallback.
+        - `token` encoders encode chunks of characters (tokens) instead of individual characters similar to LLM tokenization algorithms, but simpler
+    - transport: `bin` vs `utf8`
+        - `bin` encoders pack data into binary n-bit tokens, then encode binary data into base91
+        - `utf8` encoders encode data straight into utf-8 characters
+    - alphabet: each encoder has an optional alphabet, which limits the set of characters that can be encoded
+    - dataset: each `token` encoder is trained on a specific dataset
+
+By trying all the variations, `adaptive` encoder can find the best encoding for the given payload with a small cost of 1 byte overhead.

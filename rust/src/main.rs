@@ -2,7 +2,7 @@ use std::process::exit;
 use std::io::{stdin,read_to_string};
 use clap::Parser;
 
-use unipress::encoders::{instances::NAMED_ENCODERS, errors::Error, encode, decode};
+use unipress::encoders::{instances::NAMED_ENCODERS, errors::Error, encode, decode, get_encoder};
 use unipress::options::{EncodeOptions, TokenizationStrategy};
 
 /// Unipress - Unicode-based text compression tool. 
@@ -22,6 +22,9 @@ struct Args {
     /// List available encoders
     #[arg(short, long, default_value_t = false)]
     list_encoders: bool,
+    /// List the alphabet of the selected encoder
+    #[arg(long, default_value_t = false)]
+    alphabet: bool,
 }
 
 fn main() -> Result<(), Error> {
@@ -31,6 +34,12 @@ fn main() -> Result<(), Error> {
     for (name, _) in NAMED_ENCODERS {
       println!("{}", name);
     }
+    return Ok(());
+  }
+
+  if args.alphabet {
+    let encoder = get_encoder(&args.encoder)?;
+    println!("{}", encoder.get_alphabet());
     return Ok(());
   }
 

@@ -23,12 +23,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Run frontend tests
+      - name: Run tests
         run: |
-          docker run --rm \
-            -v $(pwd)/web/v0:/app -w /app \
-            ${{ env.RUN_TESTS_IMAGE }} \
-            node smoke_node.mjs
+          docker build -f docker/Dockerfile --target cli-tester .
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer

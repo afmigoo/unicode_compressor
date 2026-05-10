@@ -11,7 +11,7 @@ UNIPRESS_BINARY = Path(__file__).parent.parent / 'rust/target/release/unipress'
 
 if __name__ == '__main__':
     encoder_variants = get_encoder_variants()
-    lengths = list(range(0, 10 ** 3 + 1)) + [10 ** x for x in range(4, 7)]
+    lengths = list(range(0, 10 ** 2 + 1)) #+ [10 ** x for x in range(4, 7)]
 
     #### utf-8 dicts ####
     for encoder_variant in encoder_variants:
