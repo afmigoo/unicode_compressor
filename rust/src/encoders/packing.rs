@@ -18,7 +18,7 @@ pub fn pack_int(payload: &Vec<u16>, bits: usize) -> Result<Vec<u8>, Error> {
     // end-of-stream marker
     packed_bits[payload.len() * bits .. (payload.len() + 1) * bits].store_le::<u16>(0);
 
-    eprintln!("packed bits: {:?}", &packed_bits);
+    // eprintln!("packed bits: {:?}", &packed_bits);
     Ok(packed_bits.into_vec())
 }
 
@@ -34,7 +34,7 @@ pub fn unpack_int(packed: Vec<u8>, bits: usize) -> Vec<u16> {
         }
     }
 
-    eprintln!("unpacked bits: {:?}", &packed_bits);
+    // eprintln!("unpacked bits: {:?}", &packed_bits);
     payload
 }
 

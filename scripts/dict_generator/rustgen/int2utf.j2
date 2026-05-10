@@ -1,0 +1,14 @@
+// generated with jinja2
+use phf::{Map, phf_map};
+
+pub static INT2UTF: Map<u16, &'static str> = phf_map! {
+{% for char, num in char2int.items() %}
+    {{ num }}u16 => {{ char }},
+{% endfor %}
+};
+
+pub static UTF2INT: Map<&'static str, u16> = phf_map! {
+{% for char, num in char2int.items() %}
+    {{ char }} => {{ num }}u16,
+{% endfor %}
+};

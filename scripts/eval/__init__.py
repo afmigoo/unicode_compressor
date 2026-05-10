@@ -30,7 +30,7 @@ def _call_unipress(payload: str, encoder: str, decode: bool = False) -> tuple[st
       capture_output=True,
       check=True,
     )
-    stdout = result.stdout.removesuffix('\n')
+    stdout = result.stdout
   except subprocess.CalledProcessError as e:
     raise Exception(f"Failed to call unipress: {e.stderr}\npayload: {payload} (len={len(payload)})")
   after = resource.getrusage(resource.RUSAGE_CHILDREN)

@@ -1,0 +1,34 @@
+// generated with jinja2
+use super::types::{Encoder, MapEncoder, TokenEncoder, EchoEncoder, AdaptiveEncoder, Transport};
+use super::dictionaries;
+
+// Echo encoder
+pub const ECHO_ENCODER: EchoEncoder = EchoEncoder;
+
+{% for encoder in encoders %}
+pub const {{ encoder.name | upper }}: {{ encoder.struct }} = {{ encoder.struct }} {
+  token2int: &dictionaries::{{ encoder.dict_name }}::TOKEN2INT,
+  int2token: &dictionaries::{{ encoder.dict_name }}::INT2TOKEN,
+  transport: Transport::{{ encoder.transport }},
+  {% if encoder.struct == 'TokenEncoder' %}
+  token_max_chars: {{ token_max_chars }},
+  {% endif %}
+};
+{% endfor %}
+
+// Adaptive encoder
+pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
+  encoders_inventory: &[
+    ('!', &ECHO_ENCODER),
+{% for i in range(encoders | length) %}
+    ('{{ adaptive_chars[i] }}', &{{ encoders[i].name | upper }}),
+{% endfor %}
+  ],
+};
+
+pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
+  ("adaptive", &ADAPTIVE_ENCODER),
+{% for encoder in encoders %}
+  ("{{ encoder.name }}", &{{ encoder.name | upper }}),
+{% endfor %}
+];

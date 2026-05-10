@@ -1,5 +1,5 @@
 // generated with jinja2
-use phf::phf_map;
+use phf::{Map, phf_map};
 
 pub static TOKEN2INT: Map<&'static str, u16> = phf_map! {
 {% for token, encoded in token2encoded.items() %}

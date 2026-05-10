@@ -19,6 +19,9 @@ class AlphabetVariant:
 class UnrestrictedAlphabet(AlphabetVariant):
     def __init__(self):
         super().__init__(lang='all', alphabet=None, name='all')
-    
+
+    def __str__(self):
+        return 'all'
+
     def contains(self, char: str) -> bool:
         return True

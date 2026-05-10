@@ -43,7 +43,7 @@ class Dataset:
         yield filtered_s
 
 DATASETS: list[Dataset] = [
-  # {'lang': 'ru', 'name': 'wiki', 'train': 'corpus/ru_wiki_train.jsonl', 'test': 'corpus/ru_wiki_test.jsonl'},
-  # {'lang': 'en', 'name': 'wiki', 'train': 'corpus/en_wiki_train.jsonl', 'test': 'corpus/en_wiki_test.jsonl'},
+  Dataset(lang='ru', name='wiki', splits={'train': 'corpus/ru_wiki_train.jsonl', 'test': 'corpus/ru_wiki_test.jsonl'}),
+  Dataset(lang='en', name='wiki', splits={'train': 'corpus/en_wiki_train.jsonl', 'test': 'corpus/en_wiki_test.jsonl'}),
   Dataset(lang='ru', name='meshcoretel', splits={'train': 'corpus/ru_meshcoretel_train.jsonl', 'test': 'corpus/ru_meshcoretel_test.jsonl'}),
 ]

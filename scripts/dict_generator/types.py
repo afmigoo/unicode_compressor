@@ -12,7 +12,7 @@ class DictVariant:
     alphabet: AlphabetVariant
 
     def __str__(self):
-        return f'{self.alphabet}'
+        return f'{self.alphabet.lang}_{self.alphabet.name}'
 
     def render(self, output_file: Path | str):
         raise NotImplementedError
@@ -29,8 +29,17 @@ class TokenDictVariant(DictVariant):
     dataset: Dataset
 
     def __str__(self):
-        return f'{self.alphabet}_{self.dataset.name}_{self.vocab_size}'    
+        return f'{self.dataset.lang}_{self.dataset.name}_{self.alphabet.name}_{self.vocab_size}'    
 
     def render(self, output_file: Path | str):
         static_dict = train_bpe_dict(self.dataset, self.alphabet, self.vocab_size)
         return write.write_rust_dict(static_dict, output_file)
+
+@dataclass
+class EncoderVariant:
+    dict: DictVariant
+    type: Literal['map', 'token']
+    transport: Literal['utf8', 'bin']
+
+    def __str__(self):
+        return f'{self.dict}_{self.transport}_{self.type}'

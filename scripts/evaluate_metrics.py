@@ -5,6 +5,7 @@ from collections import defaultdict
 import statistics
 
 from dict_generator import dataset, alphabet
+from dict_generator.alphabet.types import UnrestrictedAlphabet
 from eval import encode, decode
 
 UNIPRESS_BINARY = Path(__file__).parent.parent / 'rust/target/release/unipress'
@@ -20,14 +21,14 @@ if __name__ == '__main__':
   examples = defaultdict(str)
 
   for ds, alph in combinations:
-    if ds['lang'] != alph['lang'] and alph['lang'] != 'all':
+    if ds.lang != alph.lang and not isinstance(alph, UnrestrictedAlphabet):
       continue
 
-    name = f"{ds['lang']}_{ds['name']}_{alph['name']}"
+    name = f"{ds}_{alph.name}"
     print(f"Evaluating {name}...")
 
     results[name] = []
-    for payload in tqdm(dataset.alphabet_filtered(ds['test'], alph['alphabet'])):
+    for payload in tqdm(ds.alphabet_filtered('test', alph)):
       stripped_payload = payload.strip()
 
       if name not in examples:
@@ -35,7 +36,8 @@ if __name__ == '__main__':
 
       encoding_result = encode(stripped_payload, 'adaptive')
       decoding_result = decode(encoding_result.encoded_payload, 'adaptive')
-      assert decoding_result.decoded_payload == stripped_payload, f"Roundtrip failed: {decoding_result.decoded_payload} != {stripped_payload}"
+      assert decoding_result.decoded_payload == stripped_payload, \
+        f"Roundtrip failed: {decoding_result.decoded_payload} != {stripped_payload}"
       
       results[name].append(encoding_result)
 
