@@ -106,10 +106,10 @@ cd rust && cargo test --release
 - `adaptive` (default, recommended) - tries all the algorithms and chooses the best one based on the size of the encoded string. Costs one extra utf-8 character to mark which algorithm was used
 - encoder variation parameters:
     - `map` vs `token`
-        - `map` encoders simply map unicode characters one-to-one. This may compress data, if payload contains multi-byte characters and they are mapped to ASCII range. Not the best choice, but a decent fallback.
-        - `token` encoders encode chunks of characters (tokens) instead of individual characters similar to LLM tokenization algorithms, but simpler
+        - `map` encoders simply map unicode characters one-to-one. This may compress data if payload contains mostly multi-byte characters. Not the best choice, but a decent fallback.
+        - `token` encoders encode chunks of characters (tokens) instead of individual characters. Similar to LLM tokenization algorithms, but simpler
     - transport: `bin` vs `utf8`
-        - `bin` encoders pack data into binary n-bit tokens, then encode binary data into base91
+        - `bin` encoders pack data into binary n-bit tokens, then encode binary data into base91. This process saves space by sub-byte packing but then inflates when passed through base91 encoding.
         - `utf8` encoders encode data straight into utf-8 characters
     - alphabet: each encoder has an optional alphabet, which limits the set of characters that can be encoded
     - dataset: each `token` encoder is trained on a specific dataset
