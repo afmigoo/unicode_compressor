@@ -1,10 +1,7 @@
 # CLI build and tests
-FROM rust:1.95.0-alpine3.22 AS cli-builder
+FROM rust:1.95.0-alpine3.22 AS cli-tester
 WORKDIR /app/rust
 COPY ./rust/ ./
-RUN cargo check --release && cargo build --release
-
-FROM cli-builder AS cli-tester
 RUN cargo test --release
 
 
