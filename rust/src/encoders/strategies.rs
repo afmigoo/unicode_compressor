@@ -15,7 +15,7 @@ use super::errors::Error;
 /// 2. Finds longest match in `token2encoded` map that starts at index `i`
 /// 3. Pushes the matched token to the encoded string, advances `i` to the end of the matched token.
 /// 4. Go to step 2.
-pub fn first_match(
+pub fn first_match_utf(
     payload: &str, 
     token2encoded: &Map<&'static str, &'static str>, 
     token_max_chars: usize
@@ -46,6 +46,14 @@ pub fn first_match(
     Ok(encoded)
 }
 
+// pub fn first_match_bin(
+//     payload: &str, 
+//     token2encoded: &Map<&'static str, &'static str>, 
+//     token_max_chars: usize
+// ) -> Result<String, Error> {
+
+// }
+
 /// Longest match tokenization encoding algorithm
 /// ### Parameters
 /// - `payload` - the string to encode
@@ -54,7 +62,7 @@ pub fn first_match(
 /// ### Algorithm
 /// 1. Finds largest token in the whole payload string
 /// 2. Repeats step 1. for the remaining parts of the payload string until the whole payload is encoded.
-pub fn longest_match(payload: &str, token2encoded: &Map<&'static str, &'static str>, token_max_chars: usize) -> Result<String, Error> {
+pub fn longest_match_utf(payload: &str, token2encoded: &Map<&'static str, &'static str>, token_max_chars: usize) -> Result<String, Error> {
     let mut encoded = String::new();
     if payload.len() == 0 {
         return Ok(encoded);

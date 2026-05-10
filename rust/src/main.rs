@@ -35,18 +35,18 @@ fn main() -> Result<(), Error> {
   }
 
   let payload = read_to_string(stdin()).expect("Failed to read payload string");
-  let payload = payload.trim();
+  // let payload = payload.trim();
   let options = EncodeOptions { tokenization_strategy: args.tokenization_strategy.clone() };
 
   let processed_payload = if args.decode {
-    decode(payload, &args.encoder)
+    decode(&payload, &args.encoder)
   } else {
-    encode(payload, &args.encoder, &options)
+    encode(&payload, &args.encoder, &options)
   };
   
   match processed_payload {
     Ok(processed_payload) => { 
-      println!("{}", processed_payload);
+      print!("{}", processed_payload);
       return Ok(());
     }
     Err(e) => { 

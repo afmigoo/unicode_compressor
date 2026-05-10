@@ -1,39 +1,36 @@
 from dataclasses import dataclass
-from typing import Literal
+from typing import Literal, Optional
 from pathlib import Path
 
-from .rustgen import render
+from .rustgen import write
+from .trainer import train_bpe_dict
+from .alphabet.types import AlphabetVariant
+from .dataset import Dataset
 
 @dataclass
-class EncoderVariant:
-    lang: str
-    alphabet: list[str]
-    alphabet_name: str
-    token_type: Literal['bin', 'utf8']
-    
+class DictVariant:
+    alphabet: AlphabetVariant
+
+    def __str__(self):
+        return f'{self.alphabet}'
+
     def render(self, output_file: Path | str):
         raise NotImplementedError
 
 @dataclass
-class MapEncoderVariant(EncoderVariant):
-    def __str__(self):
-        return f'{self.lang}_{self.alphabet_name}_{self.token_type}_map'
-    
+class MapDictVariant(DictVariant):  
     def render(self, output_file: Path | str):
-        return render.render_map_dict(output_file, self.alphabet, self.token_type)
+        static_dict = {ch: i + 1 for i, ch in enumerate(self.alphabet.alphabet)}
+        return write.write_rust_dict(static_dict, output_file)
 
 @dataclass
-class TokenEncoderVariant(EncoderVariant):
-    dataset: Path | str
+class TokenDictVariant(DictVariant):
     vocab_size: int
-
-    def render(self, output_file: Path | str):
-        return render.render_bpe_dict(
-            output_file, self.dataset, 
-            self.alphabet, self.vocab_size, 
-            self.token_type)
+    dataset: Dataset
 
     def __str__(self):
-        ds_name = Path(self.dataset).stem
-        ds_name = ds_name.removesuffix('_train')
-        return f'{ds_name}_{self.alphabet_name}_{self.vocab_size}_{self.token_type}_tkn'
+        return f'{self.alphabet}_{self.dataset.name}_{self.vocab_size}'    
+
+    def render(self, output_file: Path | str):
+        static_dict = train_bpe_dict(self.dataset, self.alphabet, self.vocab_size)
+        return write.write_rust_dict(static_dict, output_file)

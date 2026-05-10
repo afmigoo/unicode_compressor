@@ -1,0 +1,8 @@
+[package]
+name = "rust_test"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bitvec = "1"
+base91 = "0.1.0"

@@ -2,6 +2,7 @@ use crate::options::EncodeOptions;
 
 mod shared;
 mod strategies;
+mod packing;
 
 pub mod errors; use errors::Error;
 pub mod types; use types::Encoder;

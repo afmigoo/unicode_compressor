@@ -1,17 +1,38 @@
 import itertools
 from typing import Literal
 
-from .types import EncoderVariant, MapEncoderVariant, TokenEncoderVariant
+from .types import DictVariant, MapDictVariant, TokenDictVariant
 from .dataset import DATASETS
 from .alphabet import ALPHABETS
+from .alphabet.types import UnrestrictedAlphabet
+
+def get_dict_variants() -> list[DictVariant]:
+    options = []
+    
+    vocab_sizes = [64]
+    token_dict_options = itertools.product(ALPHABETS, DATASETS, vocab_sizes)
+
+    for alph in ALPHABETS:
+        options.append(MapDictVariant(
+            alphabet=alph,
+        ))
+
+    for (alph, ds, vocab_size) in token_dict_options:
+        options.append(TokenDictVariant(
+            alphabet=alph,
+            vocab_size=vocab_size,
+            dataset=ds,
+        ))
+    
+    return options
 
 def get_encoder_variants(split: Literal['train', 'test']) -> list[EncoderVariant]:
     options = []
     
     alphabets = ALPHABETS
     datasets = DATASETS
-    vocab_sizes = [1914]
-    token_types = ['utf8']
+    vocab_sizes = [64]
+    token_types = ['bin']
 
     map_options = itertools.product(alphabets, token_types)
     for (alph, token_type) in map_options:

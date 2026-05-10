@@ -13,31 +13,24 @@ def rust_str_lit(s: str, quoted: bool = True) -> str:
   )
   return f"\"{escaped}\"" if quoted else escaped
 
-def write_rust_struct(
-  tokens: dict, file: str | Path, 
-  encoded_type: Literal['bin', 'utf8'], 
-  encoder_type: Literal['map', 'token'],
+def write_rust_dict(
+  tokens: dict,
+  file: str | Path, 
 ):
   token_max_chars = max(len(tkn) for tkn in tokens.keys())
-  is_quoted = encoded_type == 'utf8'
-  rust_type = {'bin': 'u16', 'utf8': 'str'}[encoded_type]
-  type_suffix = {'bin': 'u16', 'utf8': ''}[encoded_type]
-  encoder_type = {'map': 'MapEncoder', 'token': 'TokenEncoder'}[encoder_type]
 
   token2encoded = {
-    rust_str_lit(k, is_quoted): f"{rust_str_lit(v, is_quoted)}{type_suffix}" 
+    rust_str_lit(str(k), True): rust_str_lit(str(v), False)
     for k, v in tokens.items()
   }
   
   with open(file, 'w', encoding='utf-8') as f:
     template = Template(
-      open(Path(__file__).parent / 'encoder.j2', 'r', encoding='utf-8').read(),
+      open(Path(__file__).parent / 'dict.j2', 'r', encoding='utf-8').read(),
       trim_blocks=True,
       lstrip_blocks=True,
     )
     f.write(template.render(
       token2encoded=token2encoded, 
-      encoded_type=rust_type,
-      encoder_struct=encoder_type, 
       token_max_chars=token_max_chars
     ))

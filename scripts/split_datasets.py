@@ -6,6 +6,12 @@ if __name__ == '__main__':
     Path('corpus/ru_wiki.jsonl'),
     Path('corpus/en_wiki.jsonl'),
     Path('corpus/ru_meshcoretel.jsonl'),
+    Path('corpus/arduino.jsonl'),
+    Path('corpus/c.jsonl'),
+    Path('corpus/clojure.jsonl'),
+    Path('corpus/go.jsonl'),
+    Path('corpus/python.jsonl'),
+    Path('corpus/rust.jsonl'),
   ]
 
   for f in datasets:

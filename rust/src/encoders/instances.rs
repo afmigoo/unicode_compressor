@@ -2,6 +2,9 @@ use super::types::{Encoder, EchoEncoder, AdaptiveEncoder};
 
 mod en_128_utf8_map;
 mod ru_128_utf8_map;
+
+mod ru_32_bin_map;
+
 mod en_wiki_128_1914_utf8_tkn;
 mod en_wiki_all_1914_utf8_tkn;
 mod ru_wiki_128_1914_utf8_tkn;
@@ -37,4 +40,5 @@ pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
   ("ru_wiki_all_1914_utf8_tkn", &ru_wiki_all_1914_utf8_tkn::ENCODER),
   ("ru_meshcoretel_128_1914_utf8_tkn", &ru_meshcoretel_128_1914_utf8_tkn::ENCODER),
   ("ru_meshcoretel_all_1914_utf8_tkn", &ru_meshcoretel_all_1914_utf8_tkn::ENCODER),
+  ("ru_32_bin_map", &ru_32_bin_map::ENCODER),
 ];
