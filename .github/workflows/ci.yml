@@ -1,4 +1,4 @@
-name: Docker
+name: CI
 
 on:
   push:
@@ -81,7 +81,38 @@ jobs:
           asset_name: unipress-${{ matrix.rust-target }}
           tag: ${{ github.ref }}
           overwrite: true
-          body: "Unipress CLI binary (${{ matrix.rust-target }})"
+          body: "Unipress CLI"
+
+  build-cli-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Rust (MSVC target)
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Run tests
+        run: cargo test --release --target x86_64-pc-windows-msvc
+        working-directory: rust
+
+      - name: Build release binary
+        run: cargo build --release --target x86_64-pc-windows-msvc
+        working-directory: rust
+
+      - name: Upload CLI binary to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: rust/target/x86_64-pc-windows-msvc/release/unipress.exe
+          asset_name: unipress-x86_64-pc-windows-msvc.exe
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Unipress CLI"
 
   build-wasm-image:
     needs: build-cli
