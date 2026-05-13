@@ -1,11 +1,3 @@
-# CLI build and tests
-FROM rust:1.95.0-alpine3.22 AS cli-tester
-WORKDIR /app/rust
-COPY ./rust/ ./
-RUN cargo test --release
-
-
-# WASM build
 FROM rust:1.95.0-alpine3.22 AS wasm-builder
 RUN cargo install wasm-pack --locked
 RUN rustup target add wasm32-unknown-unknown

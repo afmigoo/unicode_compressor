@@ -8,4 +8,4 @@ env/
 
 scripts/corpus/raw/coding
 scripts/corpus/processed/coding
-target/
+rust/target/
