@@ -1,8 +1,8 @@
 FROM rust:1.95.0-alpine3.22 AS cli-build
 ARG RUST_TARGET=x86_64-unknown-linux-musl
 WORKDIR /app/rust
-COPY ./rust/ ./
 RUN rustup target add "${RUST_TARGET}"
+COPY ./rust/ ./
 RUN cargo build --release --target "${RUST_TARGET}"
 
 FROM cli-build AS cli-tester
