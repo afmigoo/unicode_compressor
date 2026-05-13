@@ -122,7 +122,7 @@ jobs:
           ref='${{ needs.build.outputs.image_ref }}'
           docker pull "$ref"
           cid="$(docker create "$ref")"
-          docker cp "$cid":/usr/share/nginx/html ./public
+          docker cp "$cid":/usr/share/nginx/html ./static
           docker rm "$cid"
 
       - name: Setup Pages
@@ -131,7 +131,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./static
 
       - name: Deploy to GitHub Pages
         id: deployment
