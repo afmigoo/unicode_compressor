@@ -63,3 +63,24 @@ fn roundtrip_encoder_random_payloads() {
 
     }
 }
+
+#[test]
+fn hardcoded_roundtrip() {
+    let payload_pairs = [
+        ("Hello, world!", "4IՒ߰ӄme#"),
+        ("Привет, мир!", "Rɼµɡ~#"),
+        ("abcdefghijklmnopqrstuvwxyz", "+riTHZu):7lnFJ,)f9Ql;A"),
+        ("wikipedia is an educational portal", "^ÏP̊Ԉ؆Ǐμp"),
+        ("0123456789", "!0123456789"),
+    ];
+
+    for (payload_target, encoded_target) in payload_pairs {
+        let options = EncodeOptions {
+            tokenization_strategy: TokenizationStrategy::FirstMatch,
+        };
+        let encoded = instances::ADAPTIVE_ENCODER.encode(payload_target, &options).unwrap();
+        assert_eq!(encoded, encoded_target);
+        let decoded = instances::ADAPTIVE_ENCODER.decode(&encoded_target).unwrap();
+        assert_eq!(decoded, payload_target);
+    }
+}
