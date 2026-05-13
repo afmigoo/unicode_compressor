@@ -19,7 +19,6 @@ jobs:
   build-cli:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       contents: write
     steps:
       - name: Checkout repository
