@@ -43,8 +43,9 @@ fn main() -> Result<(), Error> {
     return Ok(());
   }
 
-  let payload = read_to_string(stdin()).expect("Failed to read payload string");
-  // let payload = payload.trim();
+  let payload = read_to_string(stdin())
+    .expect("Failed to read payload string")
+    .replace("\r\n", "\n"); // Replace Windows CRLF with Unix LF
   let options = EncodeOptions { tokenization_strategy: args.tokenization_strategy.clone() };
 
   let processed_payload = if args.decode {
