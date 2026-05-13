@@ -28,7 +28,8 @@ jobs:
         run: |
           docker build -f docker/cli.Dockerfile \
             --target cli-tester \
-            --tag cli-tester
+            --tag cli-tester \
+            .
 
       - name: Run tests
         run: |
@@ -38,7 +39,8 @@ jobs:
         run: |
           docker build -f docker/cli.Dockerfile \
             --target cli-binary \
-            --output type=local,dest=./cli .
+            --output type=local,dest=./cli \
+            .
 
       - name: Upload CLI binary to release
         uses: svenstaro/upload-release-action@v2
