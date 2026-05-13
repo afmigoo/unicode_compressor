@@ -132,7 +132,7 @@ jobs:
       - name: Pull image and extract nginx document root
         run: |
           set -eux
-          ref='${{ needs.build.outputs.image_ref }}'
+          ref='${{ needs.build-wasm-image.outputs.image_ref }}'
           docker pull "$ref"
           cid="$(docker create "$ref")"
           docker cp "$cid":/usr/share/nginx/html ./static
