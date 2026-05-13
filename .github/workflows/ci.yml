@@ -26,7 +26,9 @@ jobs:
 
       - name: Build tests image
         run: |
-          docker build -f docker/cli.Dockerfile \
+          docker buildx build -f docker/cli.Dockerfile \
+            --cache-from type=gha \
+            --cache-to type=gha,mode=max \
             --target cli-tester \
             --tag cli-tester \
             .
@@ -37,7 +39,9 @@ jobs:
 
       - name: Build binary
         run: |
-          docker build -f docker/cli.Dockerfile \
+          docker buildx build -f docker/cli.Dockerfile \
+            --cache-from type=gha \
+            --cache-to type=gha,mode=max \
             --target cli-binary \
             --output type=local,dest=./cli \
             .
