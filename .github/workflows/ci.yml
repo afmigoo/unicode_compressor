@@ -35,6 +35,7 @@ jobs:
             --cache-to type=gha,mode=max,scope=cli \
             --target cli-tester \
             --tag cli-tester \
+            --load \
             .
 
       - name: Run tests
