@@ -17,40 +17,71 @@ env:
 
 jobs:
   build-cli:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - docker-platform: linux/amd64
+            rust-target: x86_64-unknown-linux-musl
+          - docker-platform: linux/arm64
+            rust-target: aarch64-unknown-linux-musl
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
+    env:
+      CLI_CACHE_SCOPE: cli-${{ matrix.rust-target }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Build tests image
-        run: |
-          docker build -f docker/cli.Dockerfile \
-            --target cli-tester \
-            --tag cli-tester \
-            .
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4.0.0
+
+      - name: Build tests image (with GHA cache)
+        uses: docker/build-push-action@v7.1.0
+        with:
+          context: .
+          file: docker/cli.Dockerfile
+          target: cli-tester
+          platforms: ${{ matrix.docker-platform }}
+          build-args: |
+            RUST_TARGET=${{ matrix.rust-target }}
+          tags: cli-tester:latest
+          load: true
+          push: false
+          cache-from: type=gha,scope=${{ env.CLI_CACHE_SCOPE }}
+          cache-to: type=gha,mode=max,scope=${{ env.CLI_CACHE_SCOPE }}
 
       - name: Run tests
-        run: |
-          docker run --rm cli-tester
+        run: docker run --rm --platform ${{ matrix.docker-platform }} cli-tester:latest
 
-      - name: Build binary
-        run: |
-          docker build -f docker/cli.Dockerfile \
-            --target cli-binary \
-            --output type=local,dest=./cli \
-            .
+      - name: Export CLI binary (reuse cache)
+        uses: docker/build-push-action@v7.1.0
+        with:
+          context: .
+          file: docker/cli.Dockerfile
+          target: cli-binary
+          platforms: ${{ matrix.docker-platform }}
+          build-args: |
+            RUST_TARGET=${{ matrix.rust-target }}
+          outputs: type=local,dest=./cli
+          push: false
+          cache-from: type=gha,scope=${{ env.CLI_CACHE_SCOPE }}
+          cache-to: type=gha,mode=max,scope=${{ env.CLI_CACHE_SCOPE }}
 
       - name: Upload CLI binary to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: cli/unipress
-          asset_name: unipress
+          asset_name: unipress-${{ matrix.rust-target }}
           tag: ${{ github.ref }}
           overwrite: true
-          body: "Unipress CLI binary"
+          body: "Unipress CLI binary (${{ matrix.rust-target }})"
 
   build-wasm-image:
     needs: build-cli
