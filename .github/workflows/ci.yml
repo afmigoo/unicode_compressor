@@ -20,15 +20,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4.0.0
+
       - name: Build tests image
         run: |
           docker buildx build -f docker/cli.Dockerfile \
-            --cache-from type=gha \
-            --cache-to type=gha,mode=max \
+            --cache-from type=gha,scope=cli \
+            --cache-to type=gha,mode=max,scope=cli \
             --target cli-tester \
             --tag cli-tester \
             .
@@ -40,8 +44,8 @@ jobs:
       - name: Build binary
         run: |
           docker buildx build -f docker/cli.Dockerfile \
-            --cache-from type=gha \
-            --cache-to type=gha,mode=max \
+            --cache-from type=gha,scope=cli \
+            --cache-to type=gha,mode=max,scope=cli \
             --target cli-binary \
             --output type=local,dest=./cli \
             .
@@ -65,6 +69,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
+      actions: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -99,8 +104,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=wasm
+          cache-to: type=gha,mode=max,scope=wasm
 
       - name: Export image ref for Pages deploy
         id: image-ref
