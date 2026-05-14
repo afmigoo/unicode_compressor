@@ -50,9 +50,8 @@ fn roundtrip_encoder_random_payloads() {
         }
 
         let alphabet = encoder.get_alphabet();
-        let lengths = (0..20)
-          .chain(45..55)
-          .chain([100, 1000, 10000].into_iter());
+        let lengths = (0..100)
+          .chain([1_000, 10_000, 100_000].into_iter());
 
         for payload_size in lengths {
           let payload = String::from_iter(alphabet.chars().sample(&mut rng, payload_size));
