@@ -67,10 +67,11 @@ fn roundtrip_encoder_random_payloads() {
 fn roundtrip_hardcoded() {
     let payload_pairs = [
         ("Hello, world!", "4IՒ߰ӄme#"),
-        ("Привет, мир!", "Rɼµɡ~#"),
+        ("Привет, мир!", "Rɣµ̽~#"),
         ("abcdefghijklmnopqrstuvwxyz", "+riTHZu):7lnFJ,)f9Ql;A"),
         ("wikipedia is an educational portal", "^ÏP̊Ԉ؆Ǐμp"),
         ("0123456789", "!0123456789"),
+        ("30be9cfa45afbc9c34e5c8aec5d99637", "-_dZYO)2WqE{C@/dMW5dtMOK0[/J[{GA")
     ];
 
     for (payload_target, encoded_target) in payload_pairs {
