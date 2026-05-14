@@ -16,7 +16,7 @@ This is a tool that allows you to compress utf-8 strings into utf-8 strings usin
 
 It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 payload.
 
-Try it out at https://zip.cyanshark.org/
+Try it out at https://afmigoo.github.io/unicode_compressor/
 
 ## Metrics
 
