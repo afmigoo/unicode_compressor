@@ -10,6 +10,9 @@ use unipress::options::{EncodeOptions, TokenizationStrategy};
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
+    /// Payload to process. If not provided, stdin is used.
+    #[arg(required = false)]
+    payload: Option<String>,
     /// Decode the payload, by default encode is assumed
     #[arg(short, long, default_value_t = false)]
     decode: bool,
@@ -43,9 +46,14 @@ fn main() -> Result<(), Error> {
     return Ok(());
   }
 
-  let payload = read_to_string(stdin())
-    .expect("Failed to read payload string")
-    .replace("\r\n", "\n"); // Replace Windows CRLF with Unix LF
+  let payload = match args.payload {
+    Some(payload) => payload,
+    None => {
+      read_to_string(stdin())
+        .expect("Failed to read payload string")
+        .replace("\r\n", "\n") // Replace Windows CRLF with Unix LF
+    }
+  };
   let options = EncodeOptions { tokenization_strategy: args.tokenization_strategy.clone() };
 
   let processed_payload = if args.decode {

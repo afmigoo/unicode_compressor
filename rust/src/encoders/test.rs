@@ -65,7 +65,7 @@ fn roundtrip_encoder_random_payloads() {
 }
 
 #[test]
-fn hardcoded_roundtrip() {
+fn roundtrip_hardcoded() {
     let payload_pairs = [
         ("Hello, world!", "4IՒ߰ӄme#"),
         ("Привет, мир!", "Rɼµɡ~#"),
