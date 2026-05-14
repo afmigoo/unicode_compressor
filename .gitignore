@@ -9,3 +9,4 @@ env/
 scripts/corpus/raw/coding
 scripts/corpus/processed/coding
 rust/target/
+metrics.txt
