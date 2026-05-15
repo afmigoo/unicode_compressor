@@ -21,5 +21,10 @@ RU_128 += ' \n'
 RU_128 += '0123456789'
 RU_128 += punctuation
 RU_128 = list(RU_128)
-assert len(RU_128) <= 128, f"Expected <=128, got {len(RU_128)}"
+assert len(RU_128) <= 127, f"Expected <=127, got {len(RU_128)}"
 assert len(set(RU_128)) == len(RU_128), f"Expected unique"
+
+RU_256 = RU_128
+RU_256 += list('abcdefghijklmnopqrstuvwxyz')
+RU_256 += list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+assert len(RU_256) <= 255, f"Expected <=255, got {len(RU_256)}"
