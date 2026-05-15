@@ -12,16 +12,20 @@
 
 ## Description
 
-This is a tool that allows you to compress utf-8 strings into utf-8 strings using static dicttionaries compression algorithms. It is implemented in Rust and is available as a CLI tool and a web application powered by WASM.
+Unicode-to-unicode compression built around **various pre-built static dictionaries**, not one universal model. Each dictionary (its alphabet, tokens) is baked into the binary at compilation time.
 
-It was motivated by meshtastic/meshcore having tiny bytes limit for the utf-8 payload.
+At runtime the default **adaptive** encoder evaluates every variant that can handle the input and **keeps the shortest encoded string**, prefixing one Unicode character so the decoder knows which table was used—paying a tiny fixed overhead for the freedom to pick among N static layouts. In the worst-case scenario, when no variant produced a net-positive compression, encoded payload will have a 1 byte overhead.
+
+Implemented in Rust (CLI + WASM web demo). Motivated by tight UTF-8 payload limits on meshtastic/meshcore.
+
+**UTF-8 transport** was intentionally picked over binary: compressed output is meant to be **ordinary text** you can paste into chat, forums, or any UTF-8 channel without binary-safe tooling.
 
 Try it out at https://afmigoo.github.io/unicode_compressor/
 
 ## Metrics
 
 > - Compression=`0.6` means payload size was reduced by 60%
-> - Name format: `<lang>_<dataset>_<alphabet>`; so `en_wiki_punct_64` means English Wikipedia dataset with `punct_64`. alphabet
+> - Name format: `<lang>_<dataset>_<alphabet>`; so `en_wiki_punct_64` means English Wikipedia dataset with `punct_64`.
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
