@@ -6,11 +6,13 @@ from .dataset import DATASETS
 from .alphabet import ALPHABETS
 from .alphabet.types import UnrestrictedAlphabet
 
+VOCAB_SIZES = [64, 512, 2048]
+MAX_VOCAB_SIZE = VOCAB_SIZES[-1]
+
 def get_dict_variants() -> list[DictVariant]:
     options = []
     
-    vocab_sizes = [64, 2048]
-    token_dict_options = itertools.product(ALPHABETS, DATASETS, vocab_sizes)
+    token_dict_options = itertools.product(DATASETS, ALPHABETS, VOCAB_SIZES)
 
     for alph in ALPHABETS:
         if isinstance(alph, UnrestrictedAlphabet):
@@ -19,14 +21,11 @@ def get_dict_variants() -> list[DictVariant]:
             alphabet=alph,
         ))
 
-    for (alph, ds, vocab_size) in token_dict_options:
+    for (ds, alph, vocab_size) in token_dict_options:
+        # leaving variants with only matching language on dataset and alphabet
         if alph.lang != ds.lang and not isinstance(alph, UnrestrictedAlphabet):
             continue
-        if isinstance(alph, UnrestrictedAlphabet):
-            if vocab_size < 2000:
-                print(f'Skipping {alph} {ds} {vocab_size} because it has less than 2000 tokens')
-                continue
-        elif len(alph.alphabet) > vocab_size:
+        if not isinstance(alph, UnrestrictedAlphabet) and len(alph.alphabet) > vocab_size:
             print(f'Skipping {alph} {ds} {vocab_size}, alphabet is bigger than the vocabulary size ({len(alph.alphabet)} > {vocab_size})')
             continue
         options.append(TokenDictVariant(
@@ -43,14 +42,20 @@ def get_encoder_variants() -> list[EncoderVariant]:
     encoder_types = ['map', 'token']
     transports = ['utf8', 'bin']
 
-    allower_types ={
+    allowed_types ={
         'map': MapDictVariant,
         'token': TokenDictVariant,
     }
 
     encoder_variants = itertools.product(dict_variants, encoder_types, transports)
     for (dict_variant, encoder_type, transport) in encoder_variants:
-        if not isinstance(dict_variant, allower_types[encoder_type]):
+        if not isinstance(dict_variant, allowed_types[encoder_type]):
+            continue
+        # for token encoders with utf8 transport leaving only max sized variants
+        if isinstance(dict_variant, TokenDictVariant) and transport == 'utf8' and dict_variant.vocab_size < MAX_VOCAB_SIZE:
+            continue
+        # for map encoders leaving only binary transport
+        if isinstance(dict_variant, MapDictVariant) and transport != 'bin':
             continue
         options.append(EncoderVariant(
             dict=dict_variant,

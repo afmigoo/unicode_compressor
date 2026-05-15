@@ -43,7 +43,7 @@ def write_rust_encoders(
 ):
   with open(file, 'w', encoding='utf-8') as f:
     template = Template(
-      open(Path(__file__).parent / 'encoder.j2', 'r', encoding='utf-8').read(),
+      open(Path(__file__).parent / 'instances.j2', 'r', encoding='utf-8').read(),
       trim_blocks=True,
       lstrip_blocks=True,
     )

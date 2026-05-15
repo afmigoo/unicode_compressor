@@ -23,4 +23,4 @@ if __name__ == '__main__':
     #     f"Some letters are not in the min letters: {missing_min_letters}"
 
     print("missing_min_letters:", missing_min_letters)
-    print(top_letters)
+    print(sorted(top_letters))

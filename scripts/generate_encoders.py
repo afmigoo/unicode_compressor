@@ -30,4 +30,6 @@ if __name__ == '__main__':
         'transport': compile_transport(enc),
     } for enc in encoder_variants]
 
-    write.write_rust_encoders(encoders, output_file, adaptive_chars=get_printable_utf8(1)[1:])
+    adaptive_chars = get_printable_utf8(1)[1:]
+
+    write.write_rust_encoders(encoders, output_file, adaptive_chars=adaptive_chars)
