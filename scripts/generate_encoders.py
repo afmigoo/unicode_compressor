@@ -29,6 +29,7 @@ if __name__ == '__main__':
         'struct': f'{enc.type.capitalize()}Encoder',
         'transport': compile_transport(enc),
     } for enc in encoder_variants]
+    encoders.sort(key=lambda x: x['name'])
 
     adaptive_chars = get_printable_utf8(1)[1:]
 

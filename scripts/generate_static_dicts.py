@@ -3,7 +3,7 @@ from pathlib import Path
 
 from dict_generator import write
 from dict_generator.types import DictVariant
-from dict_generator.variants import get_dict_variants, MAX_VOCAB_SIZE
+from dict_generator.variants import get_dict_variants, VOCAB_SIZE
 from dict_generator import get_printable_utf8
 
 _REPO_ROOT = Path(__file__).parent.parent
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     #### int2utf dicts ####
     usable_chars = get_printable_utf8(1) + get_printable_utf8(2) + get_printable_utf8(3)
-    usable_chars = usable_chars[:MAX_VOCAB_SIZE]
+    usable_chars = usable_chars[:VOCAB_SIZE]
     char2int = {ch: i + 1 for i, ch in enumerate(usable_chars)}
     output_file = output_dir / 'plain_map.rs'
     print(f"Generating int2utf...")

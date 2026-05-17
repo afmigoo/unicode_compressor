@@ -4,6 +4,7 @@ use std::collections::LinkedList;
 use std::iter::once;
 
 use super::errors::Error;
+use super::shared::inventory_str2int_get;
 
 /// First match tokenization encoding algorithm
 /// ### Parameters
@@ -17,7 +18,7 @@ use super::errors::Error;
 /// 4. Go to step 2.
 pub fn first_match_utf(
     payload: &str, 
-    token2int: &Map<&'static str, u16>, 
+    token2int: &[&Map<&'static str, u16>],
     token_max_chars: usize
 ) -> Result<Vec<u16>, Error> {
     let mut encoded = Vec::new();
@@ -30,8 +31,8 @@ pub fn first_match_utf(
         let max_j = min(i+max_window, payload_chars.len());
         for j in (i+1..max_j+1).rev() {
             let slice: String = payload_chars[i..j].iter().collect();
-            if let Some(num) = token2int.get(&slice) {
-                encoded.push(*num);
+            if let Some(num) = inventory_str2int_get(&slice, token2int) {
+                encoded.push(num);
                 matched_end = Some(j);
                 break;
             }
@@ -64,7 +65,7 @@ pub fn first_match_utf(
 /// 2. Repeats step 1. for the remaining parts of the payload string until the whole payload is encoded.
 pub fn longest_match_utf(
     payload: &str, 
-    token2int: &Map<&'static str, u16>, 
+    token2int: &[&Map<&'static str, u16>],
     token_max_chars: usize
 ) -> Result<Vec<u16>, Error> {
     let mut encoded = Vec::new();
@@ -134,7 +135,7 @@ struct Region {
 fn subregion(
     payload: &str,
     payload_char_idx: &Vec<usize>,
-    token2int: &Map<&'static str, u16>,
+    token2int: &[&Map<&'static str, u16>],
     i_bounds: (usize, usize),
     max_window: usize
 ) -> Result<Region, Error> {
@@ -143,11 +144,11 @@ fn subregion(
         // TODO: iterate only over existing sizes
         for i in i_bounds.0..i_bounds.1-(w_size-1) {
             let slice = &payload[payload_char_idx[i]..payload_char_idx[i+w_size]];
-            if let Some(num) = token2int.get(slice) {
+            if let Some(num) = inventory_str2int_get(slice, token2int) {
                 return Ok(Region {
                     bounds: i_bounds,
                     token_bounds: (i, i+w_size),
-                    resolved_num: *num,
+                    resolved_num: num,
                 });
             }
         }

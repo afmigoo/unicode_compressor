@@ -6,13 +6,12 @@ from .dataset import DATASETS
 from .alphabet import ALPHABETS
 from .alphabet.types import UnrestrictedAlphabet
 
-VOCAB_SIZES = [64, 512, 2048]
-MAX_VOCAB_SIZE = VOCAB_SIZES[-1]
+VOCAB_SIZE = 2048
 
 def get_dict_variants() -> list[DictVariant]:
     options = []
     
-    token_dict_options = itertools.product(DATASETS, ALPHABETS, VOCAB_SIZES)
+    token_dict_options = itertools.product(DATASETS, ALPHABETS)
 
     for alph in ALPHABETS:
         if isinstance(alph, UnrestrictedAlphabet):
@@ -21,16 +20,16 @@ def get_dict_variants() -> list[DictVariant]:
             alphabet=alph,
         ))
 
-    for (ds, alph, vocab_size) in token_dict_options:
+    for (ds, alph) in token_dict_options:
         # leaving variants with only matching language on dataset and alphabet
         if alph.lang != ds.lang and not isinstance(alph, UnrestrictedAlphabet):
             continue
-        if not isinstance(alph, UnrestrictedAlphabet) and len(alph.alphabet) > vocab_size:
-            print(f'Skipping {alph} {ds} {vocab_size}, alphabet is bigger than the vocabulary size ({len(alph.alphabet)} > {vocab_size})')
+        if not isinstance(alph, UnrestrictedAlphabet) and len(alph.alphabet) > VOCAB_SIZE:
+            print(f'Skipping {alph} {ds}, alphabet is bigger than the vocabulary size ({len(alph.alphabet)} > {VOCAB_SIZE})')
             continue
         options.append(TokenDictVariant(
             alphabet=alph,
-            vocab_size=vocab_size,
+            vocab_size=VOCAB_SIZE,
             dataset=ds,
         ))
     
@@ -52,7 +51,7 @@ def get_encoder_variants() -> list[EncoderVariant]:
         if not isinstance(dict_variant, allowed_types[encoder_type]):
             continue
         # for token encoders with utf8 transport leaving only max sized variants
-        if isinstance(dict_variant, TokenDictVariant) and transport == 'utf8' and dict_variant.vocab_size < MAX_VOCAB_SIZE:
+        if isinstance(dict_variant, TokenDictVariant) and transport == 'utf8' and dict_variant.vocab_size < VOCAB_SIZE:
             continue
         # for map encoders leaving only binary transport
         if isinstance(dict_variant, MapDictVariant) and transport != 'bin':
