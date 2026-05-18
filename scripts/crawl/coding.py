@@ -14,11 +14,11 @@ else:
 N = 100
 LANGUAGES = [
     "python",
-    # "go",
-    # "rust",
-    # "c",
-    # "clojure",
-    # "arduino",
+    "go",
+    "rust",
+    "c",
+    "clojure",
+    "arduino",
 ]
 output_dir = Path(__file__).parent.parent.parent / "corpus"
 output_dir.mkdir(parents=True, exist_ok=True)
@@ -44,7 +44,7 @@ for language in LANGUAGES:
     print(f"Crawling {language}")
     for split in ["train", "test"]:
         ds = crawl_language(language, split)
-        with open(output_dir / f"{language}_{split}.jsonl", "w", encoding="utf-8") as f:
+        with open(output_dir / f"coding_{split}.jsonl", "a", encoding="utf-8") as f:
             for i, row in enumerate(ds):
                 print(f"Crawling {language} {split}... [{i + 1}/{N}]")
                 if i >= N:

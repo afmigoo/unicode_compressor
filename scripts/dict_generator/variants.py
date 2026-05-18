@@ -6,7 +6,7 @@ from .dataset import DATASETS
 from .alphabet import ALPHABETS
 from .alphabet.types import UnrestrictedAlphabet
 
-VOCAB_SIZES = [64, 512, 2048]
+VOCAB_SIZES = [2048]
 MAX_VOCAB_SIZE = VOCAB_SIZES[-1]
 
 def get_dict_variants() -> list[DictVariant]:
