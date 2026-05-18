@@ -97,6 +97,30 @@ pub const RU_MESHCORETEL_256_2048_BIN_TOKEN: TokenEncoder = TokenEncoder {
   transport: Transport::BIN(11),
   token_max_chars: 16,
 };
+pub const EN_CODING_32_2048_UTF8_TOKEN: TokenEncoder = TokenEncoder {
+  token2int: &dictionaries::en_coding_32_2048::TOKEN2INT,
+  int2token: &dictionaries::en_coding_32_2048::INT2TOKEN,
+  transport: Transport::UTF8,
+  token_max_chars: 16,
+};
+pub const EN_CODING_32_2048_BIN_TOKEN: TokenEncoder = TokenEncoder {
+  token2int: &dictionaries::en_coding_32_2048::TOKEN2INT,
+  int2token: &dictionaries::en_coding_32_2048::INT2TOKEN,
+  transport: Transport::BIN(11),
+  token_max_chars: 16,
+};
+pub const EN_CODING_128_2048_UTF8_TOKEN: TokenEncoder = TokenEncoder {
+  token2int: &dictionaries::en_coding_128_2048::TOKEN2INT,
+  int2token: &dictionaries::en_coding_128_2048::INT2TOKEN,
+  transport: Transport::UTF8,
+  token_max_chars: 16,
+};
+pub const EN_CODING_128_2048_BIN_TOKEN: TokenEncoder = TokenEncoder {
+  token2int: &dictionaries::en_coding_128_2048::TOKEN2INT,
+  int2token: &dictionaries::en_coding_128_2048::INT2TOKEN,
+  transport: Transport::BIN(11),
+  token_max_chars: 16,
+};
 
 // Adaptive encoder
 pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
@@ -118,6 +142,10 @@ pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
     ('/', &RU_MESHCORETEL_32_2048_BIN_TOKEN),
     ('0', &RU_MESHCORETEL_256_2048_UTF8_TOKEN),
     ('1', &RU_MESHCORETEL_256_2048_BIN_TOKEN),
+    ('2', &EN_CODING_32_2048_UTF8_TOKEN),
+    ('3', &EN_CODING_32_2048_BIN_TOKEN),
+    ('4', &EN_CODING_128_2048_UTF8_TOKEN),
+    ('5', &EN_CODING_128_2048_BIN_TOKEN),
   ],
 };
 
@@ -139,4 +167,8 @@ pub const NAMED_ENCODERS: &[(&str, &dyn Encoder)] = &[
   ("ru_meshcoretel_32_2048_bin_token", &RU_MESHCORETEL_32_2048_BIN_TOKEN),
   ("ru_meshcoretel_256_2048_utf8_token", &RU_MESHCORETEL_256_2048_UTF8_TOKEN),
   ("ru_meshcoretel_256_2048_bin_token", &RU_MESHCORETEL_256_2048_BIN_TOKEN),
+  ("en_coding_32_2048_utf8_token", &EN_CODING_32_2048_UTF8_TOKEN),
+  ("en_coding_32_2048_bin_token", &EN_CODING_32_2048_BIN_TOKEN),
+  ("en_coding_128_2048_utf8_token", &EN_CODING_128_2048_UTF8_TOKEN),
+  ("en_coding_128_2048_bin_token", &EN_CODING_128_2048_BIN_TOKEN),
 ];

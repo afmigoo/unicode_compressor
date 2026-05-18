@@ -2,6 +2,7 @@ from pathlib import Path
 from tokenizers import Tokenizer
 from tokenizers.models import BPE
 from tokenizers.trainers import BpeTrainer
+from tokenizers.pre_tokenizers import FixedLength
 
 from dict_generator.dataset import Dataset
 from dict_generator.alphabet.types import AlphabetVariant
@@ -15,7 +16,7 @@ def train_bpe_dict(dataset: Dataset, alphabet: AlphabetVariant, vocab_size: int)
 
   trainer = BpeTrainer(
     vocab_size=vocab_size,
-    show_progress=False,
+    show_progress=True,
     max_token_length=16,
     initial_alphabet=initial_alphabet,
     special_tokens=[
@@ -23,6 +24,7 @@ def train_bpe_dict(dataset: Dataset, alphabet: AlphabetVariant, vocab_size: int)
     ]
   )
   tokenizer = Tokenizer(BPE())
+  tokenizer.pre_tokenizer = FixedLength(length=256)
 
   tokenizer.train_from_iterator(dataset.alphabet_filtered('train', alphabet), trainer)
   token2int = dict(sorted(tokenizer.get_vocab().items(), key=lambda item: item[1]))

@@ -29,13 +29,15 @@ Try it out at https://afmigoo.github.io/unicode_compressor/
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
-|ru_wiki_32|0.6919 / 0.7018 / 0.0675|0.0017|541.1162|1102|одна богатая и знатная дама госпожа шереметева утр...|
-|total|0.5602 / 0.6071 / 0.1754|0.0011|333.3216|6458||
-|ru_wiki_256|0.6051 / 0.6363 / 0.1381|0.0012|570.1422|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
-|en_wiki_32|0.4517 / 0.4633 / 0.1513|0.0016|362.2817|1104|gates started to publish articles on the macrofung...|
-|en_wiki_128|0.4112 / 0.4286 / 0.1243|0.0014|376.7407|1107|Gates started to publish articles on the macrofung...|
-|ru_meshcoretel_32|0.6622 / 0.6860 / 0.1372|0.0003|52.0407|1007|ну она долбит да|
-|ru_meshcoretel_256|0.5476 / 0.5938 / 0.2010|0.0004|55.5397|1034|ну она долбит, да :))|
+|ru_wiki_32|0.6924 / 0.7020 / 0.0672|0.0025|541.1162|1102|одна богатая и знатная дама госпожа шереметева утр...|
+|total|0.5581 / 0.6000 / 0.1747|0.0022|467.4670|6578||
+|ru_wiki_256|0.6050 / 0.6364 / 0.1378|0.0014|570.1422|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
+|en_wiki_32|0.4529 / 0.4656 / 0.1513|0.0024|362.2817|1104|gates started to publish articles on the macrofung...|
+|en_wiki_128|0.4120 / 0.4288 / 0.1232|0.0018|376.7407|1107|Gates started to publish articles on the macrofung...|
+|ru_meshcoretel_32|0.6620 / 0.6860 / 0.1372|0.0004|52.0407|1007|ну она долбит да|
+|ru_meshcoretel_256|0.5478 / 0.5938 / 0.2003|0.0005|55.5397|1034|ну она долбит, да :))|
+|en_coding_32|0.4920 / 0.5012 / 0.0651|0.0386|7040.9500|60|package modelsimport     iadedafeefbaeccbfbef gith...|
+|en_coding_128|0.3561 / 0.3676 / 0.0735|0.0424|8332.5000|60|package models
 
 ## Stack and acknowledgements
 

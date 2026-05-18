@@ -8,4 +8,6 @@ pub mod en_wiki_32_2048;
 pub mod en_wiki_128_2048;
 pub mod ru_meshcoretel_32_2048;
 pub mod ru_meshcoretel_256_2048;
+pub mod en_coding_32_2048;
+pub mod en_coding_128_2048;
 pub mod plain_map;

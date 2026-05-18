@@ -31,7 +31,7 @@ if __name__ == '__main__':
         pass
 
     #### utf-8 dicts ####
-    with Pool() as pool:
+    with Pool(processes=1) as pool:
         results = pool.map(generate_one_variant, dict_variants)
 
     mod_lines: list[str] = []

@@ -13,11 +13,11 @@ else:
 
 N = 100
 LANGUAGES = [
-    "python",
-    "go",
-    "rust",
-    "c",
-    "clojure",
+    # "python",
+    # "go",
+    # "rust",
+    # "c",
+    # "clojure",
     "arduino",
 ]
 output_dir = Path(__file__).parent.parent.parent / "corpus"
