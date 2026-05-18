@@ -29,11 +29,10 @@ class TokenDictVariant(DictVariant):
     dataset: Dataset
 
     def __str__(self):
-        return f'{self.dataset.lang}_{self.dataset.name}_{self.alphabet.name}'    
+        return f'{self.dataset.lang}_{self.dataset.name}_{self.alphabet.name}_{self.vocab_size}'    
 
     def render(self, output_file: Path | str):
         static_dict = train_bpe_dict(self.dataset, self.alphabet, self.vocab_size)
-
         return write.write_rust_dict(static_dict, output_file)
 
 @dataclass

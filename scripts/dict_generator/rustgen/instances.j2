@@ -7,8 +7,8 @@ pub const ECHO_ENCODER: EchoEncoder = EchoEncoder;
 
 {% for encoder in encoders %}
 pub const {{ encoder.name | upper }}: {{ encoder.struct }} = {{ encoder.struct }} {
-  token2int: dictionaries::{{ encoder.dict_name }}::TOKEN2INT,
-  int2token: dictionaries::{{ encoder.dict_name }}::INT2TOKEN,
+  token2int: &dictionaries::{{ encoder.dict_name }}::TOKEN2INT,
+  int2token: &dictionaries::{{ encoder.dict_name }}::INT2TOKEN,
   transport: Transport::{{ encoder.transport }},
   {% if encoder.struct == 'TokenEncoder' %}
   token_max_chars: {{ token_max_chars }},

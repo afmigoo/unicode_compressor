@@ -3,22 +3,14 @@ use phf::Map;
 
 use super::errors::Error;
 use super::shared;
+use super::strategies;
 use super::dictionaries::plain_map;
 
-use crate::options::{EncodeOptions};
+use crate::options::{EncodeOptions, TokenizationStrategy};
 
 pub enum Transport {
     UTF8,
     BIN(usize),
-}
-
-pub enum Str2IntDict<'a> {
-    Inventory(&'a [&'static Map<&'static str, u16>]),
-    Static(&'a Map<&'static str, u16>),
-}
-pub enum Int2StrDict<'a> {
-    Inventory(&'a [&'static Map<u16, &'static str>]),
-    Static(&'a Map<u16, &'static str>),
 }
 
 pub trait Encoder: Send + Sync {
@@ -29,19 +21,19 @@ pub trait Encoder: Send + Sync {
 }
 
 pub struct MapEncoder {
-    pub token2int: &'static [&'static Map<&'static str, u16>],
-    pub int2token: &'static [&'static Map<u16, &'static str>],
+    pub token2int: &'static Map<&'static str, u16>,
+    pub int2token: &'static Map<u16, &'static str>,
     pub transport: Transport,
 } impl Encoder for MapEncoder {
     fn encode(&self, payload: &str, _: &EncodeOptions) -> Result<String, Error> {
-        let ints = shared::remap_str2int(payload, &Str2IntDict::Inventory(self.token2int))?;
+        let ints = shared::remap_utf2int(payload, self.token2int)?;
         shared::encode(ints, &self.transport, &plain_map::INT2UTF)
     }
     fn decode(&self, payload: &str) -> Result<String, Error> {
-        shared::decode(payload, &self.transport, &plain_map::UTF2INT, self.int2token)
+        shared::decode(payload, &self.transport, &plain_map::UTF2INT, &self.int2token)
     }
     fn get_alphabet(&self) -> String {
-        shared::get_alphabet(self.token2int)
+        shared::get_alphabet(&self.token2int)
     }
     fn can_encode(&self, payload: &str) -> Result<(), Error> {
         shared::covered_by_alphabet(payload, self.token2int)
@@ -50,18 +42,21 @@ pub struct MapEncoder {
 
 
 pub struct TokenEncoder {
-    pub token2int: &'static [&'static Map<&'static str, u16>],
-    pub int2token: &'static [&'static Map<u16, &'static str>],
+    pub token2int: &'static Map<&'static str, u16>,
+    pub int2token: &'static Map<u16, &'static str>,
     pub transport: Transport,
     pub token_max_chars: u8,
 } impl Encoder for TokenEncoder {
     fn encode(&self, payload: &str, options: &EncodeOptions) -> Result<String, Error> {
-        let (ints, bits) = shared::best_bits_for_payload(payload, self.token2int, self.token_max_chars as usize, options.tokenization_strategy)?;
-        let transport = match self.transport {
-            Transport::UTF8 => Transport::UTF8,
-            Transport::BIN(_) => Transport::BIN(bits),
-        };
-        shared::encode(ints, &transport, &plain_map::INT2UTF)
+        let ints = match options.tokenization_strategy {
+            TokenizationStrategy::FirstMatch => strategies::first_match_utf(
+                &payload, self.token2int, self.token_max_chars as usize
+            ),
+            TokenizationStrategy::LongestMatch => strategies::longest_match_utf(&
+                &payload, self.token2int, self.token_max_chars as usize
+            ),
+        }?;
+        shared::encode(ints, &self.transport, &plain_map::INT2UTF)
     }
     fn decode(&self, payload: &str) -> Result<String, Error> {
         shared::decode(payload, &self.transport, &plain_map::UTF2INT, &self.int2token)
