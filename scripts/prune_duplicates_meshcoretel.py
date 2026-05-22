@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""
+Prunes duplicates from corpus/ru_meshcoretel.jsonl using hash of the text.
+
+usage: python3 scripts/prune_duplicates_meshcoretel.py
+"""
+
 from pathlib import Path
 import json
 

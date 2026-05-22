@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+"""
+Generate static dictionaries rust/src/encoders/dictionaries/*.rs
+
+A dictionary is generated for each configured combination of dataset, alphabet and vocabulary size.
+When deleting existing dictionaries, rust/src/encoders/dictionaries directory must be cleared manually.
+
+usage: python3 scripts/generate_static_dicts.py
+"""
+
 from multiprocessing import Pool
 from pathlib import Path
 
@@ -31,7 +41,7 @@ if __name__ == '__main__':
         pass
 
     #### utf-8 dicts ####
-    with Pool(processes=1) as pool:
+    with Pool() as pool:
         results = pool.map(generate_one_variant, dict_variants)
 
     mod_lines: list[str] = []

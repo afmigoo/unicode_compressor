@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+"""
+Splits datasets into train and test sets.
+
+The list of datasets is hardcoded in the script.
+
+usage: python3 scripts/split_datasets.py
+"""
+
 from pathlib import Path
 from datasets import load_dataset
 

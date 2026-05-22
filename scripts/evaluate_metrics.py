@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+"""
+Evaluate the compression metrics of the encoders.
+Writes metrics.txt file with the results.
+
+usage: python3 scripts/evaluate_metrics.py
+"""
+import argparse
+
 from pathlib import Path
 from typing import Counter
 from tqdm import tqdm
@@ -28,7 +37,6 @@ if __name__ == '__main__':
       continue
 
     name = f"{ds}_{alph.name}"
-    print(f"Evaluating {name}...")
 
     results[name] = []
     for payload in tqdm(ds.alphabet_filtered('test', alph)):

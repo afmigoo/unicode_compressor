@@ -1,8 +1,10 @@
-"""Generate rust/src/encoders/instances.rs from instances.lock.
+"""
+Generate rust/src/encoders/instances.rs
 
-Run lock_encoders.py first when encoder variants change:
+Lock file must exist for this script to run. It can be created with:
   python3 scripts/lock_encoders.py
-  python3 scripts/generate_encoders.py
+
+usage: python3 scripts/generate_encoders.py
 """
 from dict_generator.rustgen import write
 from dict_generator.rustgen.encoders import build_encoders
