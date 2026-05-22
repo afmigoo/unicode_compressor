@@ -21,7 +21,7 @@ pub const ADAPTIVE_ENCODER: AdaptiveEncoder = AdaptiveEncoder {
   encoders_inventory: &[
     ('!', &ECHO_ENCODER),
 {% for i in range(encoders | length) %}
-    ('{{ adaptive_chars[i] }}', &{{ encoders[i].name | upper }}),
+    ('{{ locked_encoders[encoders[i].name] }}', &{{ encoders[i].name | upper }}),
 {% endfor %}
   ],
 };

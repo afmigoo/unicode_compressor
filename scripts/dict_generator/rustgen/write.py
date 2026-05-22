@@ -1,6 +1,7 @@
 from pathlib import Path
-from typing import Literal
 from jinja2 import Template
+
+from .lock import load_lock_file
 
 def rust_str_lit(s: str, quoted: bool = True) -> str:
   escaped = (
@@ -39,8 +40,10 @@ def write_rust_dict(
 def write_rust_encoders(
   encoders: list[dict],
   file: str | Path,
-  adaptive_chars: list[str],
+  lock_file: str | Path,
 ):
+  lock_contents = load_lock_file(lock_file, encoders)
+
   with open(file, 'w', encoding='utf-8') as f:
     template = Template(
       open(Path(__file__).parent / 'instances.j2', 'r', encoding='utf-8').read(),
@@ -49,7 +52,7 @@ def write_rust_encoders(
     )
     f.write(template.render(
       encoders=encoders,
-      adaptive_chars=[rust_str_lit(ch, False) for ch in adaptive_chars],
+      locked_encoders={k: rust_str_lit(v, quoted=False) for k, v in lock_contents.items()},
       token_max_chars=16,
     ))
 
