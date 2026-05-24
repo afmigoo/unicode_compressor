@@ -363,7 +363,8 @@ pub static TOKEN2INT: Map<&'static str, u16> = phf_map! {
     "”" => 359u16,
     "•" => 360u16,
     "…" => 361u16,
-    "─" => 362u16,
+    "№" => 362u16,
+    "─" => 363u16,
 };
 
 pub static INT2TOKEN: Map<u16, &'static str> = phf_map! {
@@ -728,5 +729,6 @@ pub static INT2TOKEN: Map<u16, &'static str> = phf_map! {
     359u16 => "”",
     360u16 => "•",
     361u16 => "…",
-    362u16 => "─",
+    362u16 => "№",
+    363u16 => "─",
 };
