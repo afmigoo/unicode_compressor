@@ -7,7 +7,7 @@ from datasets import load_dataset
 
 from .alphabet.types import AlphabetVariant
 
-def meshcoretel_filter(s: str):
+def mesh_filter(s: str):
   # remove mentions as they do not make sense in the encoded format
   return re.sub(r'^@\[[^\]]*\] ', '', s)
 
@@ -23,8 +23,8 @@ class Dataset:
   def raw(self, split: Literal['train', 'test']):
     ds = load_dataset('json', data_files=str(self.splits[split]))['train']
     for s in ds:
-      if 'meshcoretel' in self.name:
-        s['text'] = meshcoretel_filter(s['text'])
+      if 'mesh' in self.name:
+        s['text'] = mesh_filter(s['text'])
       if not 'coding' in self.name:
         s['text'] = re.sub(r'\s+', ' ', s['text'])
       yield s['text']
@@ -45,6 +45,8 @@ class Dataset:
 DATASETS: list[Dataset] = [
   Dataset(lang='ru', name='wiki', splits={'train': 'corpus/ru_wiki_train.jsonl', 'test': 'corpus/ru_wiki_test.jsonl'}),
   Dataset(lang='en', name='wiki', splits={'train': 'corpus/en_wiki_train.jsonl', 'test': 'corpus/en_wiki_test.jsonl'}),
-  Dataset(lang='ru', name='meshcoretel', splits={'train': 'corpus/ru_meshcoretel_train.jsonl', 'test': 'corpus/ru_meshcoretel_test.jsonl'}),
   Dataset(lang='en', name='coding', splits={'train': 'corpus/coding_train.jsonl', 'test': 'corpus/coding_test.jsonl'}),
+  Dataset(lang='ru', name='meshcoretel', splits={'train': 'corpus/ru_meshcoretel_train.jsonl', 'test': 'corpus/ru_meshcoretel_test.jsonl'}),
+  Dataset(lang='cyr', name='meshtastic', splits={'train': 'corpus/meshtastic/Cyrl_script_meshtastic_train.jsonl', 'test': 'corpus/meshtastic/Cyrl_script_meshtastic_test.jsonl'}),
+  Dataset(lang='lat', name='meshtastic', splits={'train': 'corpus/meshtastic/Latn_script_meshtastic_train.jsonl', 'test': 'corpus/meshtastic/Latn_script_meshtastic_test.jsonl'}),
 ]

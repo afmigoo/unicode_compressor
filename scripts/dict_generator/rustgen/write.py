@@ -43,7 +43,8 @@ def write_rust_encoders(
   lock_file: str | Path,
 ):
   lock_contents = load_lock_file(lock_file, encoders)
-
+  encoders.sort(key=lambda x: lock_contents[x['name']])
+  
   with open(file, 'w', encoding='utf-8') as f:
     template = Template(
       open(Path(__file__).parent / 'instances.j2', 'r', encoding='utf-8').read(),

@@ -1,5 +1,7 @@
 from .ru import *
 from .en import *
+from .cyr import *
+from .lat import *
 from .types import *
 
 ALPHABETS: list[AlphabetVariant] = [
@@ -15,4 +17,7 @@ ALPHABETS: list[AlphabetVariant] = [
     # AlphabetVariant(lang='en', name='punct_64', alphabet=EN_PUNCT_64),
     # AlphabetVariant(lang='en', name='alpha_64', alphabet=EN_ALPHA_64),
     AlphabetVariant(lang='en', name='128', alphabet=EN_128),
+    AlphabetVariant(lang='cyr', name='512', alphabet=CYR_512),
+    AlphabetVariant(lang='lat', name='128', alphabet=LAT_128),
+    AlphabetVariant(lang='lat', name='1024', alphabet=LAT_1024),
 ]

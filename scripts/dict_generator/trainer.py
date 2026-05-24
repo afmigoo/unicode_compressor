@@ -16,7 +16,7 @@ def train_bpe_dict(dataset: Dataset, alphabet: AlphabetVariant, vocab_size: int)
 
   trainer = BpeTrainer(
     vocab_size=vocab_size,
-    show_progress=True,
+    show_progress=False,
     max_token_length=16,
     initial_alphabet=initial_alphabet,
     special_tokens=[

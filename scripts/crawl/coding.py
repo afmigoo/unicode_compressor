@@ -1,4 +1,13 @@
-import hashlib
+#!/usr/bin/env python3
+"""
+Crawls bigcode/the-stack dataset for coding languages.
+
+A HUGGINGFACE_TOKEN environment variable must be set to access the dataset.
+The list of languages is hardcoded in the script.
+
+usage: python3 scripts/crawl/coding.py
+"""
+
 import json
 import os
 from pathlib import Path

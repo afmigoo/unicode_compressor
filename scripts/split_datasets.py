@@ -12,10 +12,12 @@ from datasets import load_dataset
 
 if __name__ == '__main__':
   datasets = [
-    Path('corpus/ru_wiki.jsonl'),
-    Path('corpus/en_wiki.jsonl'),
+    # Path('corpus/ru_wiki.jsonl'),
+    # Path('corpus/en_wiki.jsonl'),
     Path('corpus/ru_meshcoretel.jsonl'),
-    Path('corpus/coding.jsonl'),
+    # Path('corpus/coding.jsonl'),
+    Path('corpus/meshtastic/Cyrl_script_meshtastic.jsonl'),
+    Path('corpus/meshtastic/Latn_script_meshtastic.jsonl'),
   ]
 
   for f in datasets:

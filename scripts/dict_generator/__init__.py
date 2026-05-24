@@ -1,5 +1,6 @@
 from .variants import get_encoder_variants
 from .rustgen import write
+from .dataset import Dataset
 
 def get_printable_utf8(size: int) -> list[str]:
     result = []

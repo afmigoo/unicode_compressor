@@ -26,29 +26,37 @@ Try it out at https://afmigoo.github.io/unicode_compressor/
 
 > - Compression=`0.6` means payload size was reduced by 60%
 > - Name format: `<lang>_<dataset>_<alphabet>`; so `en_wiki_punct_64` means English Wikipedia dataset with `punct_64`.
+> - User time measured on Intel Core i5-1130G7; encoder is single-threaded.
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
-|ru_wiki_32|0.6924 / 0.7020 / 0.0672|0.0025|541.1162|1102|одна богатая и знатная дама госпожа шереметева утр...|
-|total|0.5581 / 0.6000 / 0.1747|0.0022|467.4670|6578||
-|ru_wiki_256|0.6050 / 0.6364 / 0.1378|0.0014|570.1422|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
-|en_wiki_32|0.4529 / 0.4656 / 0.1513|0.0024|362.2817|1104|gates started to publish articles on the macrofung...|
-|en_wiki_128|0.4120 / 0.4288 / 0.1232|0.0018|376.7407|1107|Gates started to publish articles on the macrofung...|
-|ru_meshcoretel_32|0.6620 / 0.6860 / 0.1372|0.0004|52.0407|1007|ну она долбит да|
-|ru_meshcoretel_256|0.5478 / 0.5938 / 0.2003|0.0005|55.5397|1034|ну она долбит, да :))|
-|en_coding_32|0.4920 / 0.5012 / 0.0651|0.0386|7040.9500|60|package modelsimport     iadedafeefbaeccbfbef gith...|
-|en_coding_128|0.3561 / 0.3676 / 0.0735|0.0424|8332.5000|60|package models
+|total|0.5426 / 0.6000 / 0.1992|0.0015|287.9632|11894||
+|ru_wiki_32|0.6924 / 0.7020 / 0.0674|0.0020|541.1162|1102|одна богатая и знатная дама госпожа шереметева утр...|
+|ru_wiki_256|0.6084 / 0.6364 / 0.1204|0.0014|570.1422|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
+|en_wiki_32|0.4530 / 0.4656 / 0.1513|0.0027|362.2817|1104|gates started to publish articles on the macrofung...|
+|en_wiki_128|0.4125 / 0.4288 / 0.1218|0.0024|376.7407|1107|Gates started to publish articles on the macrofung...|
+|en_coding_32|0.4920 / 0.5012 / 0.0651|0.0419|7040.9500|60|package modelsimport     iadedafeefbaeccbfbef gith...|
+|en_coding_128|0.3561 / 0.3676 / 0.0735|0.0463|8332.5000|60|package models
+
+import (
+    i878a80d2330e89d26896...|
+|ru_meshcoretel_32|0.6558 / 0.6842 / 0.1386|0.0004|52.4957|2683|люди который час|
+|ru_meshcoretel_256|0.5255 / 0.5870 / 0.2356|0.0004|54.8860|2815|люди, который час?|
+|cyr_meshtastic_512|0.6184 / 0.6243 / 0.0909|0.0005|114.3906|635|я для домашних собирал сеть по маленькому поселку,...|
+|lat_meshtastic_128|0.3182 / 0.2920 / 0.1573|0.0008|73.8922|612|Wie viele Hpfer brauchst du, um mich abzuholen?|
+|lat_meshtastic_1024|0.3021 / 0.2793 / 0.1627|0.0006|76.2402|612|Wie viele Hüpfer brauchst du, um mich abzuholen?|
 
 ## Stack and acknowledgements
 
-- **Tool's core** written in **Rust** by hand.
-- **Static dictionaries** are generated with **Python** scripts written by hand.
-- **Web-app module** is backendless and is powered by WASM.
+- **Tool's core** written in **Rust**.
+- **Static dictionaries** are generated with **Python**.
+- **Web-app module** is backendless and powered by WASM.
 - **Frontend** (*.js, *.css, *.html) vibe-coded in **JS**. Model is instructed to integrade Rust WASM module into the user interface.
-- **Datasets** used
-    - [wikipedia](https://wikipedia.org/) crawled for training `bpe_wiki`, `bpe_wiki_ru` and `bpe_wiki_en` dictionaries.
-    - [Meshcoretel](https://meshcoretel.ru/) messages taken from #public Meshcore channel (Moscow region) for training `bpe_meshcoretel_ru` dictionary.
-    - [The Stack Dataset](https://huggingface.co/datasets/bigcode/the-stack) for training `bpe_coding` dictionary.
+- **Datasets** used:
+    - [wikipedia](https://wikipedia.org/) - articles crawled
+    - [Liam Cottle's Meshtastic Map](https://meshtastic.liamcottle.net/) - API crawled
+    - [Meshcoretel](https://meshcoretel.ru/) - API crawled
+    - [The Stack Dataset](https://huggingface.co/datasets/bigcode/the-stack) - Hugging Face dataset
 
 ## How to use
 
@@ -63,7 +71,7 @@ cd rust && cargo build --release
 
 ### Web-app
 #### Public version
-Public version is available at https://zip.cyanshark.org/
+Public version is available at https://afmigoo.github.io/unicode_compressor/
 
 #### Self-hosted version
 
@@ -77,13 +85,7 @@ docker compose up
 ## How to test
 
 ```bash
-# v0
-docker run --rm \
-    -v $(pwd)/web/v1:/app -w /app \
-    node:22-alpine \
-    node smoke_node.mjs
-# v1-preview
-cd rust && cargo test --release
+cd rust && cargo test
 ```
 
 ## Privacy note
@@ -93,12 +95,7 @@ cd rust && cargo test --release
 
 ## Planned
 - `v1`
-    - [x] Create reference dataset for performance measurement
-    - [x] Rewrite greedy encoding of static dict encoder
-    - [x] Rewrite core in Rust for compatability between cli and web.
-    - [x] Refactor encoders to support diferent alphabets. Now global hard-coded alphabet is shared between all encoders
-    - [ ] Make dicts with different sizes of vocabulary use a single modular dict
-        - Subtract dictionaries of smaller sizes from the larger ones to reduce the size of binary. For an example, instead of having `dict_64 {1, ... 64}` and `dict_128 {1, ... 128}` we can have `dict_64 {1, ... 64}` and `dict_128 {65, ... 128}`, since dict_128 always contains dict_64.
+    - [ ] Add more languages
 
 ## Algorithms (names are not final)
 
