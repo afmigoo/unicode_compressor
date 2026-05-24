@@ -96,6 +96,7 @@ cd rust && cargo test
 ## Planned
 - `v1`
     - [ ] Add more languages
+    - [ ] Add MacOS CI build
 
 ## Algorithms (names are not final)
 
