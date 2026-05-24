@@ -15,7 +15,7 @@ RU_ALPHA_64 = RU_32 + [
   'Р', 'С', 'Т', 'У', 'ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', '\n'
 ]; assert len(RU_ALPHA_64) == 63, f"Expected 63, got {len(RU_ALPHA_64)}"
 
-RU_128 = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+RU_128 = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяaeëopcyx'
 RU_128 += RU_128.upper()
 RU_128 += ' \n'
 RU_128 += '0123456789'
@@ -25,6 +25,7 @@ assert len(RU_128) <= 127, f"Expected <=127, got {len(RU_128)}"
 assert len(set(RU_128)) == len(RU_128), f"Expected unique"
 
 RU_256 = RU_128
-RU_256 += list('abcdefghijklmnopqrstuvwxyz')
-RU_256 += list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+RU_256 += list('bdfghijklmnqrstuvwz') # other letters are present in RU_128
+RU_256 += list('BDFGHIJKLMNQRSTUVWZ')
 assert len(RU_256) <= 255, f"Expected <=255, got {len(RU_256)}"
+assert len(set(RU_256)) == len(RU_256), f"Expected unique"
