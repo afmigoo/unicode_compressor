@@ -30,21 +30,21 @@ Try it out at https://afmigoo.github.io/unicode_compressor/
 
 |Name|compression (avg/mean/std)|User time (avg)|Payload byte size (avg)|N|Example|
 |---|---|---|---|---|---|
-|total|0.5425 / 0.6000 / 0.1992|0.0016|287.9633|11894||
-|ru_wiki_32|0.6924 / 0.7020 / 0.0674|0.0020|541.1162|1102|одна богатая и знатная дама госпожа шереметева утр...|
-|ru_wiki_256|0.6084 / 0.6364 / 0.1204|0.0015|570.1422|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
-|en_wiki_32|0.4530 / 0.4656 / 0.1513|0.0029|362.2817|1104|gates started to publish articles on the macrofung...|
-|en_wiki_128|0.4125 / 0.4288 / 0.1218|0.0024|376.7407|1107|Gates started to publish articles on the macrofung...|
-|en_coding_32|0.4920 / 0.5012 / 0.0651|0.0427|7040.9500|60|package modelsimport     iadedafeefbaeccbfbef gith...|
-|en_coding_128|0.3561 / 0.3676 / 0.0735|0.0472|8332.5000|60|package models
+|total|0.5422 / 0.6000 / 0.1992|0.0015|288.4092|11894||
+|ru_wiki_32|0.6924 / 0.7019 / 0.0674|0.0020|541.1162|1102|одна богатая и знатная дама госпожа шереметева утр...|
+|ru_wiki_256|0.6076 / 0.6344 / 0.1196|0.0015|574.3243|1104|Одна богатая и знатная дама, госпожа Шереметева, у...|
+|en_wiki_32|0.4527 / 0.4652 / 0.1514|0.0027|362.2817|1104|gates started to publish articles on the macrofung...|
+|en_wiki_128|0.4113 / 0.4277 / 0.1218|0.0023|377.2728|1107|Gates started to publish articles on the macrofung...|
+|en_coding_32|0.4920 / 0.5012 / 0.0651|0.0414|7040.9500|60|package modelsimport     iadedafeefbaeccbfbef gith...|
+|en_coding_128|0.3553 / 0.3689 / 0.0729|0.0452|8332.6000|60|package models
 
 import (
     i878a80d2330e89d26896...|
 |ru_meshcoretel_32|0.6557 / 0.6842 / 0.1386|0.0004|52.4957|2683|люди который час|
-|ru_meshcoretel_256|0.5254 / 0.5870 / 0.2356|0.0004|54.8867|2815|люди, который час?|
-|cyr_meshtastic_512|0.6185 / 0.6243 / 0.0909|0.0005|114.3906|635|я для домашних собирал сеть по маленькому поселку,...|
-|lat_meshtastic_128|0.3182 / 0.2920 / 0.1573|0.0008|73.8922|612|Wie viele Hpfer brauchst du, um mich abzuholen?|
-|lat_meshtastic_1024|0.3021 / 0.2793 / 0.1627|0.0006|76.2402|612|Wie viele Hüpfer brauchst du, um mich abzuholen?|
+|ru_meshcoretel_256|0.5250 / 0.5862 / 0.2354|0.0004|54.9190|2815|люди, который час?|
+|cyr_meshtastic_512|0.6187 / 0.6250 / 0.0905|0.0006|114.3906|635|я для домашних собирал сеть по маленькому поселку,...|
+|lat_meshtastic_128|0.3180 / 0.2917 / 0.1573|0.0008|73.8922|612|Wie viele Hpfer brauchst du, um mich abzuholen?|
+|lat_meshtastic_1024|0.3021 / 0.2793 / 0.1626|0.0006|76.2402|612|Wie viele Hüpfer brauchst du, um mich abzuholen?|
 
 ## Stack and acknowledgements
 

@@ -1,4 +1,5 @@
 from string import punctuation
+from ._punct import _PUNCT_64
 
 EN_32 = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
@@ -21,5 +22,6 @@ EN_128 += ' \n'
 EN_128 += '0123456789'
 EN_128 += punctuation
 EN_128 = list(EN_128)
+EN_128 += [ch for ch in _PUNCT_64 if ch not in EN_128]
 assert len(EN_128) <= 128, f"Expected <=128, got {len(EN_128)}"
 assert len(set(EN_128)) == len(EN_128), f"Expected unique"

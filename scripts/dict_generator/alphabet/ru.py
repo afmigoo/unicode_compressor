@@ -1,4 +1,5 @@
 from string import punctuation
+from ._punct import _PUNCT_64
 
 RU_32 = [
   'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п',
@@ -25,7 +26,8 @@ assert len(RU_128) <= 127, f"Expected <=127, got {len(RU_128)}"
 assert len(set(RU_128)) == len(RU_128), f"Expected unique"
 
 RU_256 = RU_128
-RU_256 += list('bdfghijklmnqrstuvwz') # other letters are present in RU_128
-RU_256 += list('BDFGHIJKLMNQRSTUVWZ')
+RU_256 += list(ch for ch in 'abcdefghijklmnopqrstuvwxyz' if ch not in RU_128)
+RU_256 += list(ch for ch in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' if ch not in RU_128)
+RU_256 += [ch for ch in _PUNCT_64 if ch not in RU_128]
 assert len(RU_256) <= 255, f"Expected <=255, got {len(RU_256)}"
 assert len(set(RU_256)) == len(RU_256), f"Expected unique"
