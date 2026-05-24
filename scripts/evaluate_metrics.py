@@ -29,6 +29,7 @@ if __name__ == '__main__':
   combinations = itertools.product(datasets, alphabets)
 
   results = defaultdict(list)
+  results['total'] = []
   most_used_prefixes = defaultdict(Counter)
   examples = defaultdict(str)
 
@@ -39,7 +40,7 @@ if __name__ == '__main__':
     name = f"{ds}_{alph.name}"
 
     results[name] = []
-    for payload in tqdm(ds.alphabet_filtered('test', alph)):
+    for payload in tqdm(ds.alphabet_filtered('test', alph), desc=name):
       stripped_payload = payload.strip()
 
       if name not in examples:
